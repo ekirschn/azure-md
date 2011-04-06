@@ -1,0 +1,49 @@
+Hi Leute,
+
+zuerst: Tragt euch bitte in die Umfrage ein, damit wir zwei generelle Termine zur Teambesprechung und zur Besprechung mit Robert finden können.
+Umfrage: http://www.doodle.com/5hsvukm455gtgca7 
+
+Team - Backend (Christoph, Ronny, Marco, Eike):
+- Hypervisor / VMServer
+- JavaClient
+- ->WS , C#, Linux, Java, VMWare, VixApi
+
+Team - Frontend (Andy, Christina, Donnie, Friedrich):
+- Ressourcen managen
+- Verkauf / Kaufprozess (Markt bereitstellen)
+- Imageverwaltung (ziehen und hosten)
+- WS-> , .Net, C#, WCF, Azure, MS Visual
+- Userverwaltung (DB unabhängig von Backend), HTTPS (echtes) Zertifikat erstellen
+
+Robert :    
+    Bereitstellung von Server
+Eike :
+    Projektmanagment-Tools
+Friedrich :
+    Doodle-Umfrage -> Teamtreffen - Raumreservierung (Absprache mit Robert nach Terminfindung)
+
+Team- Backend -Aufgaben zur nächster Woche:
+- Image (Debian oder Ubuntu, ....) mit VMWare Server + Vix API + weitere benötigte Komponenten
+- Git-Server + Wiki einrichten
+- weitere Recherche
+
+Team- Frontend -Aufgaben zur nächster Woche:
+Recherche: - Webseite zu ASP.Net und Webserver
+- Domainservice in SQL-Server
+- optional: service anlegen für sql-server
+
+Festlegung :
+    Team-Backend:
+         Eike Kirschner [Project Management]
+         Marco Holzknecht [Quality Management]
+         Christoph  Papmeyer [Chief Developer]
+         Ronny Garz [Developer]
+
+    Protokollführer (ab 06.04.2011):
+        Friedrich Lüder
+
+Für Ergänzungen und Verbesserungsvorschläge stehe ich gerne zur Verfügung.
+
+
+freundlichst
+Friedrich
