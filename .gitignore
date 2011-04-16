@@ -1,0 +1,5 @@
+# Auflistung aller Dateien, die GIT ignorieren soll
+
+.DS_Store
+*~
+*.swp
