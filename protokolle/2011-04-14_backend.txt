@@ -1,0 +1,75 @@
+Meeting, Team Backend + Team Frontend
+Donnerstag, den 14.04.2011, 17.00 Uhr
+Besprechungsraum der AG Softwaretechnik
+
+Protkoll der Backend-betreffenden Themen
+
+
+
+0. Anwesenheit
+
+Robert
+Frontend: Friedrich, Christina, Andy, Olga
+Backend: Marco, Christoph, Eike
+
+
+
+1. Wochen-Bericht
+
+* GIT-Server eingerichtet
+        * Bereits alle außer Andy angemeldet + eingerichtet
+        * Eike: Unterstützung bei Einrichtung, Workflow angeboten
+* Meeting Team Backend am 07.04.2011
+        * Klärung von Fragen zu Git, Entwicklungsumgebung
+        * Festlegung der Enwicklungsplattform (Linux, 64 Bit)
+        * Festlegung von Standards (Quellcode/Programmierstil, UTF8)
+        * Benötigte Komponenten für Image festgelegt
+        * Aufgabenverteilung / -bereiche besprochen
+        * Kommende Aufgaben besprochen
+                * Eike: u.a. Featureliste, Schnittstellen zu Frontend
+                * Christoph: Architektur
+                * Ronny: Erstellung Server-ISO
+        * Wartungen per Scriptingsprachen angeregt
+* Ronny fiel krankheitsbedingt aus
+        * ISO-Erstellung übernahm Eike
+        * Server-ISO bereit für Einsatz (Geplante Übergabe an Robert: 15.04.2011, bis 11.00 Uhr)
+* Architektur-Entwurf durch Christoph erstellt
+        * Bereits funktionierende Webservices
+        * Klassenhierarchie
+
+
+
+2. Diskussion der Feature-Liste
+
+* Autonome Aktionen (mit Infos von Frontend, aber auch manuelle Initiierung durch Frontend möglich)
+        * Update, Upgrade       -> no goal
+        * Einrichtung
+        * Reboot der VM / des PCs
+        * Suspend / Resume der VM
+        * Versionskontrolle (Änderungen in VM-Image ans Frontend übertragen)        -> no goal
+* Aktionen (Frontend -> Backend)
+        * Load / Unload Image
+        * One-Time-Passwörter für z.B. SSH, Key-Management
+* Aktionen (Backend -> Frontend)
+        * Bei abgeschlossener Einrichtung / Start: Lebenszeichen an Frontend, dass Maschine bereit
+        * Heartbeat
+        * Failover, Master/Slave        -> no goal
+        * Systemfehler, Logs
+* Statusabfragen
+        * Ist Image geladen?
+        * Welches Image ist geladen?
+        * ComputerID zur Verknüpfung Seller, Buyer, Transaktion im Frontend
+        * Effektive Anfangs- / Endzeiten (Wann startete Benutzung)für Abrechnung im Frontend
+        * Systemstatus
+                * Synchronität  -> no goal
+        * System-Stats (CPU, Auslastung, ...) zur Klassifikation der PCs im Frontend
+
+
+
+3. Kommende Aufgaben
+
+* Eike: Übergabe Server-ISO
+* Eike: Zustände definieren -> Eike + Christoph + Marco
+* Christoph: Architektur
+* Marco: Testfälle definieren (Test-Driven Development)
+* Ronny: fällt vorerst weiter aus
