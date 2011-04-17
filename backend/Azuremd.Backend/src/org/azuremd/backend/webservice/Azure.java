@@ -10,7 +10,7 @@ import org.azuremd.backend.vi.VirtInterface;
 /**
  * Azure
  * 
- * WebService für die Kommunikation mit dem FrontEnd.
+ * WebService f√ºr die Kommunikation mit dem FrontEnd.
  * 
  * @author dako
  * 

@@ -5,7 +5,7 @@ import org.azuremd.backend.server.*;
 /**
  * VirtInterface
  * 
- * Beinhalt alle Funktionen, die ein Backend für die Nutzug mit diesem Client
+ * Beinhalt alle Funktionen, die ein Backend f√ºr die Nutzug mit diesem Client
  * implementieren muss und der WebService bereitstellt.
  * 
  * @author dako

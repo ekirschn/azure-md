@@ -1,6 +1,3 @@
-/*
- * 
- */
 package org.azuremd.backend;
 
 import java.io.File;
@@ -15,8 +12,8 @@ import org.azuremd.backend.webservice.Azure;
 /**
  * Application
  * 
- * Entry-Point für die Applikation, richtet alles ein (WebService, Heartbeat)
- * und lauscht dann mit dem WebService für Aufgaben vom Frontend.
+ * Entry-Point f√ºr die Applikation, richtet alles ein (WebService, Heartbeat)
+ * und lauscht dann mit dem WebService f√ºr Aufgaben vom Frontend.
  * 
  * @author dako
  * 

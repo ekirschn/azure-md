@@ -5,8 +5,8 @@ import org.azuremd.backend.server.SystemStatus;
 /**
  * VMwareVirtualServer
  * 
- * Implementiert das Backend f웦 VirtInterface f웦 VMware-Server. Andere
- * Backends m웧sen nur das VirtInterface 웑ernehmen.
+ * Implementiert das Backend f체r VirtInterface f체r VMware-Server. Andere
+ * Backends m체ssen nur das VirtInterface 체bernehmen.
  * 
  * @author dako
  * 

@@ -8,7 +8,7 @@ import org.azuremd.backend.Application;
 /**
  * Heartbeat
  * 
- * Implementiert einen Heartbeat, der zurŸck an den Server gesendet werden soll.
+ * Implementiert einen Heartbeat, der zurÃ¼ck an den Server gesendet werden soll.
  * 
  * @author dako
  * 

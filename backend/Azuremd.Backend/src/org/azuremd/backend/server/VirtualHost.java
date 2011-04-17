@@ -7,7 +7,7 @@ import org.azuremd.backend.vi.*;
 /**
  * VirtualHost
  * 
- * Baut mit dem Hypervisor eine Verbindung auf und hält sie in der gesamten
+ * Baut mit dem Hypervisor eine Verbindung auf und h√§lt sie in der gesamten
  * Lebenszeit des Prozesses.
  * 
  * @author dako
