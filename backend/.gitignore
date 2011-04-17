@@ -1,0 +1,7 @@
+.metadata/.log
+.metadata/.plugins
+.metadata/.mylyn
+.metadata/version.ini
+.metadata/.lock
+.DS_Store
+*.class
