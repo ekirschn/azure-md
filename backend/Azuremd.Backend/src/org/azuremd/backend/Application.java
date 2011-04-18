@@ -1,12 +1,14 @@
 package org.azuremd.backend;
 
 import java.io.File;
+import java.lang.management.ManagementFactory;
+
 import javax.xml.ws.*;
 import com.spinn3r.log5j.*;
+import com.vmware.vix.*;
 
-import org.azuremd.backend.server.Heartbeat;
-import org.azuremd.backend.server.SystemStatus;
-import org.azuremd.backend.server.VirtualHost;
+import org.azuremd.backend.server.*;
+import org.azuremd.backend.vi.*;
 import org.azuremd.backend.webservice.Azure;
 
 /**
@@ -37,6 +39,9 @@ public class Application
 
     public static void main(String[] args)
     {
+    	String pid = ManagementFactory.getRuntimeMXBean().getName();
+    	log.debug("Backend version %s starting up ... (pid: %s)", "0.1", pid.substring(0, pid.indexOf('@')));
+    	
         // Loading configuration
         String cfgFile = new File(String.format("%s/%s", System.getProperty("user.home"), ".azuremd")).getAbsolutePath();
 
@@ -53,8 +58,20 @@ public class Application
 
         log.debug("Connecting to virtual server host using %s@%s:%s", Configuration.getInstance().Username, Configuration.getInstance().Hostname, Configuration.getInstance().Port);
 
-        VirtualHost.connect(Configuration.getInstance().Hostname, Configuration.getInstance().Username, Configuration.getInstance().Password, Configuration.getInstance().Port);
+        VirtServerInterface host = null;
+        
+        try
+        {
+            // blocks, wtf?
+            host = new VMwareVirtualServer(Configuration.getInstance().Hostname, Configuration.getInstance().Username, Configuration.getInstance().Password, Configuration.getInstance().Port);
+        }
+        catch (VixException e)
+        {
+            e.printStackTrace();
+        }
 
+        log.debug(host.getVMS());
+        
         // Starting up webservice
         try
         {
