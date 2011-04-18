@@ -1,17 +1,17 @@
 Diskussionswürdig:
 * Schreibweise: installVM oder install_vm
 * Überladen von "Operationen": getStats anstatt von getStatsVM(vmID) und getStatsSystem()
+* Bezeichner ( Vorschlag seitens Christoph: https://github.com/ekirschn/azure-md/blob/dako/backend/Azuremd.Backend/src/org/azuremd/backend/vi/VirtInterface.java )
 
 
 Blocking-Operationen
 ####################
 
-* installVM: ISO herunterladen und installieren
+* installVM: ISO per Rsync vom Frontend herunterladen und installieren
         * vmID          (Identifikation der neu einzurichtenden VM)
         * source        (VMX-Datei als zu installierendes ISO)
         * ramSize       (Größe des virtuellen RAM)
         * hdSize        (Größe der virtuellen Festplatte)
-        * checksum      (Prüfsumme)
 * startVM: Starten der VM
         * vmID          (Identifikation der zu startenden VM)
 * restartVM: Neustarten der VM
@@ -37,22 +37,22 @@ Blocking-Operationen
 Non-Blocking-Operationen
 ########################
 
-* getStateVM: Status der VM (start, stop, suspended)
+* getVmStatus: Status der VM (start, stop, suspended)
         * vmID
-* getAdressVM: IP der VM abfragen
+* getVmAdress: IP der VM abfragen
         * vmID
-* getStateSystem: Status des Systems (started, ready, busy)
-* getIdSystem: ID des Computers
-* getIDsVM: IDs aller VMs (Liste)   ?
-* getStatsSystem: Informationen über alle verfügbaren Ressourcen (Größe, ...) des Computers (HD, RAM, CPU)
-* getStatsVM: Informationen über alle verfügbaren Ressourcen (Größe, ...) der VM (HD, RAM, CPU)
-* getStatisticsSystem: Statistiken bzgl. Auslastung des Computers (HD, RAM, CPU, Traffic)
-* getStatisticsVM: Statistiken bzgl. Auslastung der VM (HD, RAM, CPU, Traffic)
-* getLogsSystem: Alle Logbücher des Computers
-* getLogsVM: Alle Logbücher der VM
+* getSystemState: Status des Systems (started, ready, busy)
+* getSystemId: ID des Computers
+* getVMIds: IDs aller VMs (Liste)   ?
+* getSystemStats: Informationen über alle verfügbaren Ressourcen (Größe, ...) des Computers (HD, RAM, CPU)
+* getVmStats: Informationen über alle verfügbaren Ressourcen (Größe, ...) der VM (HD, RAM, CPU)
+* getSystemStatistics: Statistiken bzgl. Auslastung des Computers (HD, RAM, CPU, Traffic)
+* getVmStatistics: Statistiken bzgl. Auslastung der VM (HD, RAM, CPU, Traffic)
+* getSystemLogs: Alle Logbücher des Computers per Rsync an Frontend übertragen
+* getVmLogs: Alle Logbücher der VM per Rsync an Frontend übertragen
         * vmID
-* getFailLogsSystem: Fehler-Logbücher des Computers
-* getFailLogsVM: Fehler-Logbücher der VM
+* getSystemFailLogs: Fehler-Logbücher des Computers per Rsync an Frontend übertragen
+* getVmFailLogs: Fehler-Logbücher der VM per Rsync an Frontend übertragen
         * vmID
 * setHeartbeatRate: Häufigkeit der Heartbeat-Meldungen verändern
         * rate          (Zeitintervall in Millisekunden)
