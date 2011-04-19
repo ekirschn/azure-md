@@ -22,10 +22,10 @@ import org.azuremd.backend.webservice.Azure;
  */
 public class Application
 {
-    // Global logging object
-    public static final Logger log = Logger.getLogger();
-
+    private static final Logger log = Logger.getLogger();
     private static SystemStatus status = SystemStatus.STARTING;
+    private static Endpoint webservice;
+    private static Heartbeat heart;
 
     public static SystemStatus GetStatus()
     {
@@ -36,7 +36,7 @@ public class Application
     {
         status = _status;
     }
-
+    
     public static void main(String[] args)
     {
     	String pid = ManagementFactory.getRuntimeMXBean().getName();
@@ -86,7 +86,18 @@ public class Application
         }
 
         // Entering normal working modus
-        new Heartbeat(Configuration.getInstance().HeartbeatUrl);
+        heart = new Heartbeat(Configuration.getInstance().HeartbeatUrl);
+        
+        // Adding control+c/exit handler
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            public void run()
+            {
+                heart.stop();
+                webservice.stop();
+                log.debug("Exiting client");
+            }
+        });
+        
         SetStatus(SystemStatus.READY);
 
         while (true)

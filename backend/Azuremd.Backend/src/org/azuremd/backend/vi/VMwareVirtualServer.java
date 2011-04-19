@@ -1,9 +1,10 @@
 package org.azuremd.backend.vi;
 
 import java.util.*;
+
+import com.spinn3r.log5j.Logger;
 import com.vmware.vix.*;
 
-import org.azuremd.backend.Application;
 import org.azuremd.backend.server.SystemStatus;
 
 /**
@@ -95,7 +96,7 @@ public class VMwareVirtualServer implements VirtServerInterface
         }
         catch (VixException e)
         {
-            Application.log.error(e);
+            Logger.getLogger().error(e);
         }
         
         return null;

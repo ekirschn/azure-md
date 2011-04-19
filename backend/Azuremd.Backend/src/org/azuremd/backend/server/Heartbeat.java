@@ -1,9 +1,8 @@
 package org.azuremd.backend.server;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
-import org.azuremd.backend.Application;
+import com.spinn3r.log5j.Logger;
 
 /**
  * Heartbeat
@@ -19,7 +18,7 @@ public class Heartbeat
 
     public Heartbeat(String serverUrl)
     {
-        Application.log.debug("Heart starts beating");
+        Logger.getLogger().debug("Heart starts beating");
 
         timer = new Timer(true);
         timer.scheduleAtFixedRate(new TimerTask()
@@ -29,5 +28,10 @@ public class Heartbeat
                 // Beating ...
             }
         }, 0, 60000);
+    }
+    
+    public void stop()
+    {
+        Logger.getLogger().debug("Heart stops beating");   
     }
 }

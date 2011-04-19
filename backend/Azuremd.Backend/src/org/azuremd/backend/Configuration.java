@@ -5,6 +5,8 @@ import java.io.File;
 import org.simpleframework.xml.*;
 import org.simpleframework.xml.core.Persister;
 
+import com.spinn3r.log5j.Logger;
+
 /**
  * Configuration
  * 
@@ -48,7 +50,7 @@ public class Configuration
         }
         catch (Exception e)
         {
-            Application.log.error("Could not read configuration", e);
+            Logger.getLogger().error("Could not read configuration", e);
         }
 
         instance = (cfg != null) ? cfg : new Configuration();
@@ -66,7 +68,7 @@ public class Configuration
         }
         catch (Exception e)
         {
-            Application.log.error("Could not write configuration", e);
+            Logger.getLogger().error("Could not write configuration", e);
         }
     }
 
