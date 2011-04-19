@@ -1,18 +1,29 @@
 package org.azuremd.backend.vi;
 
+import java.util.*;
+import com.vmware.vix.*;
+
+import org.azuremd.backend.Application;
 import org.azuremd.backend.server.SystemStatus;
 
 /**
  * VMwareVirtualServer
  * 
- * Implementiert das Backend für VirtInterface für VMware-Server. Andere
- * Backends müssen nur das VirtInterface übernehmen.
+ * VMware-Server spezielle Implementierung des Interfaces.
  * 
  * @author dako
  * 
  */
-public class VMwareVirtualServer implements VirtInterface
+public class VMwareVirtualServer implements VirtServerInterface
 {
+    private VixHostHandle server;
+    
+    public VMwareVirtualServer(String hostname, String username,
+            String password, int port) throws VixException
+    {
+        server = new VixHostHandle(VixConstants.VIX_API_VERSION, VixServiceProvider.VIX_SERVICEPROVIDER_VMWARE_SERVER, hostname, port, username, password);
+    }
+
     @Override
     public boolean LoadImage(String imageUrl)
     {
@@ -76,4 +87,17 @@ public class VMwareVirtualServer implements VirtInterface
         return false;
     }
 
+    public ArrayList<String> getVMS()
+    {
+        try
+        {
+            return server.getRegisteredVms();
+        }
+        catch (VixException e)
+        {
+            Application.log.error(e);
+        }
+        
+        return null;
+    }
 }
