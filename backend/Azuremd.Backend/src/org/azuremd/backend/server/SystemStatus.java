@@ -3,7 +3,7 @@ package org.azuremd.backend.server;
 /**
  * SystemStatus
  * 
- * Einfache Implementation für den Status des Clienten.
+ * Einfache Implementation f√ºr den Status des Clienten.
  * 
  * @author dako
  * 

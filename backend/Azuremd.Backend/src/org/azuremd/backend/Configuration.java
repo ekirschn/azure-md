@@ -77,7 +77,7 @@ public class Configuration
 
     private Configuration()
     {
-        // Erstellen außerhalb dieser Klasse verhindern
+        // Erstellen au√üerhalb dieser Klasse verhindern
 
     }
 }
