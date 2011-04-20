@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="libs/simple-xml-2.5.2.jar"/>
 	<classpathentry kind="lib" path="libs/jna.jar"/>
 	<classpathentry kind="lib" path="libs/vix.jar"/>
+	<classpathentry kind="lib" path="libs/jython.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
