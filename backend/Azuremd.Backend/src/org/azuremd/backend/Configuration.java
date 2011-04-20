@@ -42,18 +42,26 @@ public class Configuration
     public static Configuration load(String fileName)
     {
         Serializer ser = new Persister();
-        Configuration cfg = null;
+        Configuration cfg = new Configuration();
+        File cfgFile = new File(fileName);
 
-        try
+        if (!cfgFile.exists())
         {
-            cfg = ser.read(Configuration.class, new File(fileName));
+            Logger.getLogger().debug("Config not found; assuming default config");
         }
-        catch (Exception e)
+        else
         {
-            Logger.getLogger().error("Could not read configuration", e);
+            try
+            {
+                cfg = ser.read(Configuration.class, cfgFile);
+            }
+            catch (Exception e)
+            {
+                Logger.getLogger().error("Could not read configuration", e);
+            }
         }
 
-        instance = (cfg != null) ? cfg : new Configuration();
+        instance = cfg;
 
         return instance;
     }

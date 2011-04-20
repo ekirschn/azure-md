@@ -87,9 +87,10 @@ public class Application
 
         // Entering normal working modus
         heart = new Heartbeat(Configuration.getInstance().HeartbeatUrl);
-        
+
         // Adding control+c/exit handler
-        Runtime.getRuntime().addShutdownHook(new Thread() {
+        Runtime.getRuntime().addShutdownHook(new Thread()
+        {
             public void run()
             {
                 heart.stop();
