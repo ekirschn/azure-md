@@ -75,8 +75,8 @@ public class Application
         // Starting up webservice
         try
         {
-            Endpoint.publish(Configuration.getInstance().FrontEndUrl, new Azure());
-            log.debug("Starting webservice at %s", Configuration.getInstance().FrontEndUrl);
+            Endpoint.publish(Configuration.getInstance().WebServiceUrl, new Azure());
+            log.debug("Starting webservice at %s", Configuration.getInstance().WebServiceUrl);
         }
         catch (Exception bind)
         {

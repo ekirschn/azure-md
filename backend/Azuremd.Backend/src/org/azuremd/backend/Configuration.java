@@ -32,7 +32,7 @@ public class Configuration
     int Port = 8333;
 
     @Element
-    String FrontEndUrl = "http://localhost:8080/";
+    String WebServiceUrl = "http://localhost:8080/";
 
     @Element
     String HeartbeatUrl = "Http://localhost.heartbeat.com";
