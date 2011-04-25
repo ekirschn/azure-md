@@ -1,8 +1,13 @@
 package org.azuremd.backend;
 
-import java.io.File;
+import java.io.*;
 import java.lang.management.ManagementFactory;
+import java.net.*;
+import java.security.*;
 
+import com.sun.net.httpserver.*;
+
+import javax.net.ssl.*;
 import javax.xml.ws.*;
 import com.spinn3r.log5j.*;
 import com.vmware.vix.*;
@@ -37,6 +42,36 @@ public class Application
         status = _status;
     }
     
+    private static HttpContext createSslContext() throws Exception
+    {
+        // Ja, diesen GANZEN Kram brauch mant, wenn man nur SSL haben will. Java
+        // macht so Spaß.
+        SSLContext ssl = SSLContext.getInstance("TLS");
+
+        KeyManagerFactory keyFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+        KeyStore store = KeyStore.getInstance("JKS");
+
+        store.load(new FileInputStream("bin/server.keystore"), Configuration.getInstance().KeyStorePass.toCharArray());
+
+        keyFactory.init(store, Configuration.getInstance().KeyStorePass.toCharArray());
+
+        TrustManagerFactory trustFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+
+        trustFactory.init(store);
+
+        ssl.init(keyFactory.getKeyManagers(), trustFactory.getTrustManagers(), new SecureRandom());
+
+        URI uri = new URI(Configuration.getInstance().WebServiceUrl);
+
+        HttpsServer httpsServer = HttpsServer.create(new InetSocketAddress(uri.getHost(), uri.getPort()), 0);
+        httpsServer.setHttpsConfigurator(new HttpsConfigurator(ssl));
+
+        HttpContext httpContext = httpsServer.createContext("/");
+        httpsServer.start();
+
+        return httpContext;
+    }
+
     public static void main(String[] args)
     {
     	String pid = ManagementFactory.getRuntimeMXBean().getName();
@@ -71,11 +106,13 @@ public class Application
         }
 
         log.debug(host.getVMS());
-        
+
         // Starting up webservice
         try
         {
-            Endpoint.publish(Configuration.getInstance().WebServiceUrl, new Azure());
+            webservice = Endpoint.create(new Azure());
+            webservice.publish(createSslContext());
+            
             log.debug("Starting webservice at %s", Configuration.getInstance().WebServiceUrl);
         }
         catch (Exception bind)

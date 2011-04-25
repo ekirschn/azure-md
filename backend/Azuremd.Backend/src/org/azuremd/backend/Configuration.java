@@ -32,10 +32,13 @@ public class Configuration
     int Port = 8333;
 
     @Element
-    String WebServiceUrl = "http://localhost:8080/";
+    String WebServiceUrl = "https://localhost:8080/";
 
     @Element
-    String HeartbeatUrl = "Http://localhost.heartbeat.com";
+    String HeartbeatUrl = "http://localhost.heartbeat.com";
+    
+    @Element
+    String KeyStorePass = "changeit";
 
     private static Configuration instance = null;
 
