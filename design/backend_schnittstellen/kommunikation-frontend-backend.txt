@@ -1,8 +1,0 @@
-Erläuterungen zu "kommunikation-frontend-backend".png/vsd
-
-1. Backend: Generieren eines Session-Keys
-2. Frontend: Verschicken des Frontend-PublicKeys an das Backend
-3. Backend: Chiffrieren des Session-Keys mit dem Frontend-PublicKey
-4. Backend: Sessionkey für Synchrone Verschlüsselung mittels asynchroner Verschlüsselung ans Frontend senden
-5. Frontend: SessionKey mit Frontend-PrivateKey dechiffrieren
-6. Aufbau einer Synchronen Verschlüsselung mit SessionKey
