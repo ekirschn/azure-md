@@ -3,8 +3,8 @@ Blocking-Operationen
 
 * installVM: Per Rsync benötigte Dateien vom Frontend herunterladen und installieren
         * vmId          (Identifikation der neu einzurichtenden VM)
-        * vmx        	(Adresse zu VMX-Datei als VMware Virtual Machine Configuration)
-		* vmdk			(Adresse zu VMDK-Datei als VMware Virtual Hard Disk)
+        * vmx           (Adresse zu VMX-Datei als VMware Virtual Machine Configuration)
+        * vmdk          (Adresse zu VMDK-Datei als VMware Virtual Hard Disk)
 * startVM: Starten der VM
         * vmId          (Identifikation der zu startenden VM)
 * restartVM: Neustarten der VM
@@ -19,13 +19,14 @@ Blocking-Operationen
         * vmId          (Identifikation der laufenden oder gestoppten VM)
         * ramSize       (Neue RAM-Größe bzw. alte, wenn keine Veränderung erfolgen soll)
         * hdSize        (Neue Festplattengröße bzw. alte, wenn keine Veränderung erfolgen soll)
-		* cpuCores		(Neue Anzahl genutzter CPU-Kerne bzw. alte, wenn keine Veränderung erfolgen soll)
+        * cpuCores      (Neue Anzahl genutzter CPU-Kerne bzw. alte, wenn keine Veränderung erfolgen soll)
 
 
 Non-Blocking-Operationen
 ########################
 
 * getSystemStatus: Status des Systems (started, ready, busy)
+* tellSystemStatus: Status des Systems (started, ready, busy)
 * getVmStatus: Status der VM (start, stop, suspended)
         * vmId
 * getSystemId: ID des Computers
@@ -34,6 +35,9 @@ Non-Blocking-Operationen
 * getVmAdress: IP der VM abfragen
         * vmId
 * getSystemStatistics: Statistiken bzgl. Auslastung des Computers (HD, RAM, CPU, Traffic)
+* getToken
+* setToken
+        * authToken
 
 
 No-Goal:
@@ -48,3 +52,4 @@ No-Goal:
 * getVmStats: Informationen über alle verfügbaren Ressourcen (Größe, ...) der VM (HD, RAM, CPU)
 * setHeartbeatRate: Häufigkeit der Heartbeat-Meldungen verändern
         * rate          (Zeitintervall in Millisekunden)
+* getClientVersion: Aktuelle Version des Clients
