@@ -23,7 +23,7 @@ public class Azure implements VirtInterface
     public boolean LoadImage(String imageUrl)
     {
         // Do locking
-        Application.SetStatus(SystemStatus.BUSY);
+        Application.setStatus(SystemStatus.BUSY);
 
         return true;
     }
@@ -67,7 +67,7 @@ public class Azure implements VirtInterface
     @WebMethod
     public SystemStatus GetStatus()
     {
-        return Application.GetStatus();
+        return Application.getStatus();
     }
 
     @WebMethod

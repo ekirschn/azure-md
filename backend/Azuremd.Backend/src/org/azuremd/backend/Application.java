@@ -27,12 +27,12 @@ public class Application
     private static Endpoint webservice;
     private static Heartbeat heart;
 
-    public static SystemStatus GetStatus()
+    public static SystemStatus getStatus()
     {
         return status;
     }
 
-    public static void SetStatus(SystemStatus _status)
+    public static void setStatus(SystemStatus _status)
     {
         status = _status;
     }
@@ -93,13 +93,14 @@ public class Application
         {
             public void run()
             {
-                heart.stop();
-                webservice.stop();
+                if (heart != null) heart.stop();
+                if (webservice != null) webservice.stop();
+                
                 log.debug("Exiting client");
             }
         });
         
-        SetStatus(SystemStatus.READY);
+        setStatus(SystemStatus.READY);
 
         while (true)
         {}
