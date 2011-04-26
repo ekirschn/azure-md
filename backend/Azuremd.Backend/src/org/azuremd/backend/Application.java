@@ -10,11 +10,13 @@ import com.sun.net.httpserver.*;
 import javax.net.ssl.*;
 import javax.xml.ws.*;
 import com.spinn3r.log5j.*;
+import com.beust.jcommander.JCommander;
 import com.vmware.vix.*;
 
 import org.azuremd.backend.server.*;
 import org.azuremd.backend.vi.*;
 import org.azuremd.backend.webservice.Azure;
+import org.azuremd.cli.ProgramArguments;
 
 /**
  * Application
@@ -43,7 +45,7 @@ public class Application
         status = _status;
     }
 
-    public VirtServerInterface Host()
+    public VirtServerInterface getHost()
     {
         return host;
     }
@@ -78,7 +80,7 @@ public class Application
         return httpContext;
     }
 
-    public static void main(String[] args)
+    public static void main(String[] _args)
     {
         // Adding control+c/exit handler
         Runtime.getRuntime().addShutdownHook(new Thread()
@@ -97,28 +99,27 @@ public class Application
         String pid = ManagementFactory.getRuntimeMXBean().getName();
         log.debug("Backend version %s starting up ... (pid: %s)", "0.1", pid.substring(0, pid.indexOf('@')));
 
-        // Loading configuration
-        String cfgFile = new File(String.format("%s/%s", System.getProperty("user.home"), ".azuremd")).getAbsolutePath();
+        ProgramArguments args = new ProgramArguments();
+        new JCommander(args, _args);
 
+        String cfgFile = (args.configFilePath == null) ? new File(String.format("%s/%s", System.getProperty("user.home"), ".azuremd")).getAbsolutePath()
+                : args.configFilePath;
         Configuration.load(cfgFile);
 
-        // Generating default config
-        if (args.length > 0)
-        {
-            if (args[0].equals("-cc"))
-            {
-                Configuration.save(cfgFile);
-            }
-        }
+        if (args.createConfig)
+            Configuration.save(cfgFile);
 
-        try
+        if (!args.noConnection)
         {
-            host = new VMwareVirtualServer(Configuration.getInstance().Hostname, Configuration.getInstance().Username, Configuration.getInstance().Password, Configuration.getInstance().Port);
-        }
-        catch (VixException e)
-        {
-            log.error(e);
-            System.exit(1);
+            try
+            {
+                host = new VMwareVirtualServer(Configuration.getInstance().Hostname, Configuration.getInstance().Username, Configuration.getInstance().Password, Configuration.getInstance().Port);
+            }
+            catch (VixException e)
+            {
+                log.error(e);
+                System.exit(1);
+            }
         }
 
         try

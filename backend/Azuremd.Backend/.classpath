@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="libs/jna.jar"/>
 	<classpathentry kind="lib" path="libs/vix.jar"/>
 	<classpathentry kind="lib" path="libs/jython.jar"/>
+	<classpathentry kind="lib" path="libs/jcommander-1.17.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
