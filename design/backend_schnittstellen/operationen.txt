@@ -32,7 +32,7 @@ Non-Blocking-Operationen
 * getSystemId: ID des Computers
 * getVmIds: IDs aller VMs (Liste)
 * getIsoIds: IDs aller VMs und der darin geladenen ISOs (Liste)
-* getVmAdress: IP der VM abfragen
+* getVmAddress: IP der VM abfragen
         * vmId
 * getSystemStatistics: Statistiken bzgl. Auslastung des Computers (HD, RAM, CPU, Traffic)
 * getToken
