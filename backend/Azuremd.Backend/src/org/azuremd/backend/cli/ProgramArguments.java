@@ -1,4 +1,4 @@
-package org.azuremd.cli;
+package org.azuremd.backend.cli;
 
 import com.beust.jcommander.*;
 
