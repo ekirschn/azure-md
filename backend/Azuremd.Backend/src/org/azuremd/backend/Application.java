@@ -31,6 +31,7 @@ public class Application
     private static SystemStatus status = SystemStatus.STARTING;
     private static Endpoint webservice;
     private static Heartbeat heart;
+    private static VirtServerInterface host;
 
     public static SystemStatus getStatus()
     {
@@ -41,10 +42,15 @@ public class Application
     {
         status = _status;
     }
-    
+
+    public VirtServerInterface Host()
+    {
+        return host;
+    }
+
     private static HttpContext createSslContext() throws Exception
     {
-        // Ja, diesen GANZEN Kram brauch mant, wenn man nur SSL haben will. Java
+        // Ja, diesen GANZEN Kram brauch man, wenn man nur SSL haben will. Java
         // macht so Spaß.
         SSLContext ssl = SSLContext.getInstance("TLS");
 
@@ -74,9 +80,23 @@ public class Application
 
     public static void main(String[] args)
     {
-    	String pid = ManagementFactory.getRuntimeMXBean().getName();
-    	log.debug("Backend version %s starting up ... (pid: %s)", "0.1", pid.substring(0, pid.indexOf('@')));
-    	
+        // Adding control+c/exit handler
+        Runtime.getRuntime().addShutdownHook(new Thread()
+        {
+            public void run()
+            {
+                if (heart != null)
+                    heart.stop();
+                if (webservice != null)
+                    webservice.stop();
+                if (host != null)
+                    host.disconnect();
+            }
+        });
+
+        String pid = ManagementFactory.getRuntimeMXBean().getName();
+        log.debug("Backend version %s starting up ... (pid: %s)", "0.1", pid.substring(0, pid.indexOf('@')));
+
         // Loading configuration
         String cfgFile = new File(String.format("%s/%s", System.getProperty("user.home"), ".azuremd")).getAbsolutePath();
 
@@ -91,52 +111,32 @@ public class Application
             }
         }
 
-        log.debug("Connecting to virtual server host using %s@%s:%s", Configuration.getInstance().Username, Configuration.getInstance().Hostname, Configuration.getInstance().Port);
-
-        VirtServerInterface host = null;
-        
         try
         {
-            // blocks, wtf?
             host = new VMwareVirtualServer(Configuration.getInstance().Hostname, Configuration.getInstance().Username, Configuration.getInstance().Password, Configuration.getInstance().Port);
         }
         catch (VixException e)
         {
-            e.printStackTrace();
+            log.error(e);
+            System.exit(1);
         }
 
-        log.debug(host.getVMS());
-
-        // Starting up webservice
         try
         {
             webservice = Endpoint.create(new Azure());
             webservice.publish(createSslContext());
-            
+
             log.debug("Starting webservice at %s", Configuration.getInstance().WebServiceUrl);
         }
         catch (Exception bind)
         {
             log.error("Could not set up webservice; exiting ... ", bind);
-            System.exit(1);
-
+            Runtime.getRuntime().exit(1);
         }
 
-        // Entering normal working modus
         heart = new Heartbeat(Configuration.getInstance().HeartbeatUrl);
 
-        // Adding control+c/exit handler
-        Runtime.getRuntime().addShutdownHook(new Thread()
-        {
-            public void run()
-            {
-                if (heart != null) heart.stop();
-                if (webservice != null) webservice.stop();
-                
-                log.debug("Exiting client");
-            }
-        });
-        
+        // Entering normal working modus
         setStatus(SystemStatus.READY);
 
         while (true)

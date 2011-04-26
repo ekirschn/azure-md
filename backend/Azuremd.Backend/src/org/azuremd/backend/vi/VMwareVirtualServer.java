@@ -18,11 +18,21 @@ import org.azuremd.backend.server.SystemStatus;
 public class VMwareVirtualServer implements VirtServerInterface
 {
     private VixHostHandle server;
-    
+    private static Logger log = Logger.getLogger();
+
     public VMwareVirtualServer(String hostname, String username,
             String password, int port) throws VixException
     {
-        server = new VixHostHandle(VixConstants.VIX_API_VERSION, VixServiceProvider.VIX_SERVICEPROVIDER_VMWARE_SERVER, hostname, port, username, password);
+        String url = String.format("https://%s:%s/sdk", hostname, port);
+        log.debug("Connecting to virtual server host using %s@%s", username, url);
+
+        server = new VixHostHandle(VixConstants.VIX_API_VERSION, VixServiceProvider.VIX_SERVICEPROVIDER_VMWARE_VI_SERVER, url, (port != 8333) ? port
+                : 0, username, password);
+    }
+    
+    public void disconnect()
+    {
+        server.disconnect();
     }
 
     @Override
@@ -96,9 +106,9 @@ public class VMwareVirtualServer implements VirtServerInterface
         }
         catch (VixException e)
         {
-            Logger.getLogger().error(e);
+            log.error(e);
         }
-        
+
         return null;
     }
 }

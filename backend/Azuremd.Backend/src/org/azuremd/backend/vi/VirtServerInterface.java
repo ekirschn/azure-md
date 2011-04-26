@@ -16,4 +16,6 @@ import java.util.*;
 public interface VirtServerInterface extends VirtInterface 
 {
 	public ArrayList<String> getVMS();
+	
+	public void disconnect();
 }
