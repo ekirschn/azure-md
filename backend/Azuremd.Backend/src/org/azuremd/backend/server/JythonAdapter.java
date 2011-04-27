@@ -3,6 +3,7 @@ package org.azuremd.backend.server;
 import org.python.Version;
 import org.python.util.PythonInterpreter;
 
+import com.apple.eawt.Application;
 import com.spinn3r.log5j.Logger;
 
 /**
@@ -38,6 +39,6 @@ public class JythonAdapter
         if (py == null)
             setup();
 
-        py.execfile(String.format("bin/scripts/%s.py", file));
+        py.execfile(Application.class.getClassLoader().getResourceAsStream(String.format("scripts/%s.py", file)));
     }
 }
