@@ -1,6 +1,6 @@
 package org.azuremd.backend;
 
-import java.io.File;
+import java.io.*;
 
 import org.simpleframework.xml.*;
 import org.simpleframework.xml.core.Persister;
@@ -36,50 +36,90 @@ public class Configuration
 
     @Element
     String HeartbeatUrl = "http://localhost.heartbeat.com";
-    
+
     @Element
     String KeyStorePass = "changeit";
 
+    private static final Logger log = Logger.getLogger();
     private static Configuration instance = null;
+    private static String configurationPath = String.format("%s/%s", System.getProperty("user.home"), ".azuremd");
 
-    public static Configuration load(String fileName)
+    public static String getConfigurationPath()
+    {
+        return configurationPath;
+    }
+
+    public static String getConfigurationFile()
+    {
+        return String.format("%s/%s", configurationPath, "config");
+    }
+
+    public static void setConfigurationPath(String path)
+    {
+        configurationPath = path;
+    }
+
+    public static void load(String fileName)
     {
         Serializer ser = new Persister();
         Configuration cfg = new Configuration();
         File cfgFile = new File(fileName);
 
-        if (!cfgFile.exists())
-        {
-            Logger.getLogger().debug("Config not found; assuming default config");
-        }
-        else
-        {
-            try
-            {
-                cfg = ser.read(Configuration.class, cfgFile);
-            }
-            catch (Exception e)
-            {
-                Logger.getLogger().error("Could not read configuration", e);
-            }
-        }
-
-        instance = cfg;
-
-        return instance;
-    }
-
-    public static void save(String fileName)
-    {
-        Serializer ser = new Persister();
-
         try
         {
-            ser.write(Configuration.getInstance(), new File(fileName));
+            cfg = ser.read(Configuration.class, cfgFile);
+            log.debug("Loading configuration from %s", cfgFile);
         }
         catch (Exception e)
         {
-            Logger.getLogger().error("Could not write configuration", e);
+            log.error("Could not read configuration", e);
+        }
+
+        instance = cfg;
+    }
+
+    /**
+     * Schreibt die Standardkonfigurtion mit Dummy-Zertifikat in einen Pfad.
+     * Falls dieser Pfad nicht vorhanden ist, wird er erstellt.
+     * 
+     * @param fileName
+     *            Pfad der zur schreibenden Konfigurationsdatei
+     */
+    public static void saveDefaultConfig(String fileName)
+    {
+        File file = new File(fileName);
+        File path = new File(file.getParent());
+
+        if (!path.exists())
+        {
+            log.debug("Creating new path configuration path (%s)", path);
+            path.mkdir();
+        }
+
+        try
+        {
+            // EOF
+            byte[] buffer = new byte[0xFFFF];
+            OutputStream out = new FileOutputStream(String.format("%s/%s", path, "server.keystore"));
+            InputStream in = Application.class.getClassLoader().getResourceAsStream("server.keystore");
+
+            for (int len; (len = in.read(buffer)) != -1;)
+                out.write(buffer, 0, len);
+            
+            in.close();
+            out.close();
+
+            Serializer ser = new Persister();
+
+            ser.write(new Configuration(), file);
+        }
+        catch (IOException e)
+        {
+            log.error("Could not write keystore", e);
+        }
+        catch (Exception e)
+        {
+            log.error("Could not write configuration", e);
         }
     }
 
@@ -91,6 +131,5 @@ public class Configuration
     private Configuration()
     {
         // Erstellen außerhalb dieser Klasse verhindern
-
     }
 }

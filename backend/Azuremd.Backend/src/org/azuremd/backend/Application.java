@@ -59,7 +59,7 @@ public class Application
         KeyManagerFactory keyFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
         KeyStore store = KeyStore.getInstance("JKS");
 
-        store.load(new FileInputStream("bin/server.keystore"), Configuration.getInstance().KeyStorePass.toCharArray());
+        store.load(new FileInputStream(String.format("%s/server.keystore", Configuration.getConfigurationPath())), Configuration.getInstance().KeyStorePass.toCharArray());
 
         keyFactory.init(store, Configuration.getInstance().KeyStorePass.toCharArray());
 
@@ -96,19 +96,36 @@ public class Application
             }
         });
 
+        ProgramArguments args = new ProgramArguments();
+        JCommander parser = new JCommander(args, _args);
+        
+        if (args.showHelp)
+        {
+            parser.usage();
+            System.exit(0);
+        }
+        
         String pid = ManagementFactory.getRuntimeMXBean().getName();
         log.debug("Backend version %s starting up ... (pid: %s)", "0.1", pid.substring(0, pid.indexOf('@')));
-
-        ProgramArguments args = new ProgramArguments();
-        new JCommander(args, _args);
-
-        String cfgFile = (args.configFilePath == null) ? new File(String.format("%s/%s", System.getProperty("user.home"), ".azuremd")).getAbsolutePath()
-                : args.configFilePath;
-        Configuration.load(cfgFile);
+        
+        if (args.configPath != null)
+            Configuration.setConfigurationPath(args.configPath);
 
         if (args.createConfig)
-            Configuration.save(cfgFile);
-
+        {
+            log.debug("Writing default config to %s", Configuration.getConfigurationFile());
+            Configuration.saveDefaultConfig(Configuration.getConfigurationFile());
+            System.exit(0);
+        }
+        
+        if (!new File(Configuration.getConfigurationFile()).exists())
+        {
+            log.error("Could not found configuration file. Use -cc to create a default configuraton.");
+            System.exit(1);
+        }
+        
+        Configuration.load(Configuration.getConfigurationFile());
+        
         if (!args.noConnection)
         {
             try
