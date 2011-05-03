@@ -9,6 +9,6 @@ public class ServiceTest {
 	{
 		AzureService service = new AzureService();
 		Azure inter = service.getAzurePort();
-		System.out.println(inter.getStatus());
+		System.out.println(inter.getVmStatus());
 	}
 }
