@@ -1,11 +1,14 @@
 package org.azuremd.backend.webservice;
 
+import java.util.Map;
+
 import javax.jws.*;
 import javax.jws.soap.SOAPBinding;
 
 import org.azuremd.backend.Application;
 import org.azuremd.backend.server.SystemStatus;
 import org.azuremd.backend.vi.VirtInterface;
+import org.azuremd.backend.vi.VmInfo;
 
 /**
  * Azure
@@ -20,59 +23,63 @@ import org.azuremd.backend.vi.VirtInterface;
 public class Azure implements VirtInterface
 {
     @WebMethod
-    public boolean LoadImage(String imageUrl)
+    public SystemStatus RegisterVm(String vmId, String source)
     {
-        // Do locking
-        Application.setStatus(SystemStatus.BUSY);
-
-        return true;
+        // host.vmware.register (...)
+        return Application.getStatus();
     }
 
     @WebMethod
-    public boolean UnloadImage()
-    {
-        return true;
-    }
-
-    @WebMethod
-    public boolean Reboot(String virtualMachine)
-    {
-        return true;
-    }
-
-    @WebMethod
-    public boolean RebootHost()
-    {
-        return true;
-    }
-
-    @WebMethod
-    public boolean Suspend(String virtualMachine)
-    {
-        return true;
-    }
-
-    @WebMethod
-    public boolean Resume(String virutalMachine)
-    {
-        return true;
-    }
-
-    @WebMethod
-    public boolean GetVmStatus(String virtualMachine)
-    {
-        return true;
-    }
-
-    @WebMethod
-    public SystemStatus GetStatus()
+    public SystemStatus StartVm(String vmId)
     {
         return Application.getStatus();
     }
 
     @WebMethod
-    public boolean GetSystemStatus()
+    public SystemStatus RestartVm(String vmId)
     {
-        return true;
+        return Application.getStatus();
+    }
+
+    @WebMethod
+    public SystemStatus StopVm(String vmId)
+    {
+        return Application.getStatus();
+    }
+
+    @WebMethod
+    public SystemStatus SuspendVm(String vmId)
+    {
+        return Application.getStatus();
+    }
+
+    @WebMethod
+    public SystemStatus ResumeVm(String vmId)
+    {
+        return Application.getStatus();
+    }
+
+    @WebMethod
+    public SystemStatus ResizeComponents(String vmId, int ramSize, long hdSize, int cpuCores)
+    {
+        return Application.getStatus();
+    }
+
+    @WebMethod
+    public Map<String, VmInfo> GetVmStatus()
+    {
+        return null;
+    }
+
+    @WebMethod
+    public String GetVmIp(String vmId)
+    {
+        return null;
+    }
+    
+    @WebMethod
+    public void SetToken(String authToken) 
+    {
+        
     }
 }

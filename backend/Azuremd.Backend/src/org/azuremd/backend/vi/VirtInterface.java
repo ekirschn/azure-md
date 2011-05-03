@@ -1,5 +1,7 @@
 package org.azuremd.backend.vi;
 
+import java.util.*;
+
 import org.azuremd.backend.server.*;
 
 /**
@@ -13,21 +15,23 @@ import org.azuremd.backend.server.*;
  */
 public interface VirtInterface
 {
-    public boolean LoadImage(String imageUrl);
+    public SystemStatus RegisterVm(String vmId, String source);
 
-    public boolean UnloadImage();
+    public SystemStatus StartVm(String vmId);
 
-    public boolean Reboot(String virtualMachine);
+    public SystemStatus RestartVm(String vmId);
 
-    public boolean RebootHost();
+    public SystemStatus StopVm(String vmId);
 
-    public boolean Suspend(String virtualMachine);
+    public SystemStatus SuspendVm(String vmId);
 
-    public boolean Resume(String virutalMachine);
+    public SystemStatus ResumeVm(String vmId);
 
-    public boolean GetVmStatus(String virtualMachine);
+    public SystemStatus ResizeComponents(String vmId, int ramSize, long hdSize, int cpuCores);
+    
+    public Map<String, VmInfo> GetVmStatus();
+    
+    public String GetVmIp(String vmId);
 
-    public SystemStatus GetStatus();
-
-    public boolean GetSystemStatus();
+    public void SetToken(String authToken);
 }

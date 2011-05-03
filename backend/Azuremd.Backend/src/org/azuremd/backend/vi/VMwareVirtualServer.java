@@ -5,6 +5,7 @@ import java.util.*;
 import com.spinn3r.log5j.Logger;
 import com.vmware.vix.*;
 
+import org.azuremd.backend.Application;
 import org.azuremd.backend.server.SystemStatus;
 
 /**
@@ -36,66 +37,71 @@ public class VMwareVirtualServer implements VirtServerInterface
     }
 
     @Override
-    public boolean LoadImage(String imageUrl)
+    public SystemStatus RegisterVm(String vmId, String source)
     {
-        // TODO Auto-generated method stub
-        return false;
+        Application.setStatus(SystemStatus.BUSY);
+        
+        return Application.getStatus();
     }
 
     @Override
-    public boolean UnloadImage()
+    public SystemStatus StartVm(String vmId)
     {
         // TODO Auto-generated method stub
-        return false;
+        return Application.getStatus();
     }
 
     @Override
-    public boolean Reboot(String virtualMachine)
+    public SystemStatus RestartVm(String vmId)
     {
         // TODO Auto-generated method stub
-        return false;
+        return Application.getStatus();
     }
 
     @Override
-    public boolean RebootHost()
+    public SystemStatus StopVm(String vmId)
     {
         // TODO Auto-generated method stub
-        return false;
+        return Application.getStatus();
     }
 
     @Override
-    public boolean Suspend(String virtualMachine)
+    public SystemStatus SuspendVm(String vmId)
     {
         // TODO Auto-generated method stub
-        return false;
+        return Application.getStatus();
     }
 
     @Override
-    public boolean Resume(String virutalMachine)
+    public SystemStatus ResumeVm(String vmId)
     {
         // TODO Auto-generated method stub
-        return false;
+        return Application.getStatus();
     }
 
     @Override
-    public boolean GetVmStatus(String virtualMachine)
+    public SystemStatus ResizeComponents(String vmId, int ramSize, long hdSize, int cpuCores)
     {
         // TODO Auto-generated method stub
-        return false;
+        return Application.getStatus();
     }
 
     @Override
-    public SystemStatus GetStatus()
+    public Map<String, VmInfo> GetVmStatus()
     {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public boolean GetSystemStatus()
+    public String GetVmIp(String vmId)
     {
         // TODO Auto-generated method stub
-        return false;
+        return null;
+    }
+    
+    public void SetToken(String authToken) {
+        // Wird nie in dieser Klasse aufgerufen.
     }
 
     public ArrayList<String> getVMS()
