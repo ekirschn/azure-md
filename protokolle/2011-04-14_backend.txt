@@ -2,7 +2,7 @@ Meeting, Team Backend + Team Frontend
 Donnerstag, den 14.04.2011, 17.00 Uhr
 Besprechungsraum der AG Softwaretechnik
 
-Protkoll der Backend-betreffenden Themen
+Protokoll der Backend-betreffenden Themen
 
 
 

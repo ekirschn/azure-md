@@ -1,0 +1,41 @@
+Meeting, Team Backend + Team Frontend
+Donnerstag, den 26.04.2011, 13.00 Uhr
+Besprechungsraum der AG Softwaretechnik
+
+Protokoll der Backend-betreffenden Themen
+
+
+
+0. Anwesenheit
+
+Robert
+Frontend: Friedrich, Christina, Andy, Olga
+Backend: Marco, Christoph, Ronny, Eike
+
+
+
+1. Wochen-Bericht
+
+* Schnittstellen-Operationen verfeinert
+		* (design/backend_schnittstellen/operationen.txt)
+		* Mit PM Frontend abgesprochen
+		* Noch kein Statement des Chef-Entwicklers von Frontend
+* Sequenzdiagramm der Kommunikation zwischen Frontend und Backend erstellt
+		* (design/backend_schnittstellen/kommunikation-frontend-backend.png)
+		* Mit PM Frontend abgesprochen
+		* Noch kein Statement des Chef-Entwicklers von Frontend
+* SSL-Support für Webservice eingebaut
+* Jython-Support für Wartungen eingebaut
+* VIX API funktioniert nun auf keinem System mehr
+
+
+
+2. Kommende Aufgaben
+
+* Bezeichner des Webservices finalisieren
+* VIX API fixen, Alternativ ältere Versionen testen
+* Vorbereitung für Test der ersten Kommunikation bis zum Start der VM, benötigt von Frontend:
+		* PublicKey des Frontends
+		* CA-Zertifikat
+		* Service-Endpunkt (Adresse)
+		* Token, ComputerID

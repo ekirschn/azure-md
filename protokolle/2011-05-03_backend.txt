@@ -1,0 +1,48 @@
+Meeting, Team Backend + Team Frontend
+Donnerstag, den 03.05.2011, 13.00 Uhr
+Besprechungsraum der AG Softwaretechnik
+
+Protokoll der Backend-betreffenden Themen
+
+
+
+0. Anwesenheit
+
+Robert
+Frontend: Friedrich, Christina, Andy, Olga
+Backend: Christoph, Ronny, Eike
+
+
+
+1. Wochen-Bericht
+
+* Bezeichner für Webservice finalisiert
+		* (design/backend_schnittstellen/operationen.txt)
+* VIX API nun funktionsfähig
+* Unterstützung des Team Frontends
+		* Erstellung PublicKey (Anleitung)
+		* Erstellung CA-Zertifikat (Anleitung)
+		* Funktionsweise, Test Rsync
+		* GIT-Einrichtung beim Chef-Entwickler des Frontends
+		* Fix der Webseite (APS.NET MVC), nun wieder funktionsfähig
+* Update/Upgrade-Prozess als Diagramm visualisiert
+		* (design/backend_updateprocess/upgrade_process.png)
+* Heartbeat - Identifizierung des Computers
+		* 2 Herangehensweisen diskutiert
+				* Token (SSL-Verschlüselung erforderlich)
+				* ComputerID
+		* Realisierung von: ComputerID
+				* Zuweisung durch Frontend zum Zeitpunkt der Token-Zuweisung
+				* Umbenennung der Bezeichner getToken/setToken
+
+
+
+2. Kommende Aufgaben
+
+* Beschäftigung mit VM-IP (Ermittelung per VMware Tools?) [Christoph]
+* Übersicht über GIT-Befehle im Wiki für Team Frontend [Eike]
+* Testfälle [Marco]
+* Update/Upgrade Prozess implementieren [Ronny]
+* Eigentliche Implementierung der Services, da noch alle Interfaces leer [Christoph]
+* Einbau der benötigten Komponenten für Testlauf, sobald diese zur Verfügung stehen
+		* PublicKey, CA-Zertifikat, Service-Endpunkt, Token, ComputerID
