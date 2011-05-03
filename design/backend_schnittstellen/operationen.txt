@@ -1,55 +1,35 @@
-Blocking-Operationen
+Blocking-Operationen	(Rückgabe-Wert: BUSY)
 ####################
 
-* installVM: Per Rsync benötigte Dateien vom Frontend herunterladen und installieren
+* RestartVm: Registrieren der VM im System
         * vmId          (Identifikation der neu einzurichtenden VM)
-        * vmx           (Adresse zu VMX-Datei als VMware Virtual Machine Configuration)
-        * vmdk          (Adresse zu VMDK-Datei als VMware Virtual Hard Disk)
-* startVM: Starten der VM
+        * vmx           (Dateiname der VMX als VMware Virtual Machine Configuration)
+* StartVm: Starten der VM
         * vmId          (Identifikation der zu startenden VM)
-* restartVM: Neustarten der VM
+* RestartVm: Neustarten der VM
         * vmId          (Identifikation der laufenden VM)
-* stopVM: Herunterfahren der VM
+* StopVm: Herunterfahren der VM
         * vmId          (Identifikation der laufenden VM)
-* suspendVM: Ruhezustand der VM einleiten
+* SuspendVm: Ruhezustand der VM einleiten
         * vmId          (Identifikation der laufenden VM)
-* resumeVM:
+* ResumeVm:
         * vmId          (Identifikation der im Ruhezustand befindlichen VM)
-* resizeComponents: Festplatten-Größe, RAM-Größe und/oder Anzahl der CPU-Kerne der VM verändern
+* ResizeComponents: Festplatten-Größe, RAM-Größe und/oder Anzahl der CPU-Kerne der VM verändern
         * vmId          (Identifikation der laufenden oder gestoppten VM)
         * ramSize       (Neue RAM-Größe bzw. alte, wenn keine Veränderung erfolgen soll)
         * hdSize        (Neue Festplattengröße bzw. alte, wenn keine Veränderung erfolgen soll)
         * cpuCores      (Neue Anzahl genutzter CPU-Kerne bzw. alte, wenn keine Veränderung erfolgen soll)
-
+* GetVmIp: IP der VM abfragen
+		* vmId
 
 Non-Blocking-Operationen
 ########################
 
-* getSystemStatus: Status des Systems (started, ready, busy)
-* tellSystemStatus: Status des Systems (started, ready, busy)
-* getVmStatus: Status der VM (start, stop, suspended)
-        * vmId
-* getSystemId: ID des Computers
-* getVmIds: IDs aller VMs (Liste)
-* getIsoIds: IDs aller VMs und der darin geladenen ISOs (Liste)
-* getVmAddress: IP der VM abfragen
-        * vmId
-* getSystemStatistics: Statistiken bzgl. Auslastung des Computers (HD, RAM, CPU, Traffic)
-* getToken
-* setToken
+Frontend:
+* TellSystemStatus: Status des Systems (started, ready, busy)
+* GetToken
+
+Backend:
+* GetVmStatus: Bzgl. aller VMs: die IDs, Status (none, started, stopped, suspended) und IsoIDs
+* SetToken
         * authToken
-
-
-No-Goal:
-* getAccess: One-Time-Zugriff per SSH
-* getSystemLogs: Alle Logbücher des Computers per Rsync an Frontend übertragen
-* getVmLogs: Alle Logbücher der VM per Rsync an Frontend übertragen
-        * vmId
-* getSystemFailLogs: Fehler-Logbücher des Computers per Rsync an Frontend übertragen
-* getVmFailLogs: Fehler-Logbücher der VM per Rsync an Frontend übertragen
-        * vmId
-* getSystemStats: Informationen über alle verfügbaren Ressourcen (Größe, ...) des Computers (HD, RAM, CPU)
-* getVmStats: Informationen über alle verfügbaren Ressourcen (Größe, ...) der VM (HD, RAM, CPU)
-* setHeartbeatRate: Häufigkeit der Heartbeat-Meldungen verändern
-        * rate          (Zeitintervall in Millisekunden)
-* getClientVersion: Aktuelle Version des Clients
