@@ -1,7 +1,7 @@
 Blocking-Operationen (Frontend -> Backend)
 ##########################################
 
-* RestartVm: Registrieren der VM im System
+* RegisterVm: Registrieren der VM im System
         * string	vmId          (Identifikation der neu einzurichtenden VM)
         * string	source        (VMX-Dateiname)
 		-> TellSystemStatus("BUSY") -> TellSystemStatus("READY")
@@ -22,7 +22,7 @@ Blocking-Operationen (Frontend -> Backend)
         * string	vmId          (Identifikation der laufenden VM)
 		-> TellSystemStatus("BUSY") -> TellSystemStatus("READY")
 		
-* ResumeVm:
+* ResumeVm: VM aus dem Ruhezustand aufwecken
         * string	vmId          (Identifikation der im Ruhezustand befindlichen VM)
 		-> TellSystemStatus("BUSY") -> TellSystemStatus("READY")
 		
@@ -36,6 +36,9 @@ Blocking-Operationen (Frontend -> Backend)
 * GetVmIp: IP der VM abfragen
 		* string	vmId
 		-> TellSystemStatus("BUSY") -> TellSystemStatus("READY") -> string ip
+
+* Upgrade: Java-Tool auf die neuste Version aktualisieren
+		-> TellSystemStatus("UPGRADING") -> TellSystemStatus("READY") -> string {UPGRADE_SUCESS, UPGRADE_FAILURE}
 
 
 Non-Blocking-Operationen (Frontend -> Backend)
