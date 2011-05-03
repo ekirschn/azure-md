@@ -1,6 +1,6 @@
 package org.azuremd.backend.webservice;
 
-import java.util.Map;
+import java.util.*;
 
 import javax.jws.*;
 import javax.jws.soap.SOAPBinding;
@@ -66,7 +66,7 @@ public class Azure implements VirtInterface
     }
 
     @WebMethod
-    public Map<String, VmInfo> GetVmStatus()
+    public Dictionary<String, VmInfo> GetVmStatus()
     {
         return null;
     }
@@ -78,7 +78,7 @@ public class Azure implements VirtInterface
     }
     
     @WebMethod
-    public void SetToken(String authToken) 
+    public void SetInitialParams(String authToken, String computerId) 
     {
         
     }

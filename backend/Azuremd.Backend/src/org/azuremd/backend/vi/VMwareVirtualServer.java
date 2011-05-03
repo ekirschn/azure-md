@@ -87,7 +87,7 @@ public class VMwareVirtualServer implements VirtServerInterface
     }
 
     @Override
-    public Map<String, VmInfo> GetVmStatus()
+    public Dictionary<String, VmInfo> GetVmStatus()
     {
         // TODO Auto-generated method stub
         return null;
@@ -100,7 +100,7 @@ public class VMwareVirtualServer implements VirtServerInterface
         return null;
     }
     
-    public void SetToken(String authToken) {
+    public void SetInitialParams(String authToken, String computerId) {
         // Wird nie in dieser Klasse aufgerufen.
     }
 

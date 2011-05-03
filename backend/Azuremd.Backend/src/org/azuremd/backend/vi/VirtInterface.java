@@ -29,9 +29,9 @@ public interface VirtInterface
 
     public SystemStatus ResizeComponents(String vmId, int ramSize, long hdSize, int cpuCores);
     
-    public Map<String, VmInfo> GetVmStatus();
+    public Dictionary<String, VmInfo> GetVmStatus();
     
     public String GetVmIp(String vmId);
 
-    public void SetToken(String authToken);
+    public void SetInitialParams(String authToken, String computerId);
 }
