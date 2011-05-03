@@ -10,5 +10,5 @@ package org.azuremd.backend.server;
  */
 public enum SystemStatus
 {
-    NONE, STARTING, READY, BUSY
+    NONE, UPGRADING, STARTING, READY, BUSY
 }
