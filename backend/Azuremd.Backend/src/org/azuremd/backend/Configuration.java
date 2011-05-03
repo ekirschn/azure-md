@@ -39,6 +39,9 @@ public class Configuration
 
     @Element
     String KeyStorePass = "changeit";
+    
+    @Element
+    String AuthToken = "<NONE>";
 
     private static final Logger log = Logger.getLogger();
     private static Configuration instance = null;

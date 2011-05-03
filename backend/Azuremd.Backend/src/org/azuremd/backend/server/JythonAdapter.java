@@ -3,8 +3,9 @@ package org.azuremd.backend.server;
 import org.python.Version;
 import org.python.util.PythonInterpreter;
 
-import com.apple.eawt.Application;
 import com.spinn3r.log5j.Logger;
+
+import org.azuremd.backend.*;
 
 /**
  * JythonAdapter
