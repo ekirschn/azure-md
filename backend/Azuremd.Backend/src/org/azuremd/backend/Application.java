@@ -45,7 +45,7 @@ public class Application
         status = _status;
     }
 
-    public VirtServerInterface getHost()
+    public static VirtServerInterface getHost()
     {
         return host;
     }

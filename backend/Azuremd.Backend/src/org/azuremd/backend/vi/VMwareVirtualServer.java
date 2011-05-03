@@ -89,8 +89,23 @@ public class VMwareVirtualServer implements VirtServerInterface
     @Override
     public Dictionary<String, VmInfo> GetVmStatus()
     {
-        // TODO Auto-generated method stub
-        return null;
+        // TODO: fix
+        Hashtable<String, VmInfo> vms = new Hashtable<String, VmInfo>();
+        
+        try
+        {
+            for(String item : server.getRegisteredVms())
+            {
+                // VixVmHandle vm = server.findVmByName(item);
+                vms.put(item, new VmInfo());
+            }
+        }
+        catch (VixException e)
+        {
+            log.error(e);
+        }
+        
+        return vms;
     }
 
     @Override

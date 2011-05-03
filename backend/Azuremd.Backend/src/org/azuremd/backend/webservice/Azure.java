@@ -68,7 +68,7 @@ public class Azure implements VirtInterface
     @WebMethod
     public Dictionary<String, VmInfo> GetVmStatus()
     {
-        return null;
+        return Application.getHost().GetVmStatus();
     }
 
     @WebMethod
