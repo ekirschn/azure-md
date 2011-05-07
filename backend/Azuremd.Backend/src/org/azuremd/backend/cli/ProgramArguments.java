@@ -21,6 +21,9 @@ public class ProgramArguments
     @Parameter(names = "-nc", description="Stellt keine Verbindung zum eingetragnen Server her (debug)")
     public boolean noConnection;
     
+    @Parameter(names = "-no-ssl", description="Deaktiviert die SSL-Unterstützung beim WebService.")
+    public boolean noSsl;
+    
     @Parameter(names = "-h", description="Zeigt diese Hilfe an")
     public boolean showHelp;
 }

@@ -1,14 +1,11 @@
 package org.azuremd.backend.webservice;
 
-import java.util.*;
-
 import javax.jws.*;
 import javax.jws.soap.SOAPBinding;
 
 import org.azuremd.backend.Application;
 import org.azuremd.backend.server.SystemStatus;
 import org.azuremd.backend.vi.VirtInterface;
-import org.azuremd.backend.vi.VmInfo;
 
 /**
  * Azure
@@ -38,6 +35,7 @@ public class Azure implements VirtInterface
     @WebMethod
     public SystemStatus RestartVm(String vmId)
     {
+        Application.getHost().RestartVm(vmId);
         return Application.getStatus();
     }
 
@@ -66,8 +64,8 @@ public class Azure implements VirtInterface
     }
 
     @WebMethod
-    public Dictionary<String, VmInfo> GetVmStatus()
-    {
+    public String GetVmStatus()
+    {  
         return Application.getHost().GetVmStatus();
     }
 

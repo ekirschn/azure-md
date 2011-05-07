@@ -21,7 +21,7 @@ public class Heartbeat
         Logger.getLogger().debug("Heart starts beating");
 
         timer = new Timer(true);
-        timer.scheduleAtFixedRate(new TimerTask()
+        timer.schedule(new TimerTask()
         {
             public void run()
             {

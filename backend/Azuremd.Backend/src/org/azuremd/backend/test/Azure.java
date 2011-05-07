@@ -126,7 +126,7 @@ public interface Azure {
      */
     @WebMethod(operationName = "GetVmStatus")
     @WebResult(partName = "return")
-    public Dictionary getVmStatus();
+    public String getVmStatus();
 
     /**
      * 

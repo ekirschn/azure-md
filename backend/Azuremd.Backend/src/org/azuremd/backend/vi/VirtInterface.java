@@ -1,7 +1,5 @@
 package org.azuremd.backend.vi;
 
-import java.util.*;
-
 import org.azuremd.backend.server.*;
 
 /**
@@ -29,7 +27,7 @@ public interface VirtInterface
 
     public SystemStatus ResizeComponents(String vmId, int ramSize, long hdSize, int cpuCores);
     
-    public Dictionary<String, VmInfo> GetVmStatus();
+    public String GetVmStatus();
     
     public String GetVmIp(String vmId);
 

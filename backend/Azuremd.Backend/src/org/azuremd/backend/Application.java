@@ -68,11 +68,12 @@ public class Application
         trustFactory.init(store);
 
         ssl.init(keyFactory.getKeyManagers(), trustFactory.getTrustManagers(), new SecureRandom());
+        HttpsConfigurator httpsConf = new HttpsConfigurator(ssl);
 
         URI uri = new URI(Configuration.getInstance().WebServiceUrl);
 
         HttpsServer httpsServer = HttpsServer.create(new InetSocketAddress(uri.getHost(), uri.getPort()), 0);
-        httpsServer.setHttpsConfigurator(new HttpsConfigurator(ssl));
+        httpsServer.setHttpsConfigurator(httpsConf);
 
         HttpContext httpContext = httpsServer.createContext("/");
         httpsServer.start();
@@ -98,16 +99,16 @@ public class Application
 
         ProgramArguments args = new ProgramArguments();
         JCommander parser = new JCommander(args, _args);
-        
+
         if (args.showHelp)
         {
             parser.usage();
             System.exit(0);
         }
-        
+
         String pid = ManagementFactory.getRuntimeMXBean().getName();
         log.debug("Backend version %s starting up ... (pid: %s)", "0.1", pid.substring(0, pid.indexOf('@')));
-        
+
         if (args.configPath != null)
             Configuration.setConfigurationPath(args.configPath);
 
@@ -117,15 +118,15 @@ public class Application
             Configuration.saveDefaultConfig(Configuration.getConfigurationFile());
             System.exit(0);
         }
-        
+
         if (!new File(Configuration.getConfigurationFile()).exists())
         {
             log.error("Could not found configuration file. Use -cc to create a default configuraton.");
             System.exit(1);
         }
-        
+
         Configuration.load(Configuration.getConfigurationFile());
-        
+
         if (!args.noConnection)
         {
             try
@@ -141,10 +142,21 @@ public class Application
 
         try
         {
-            webservice = Endpoint.create(new Azure());
-            webservice.publish(createSslContext());
+            if (args.noSsl)
+            {
+                Endpoint.publish(Configuration.getInstance().WebServiceUrl.replace("https", "http"), new Azure());
+            }
+            else
+            {
+                webservice = Endpoint.create(new Azure());
+                webservice.publish(createSslContext());
+            }
 
-            log.debug("Starting webservice at %s", Configuration.getInstance().WebServiceUrl);
+            String serviceUrl = Configuration.getInstance().WebServiceUrl;
+            serviceUrl = ((args.noSsl) ? "http" : "https")
+                    + serviceUrl.substring(serviceUrl.indexOf(':'));
+
+            log.debug("Starting webservice at %s", serviceUrl);
         }
         catch (Exception bind)
         {

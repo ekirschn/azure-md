@@ -1,6 +1,9 @@
 package org.azuremd.backend.vi;
 
+import java.io.*;
 import java.util.*;
+
+import javax.xml.stream.*;
 
 import com.spinn3r.log5j.Logger;
 import com.vmware.vix.*;
@@ -51,10 +54,9 @@ public class VMwareVirtualServer implements VirtServerInterface
         return Application.getStatus();
     }
 
-    @Override
     public SystemStatus RestartVm(String vmId)
     {
-        // TODO Auto-generated method stub
+        // TODO Auto-generated method stub        
         return Application.getStatus();
     }
 
@@ -86,26 +88,47 @@ public class VMwareVirtualServer implements VirtServerInterface
         return Application.getStatus();
     }
 
-    @Override
-    public Dictionary<String, VmInfo> GetVmStatus()
+    public String GetVmStatus()
     {
-        // TODO: fix
-        Hashtable<String, VmInfo> vms = new Hashtable<String, VmInfo>();
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        String result = "";
         
         try
         {
+            XMLStreamWriter writer = XMLOutputFactory.newInstance().createXMLStreamWriter(os);
+            writer.writeStartElement("vms");
+            
+            List<String> runningVms = server.getRunningVms();
+            
             for(String item : server.getRegisteredVms())
             {
                 // VixVmHandle vm = server.findVmByName(item);
-                vms.put(item, new VmInfo());
+                
+                writer.writeStartElement("vm");
+                writer.writeAttribute("name", item);
+                writer.writeAttribute("status", (runningVms.contains(item)) ? "running" : "stopped");
+                writer.writeEndElement();
+                
+                //vm.release();
             }
+            
+            writer.writeEndElement();
+            writer.flush();
+            writer.close();
+            
+            result = os.toString("utf-8");
+            
         }
         catch (VixException e)
         {
             log.error(e);
         }
+        catch (Exception e)
+        {
+            log.error(e);
+        }
         
-        return vms;
+        return result;
     }
 
     @Override

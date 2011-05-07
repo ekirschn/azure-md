@@ -30,9 +30,9 @@ public class AzureService
         try {
             URL baseUrl;
             baseUrl = org.azuremd.backend.test.AzureService.class.getResource(".");
-            url = new URL(baseUrl, "https://localhost:8080/azure?wsdl");
+            url = new URL(baseUrl, "http://localhost:8080/azure?wsdl");
         } catch (MalformedURLException e) {
-            logger.warning("Failed to create URL for the wsdl Location: 'https://localhost:8080/azure?wsdl', retrying as a local file");
+            logger.warning("Failed to create URL for the wsdl Location: 'http://localhost:8080/azure?wsdl', retrying as a local file");
             logger.warning(e.getMessage());
         }
         AZURESERVICE_WSDL_LOCATION = url;
