@@ -1,9 +1,6 @@
 package org.azuremd.backend.vi;
 
-import java.io.*;
 import java.util.*;
-
-import javax.xml.stream.*;
 
 import com.spinn3r.log5j.Logger;
 import com.vmware.vix.*;
@@ -88,47 +85,30 @@ public class VMwareVirtualServer implements VirtServerInterface
         return Application.getStatus();
     }
 
-    public String GetVmStatus()
+    @SuppressWarnings("serial")
+    public VmBucket GetVmStatus()
     {
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        String result = "";
+        VmBucket table = new VmBucket();
         
         try
         {
-            XMLStreamWriter writer = XMLOutputFactory.newInstance().createXMLStreamWriter(os);
-            writer.writeStartElement("vms");
-            
-            List<String> runningVms = server.getRunningVms();
-            
-            for(String item : server.getRegisteredVms())
+            final List<String> runningVms = server.getRunningVms();
+
+            for(final String item : server.getRegisteredVms())
             {
                 // VixVmHandle vm = server.findVmByName(item);
                 
-                writer.writeStartElement("vm");
-                writer.writeAttribute("name", item);
-                writer.writeAttribute("status", (runningVms.contains(item)) ? "running" : "stopped");
-                writer.writeEndElement();
+                table.put(item, new Hashtable<String, String>() {{ put("status", (runningVms.contains(item)) ? "running" : "stopped"); }});
                 
                 //vm.release();
             }
-            
-            writer.writeEndElement();
-            writer.flush();
-            writer.close();
-            
-            result = os.toString("utf-8");
-            
         }
         catch (VixException e)
         {
             log.error(e);
         }
-        catch (Exception e)
-        {
-            log.error(e);
-        }
-        
-        return result;
+         
+        return table;
     }
 
     @Override
@@ -140,19 +120,5 @@ public class VMwareVirtualServer implements VirtServerInterface
     
     public void SetInitialParams(String authToken, String computerId) {
         // Wird nie in dieser Klasse aufgerufen.
-    }
-
-    public ArrayList<String> getVMS()
-    {
-        try
-        {
-            return server.getRegisteredVms();
-        }
-        catch (VixException e)
-        {
-            log.error(e);
-        }
-
-        return null;
     }
 }

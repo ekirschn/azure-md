@@ -20,31 +20,31 @@ import com.spinn3r.log5j.Logger;
 public class Configuration
 {
     @Element
-    String Hostname = "localhost";
+    public String Hostname = "localhost";
 
     @Element
-    String Username = "root";
+    public String Username = "root";
 
     @Element
-    String Password = "root";
+    public String Password = "root";
 
     @Element
     int Port = 8333;
 
     @Element
-    String WebServiceUrl = "https://localhost:8080/";
+    public String WebServiceUrl = "https://localhost:8080/";
 
     @Element
-    String HeartbeatUrl = "http://localhost.heartbeat.com";
+    public String HeartbeatUrl = "http://localhost.heartbeat.com";
 
     @Element
-    String KeyStorePass = "changeit";
+    public String KeyStorePass = "changeit";
     
     @Element
-    String AuthToken = "NONE";
+    public String AuthToken = "NONE";
     
     @Element
-    String ComputerId = "NONE";
+    public String ComputerId = "NONE";
 
     private static final Logger log = Logger.getLogger();
     private static Configuration instance = null;
@@ -82,6 +82,23 @@ public class Configuration
         }
 
         instance = cfg;
+    }
+    
+    /**
+     * Speichert die aktuelle Konfiguration im Pfad.
+     */
+    public void save()
+    {
+        Serializer ser = new Persister();
+
+        try
+        {
+            ser.write(this, new File(getConfigurationFile()));
+        }
+        catch (Exception e)
+        {
+            log.error(e);
+        }
     }
 
     /**

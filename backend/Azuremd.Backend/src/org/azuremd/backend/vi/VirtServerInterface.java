@@ -1,6 +1,6 @@
 package org.azuremd.backend.vi;
 
-import java.util.*;
+import org.azuremd.backend.server.SystemStatus;
 
 
 /**
@@ -13,9 +13,25 @@ import java.util.*;
  * @author dako
  *
  */
-public interface VirtServerInterface extends VirtInterface 
-{
-	public ArrayList<String> getVMS();
-	
+public interface VirtServerInterface 
+{	
 	public void disconnect();
+	
+    public SystemStatus RegisterVm(String vmId, String source);
+
+    public SystemStatus StartVm(String vmId);
+
+    public SystemStatus RestartVm(String vmId);
+
+    public SystemStatus StopVm(String vmId);
+
+    public SystemStatus SuspendVm(String vmId);
+
+    public SystemStatus ResumeVm(String vmId);
+
+    public SystemStatus ResizeComponents(String vmId, int ramSize, long hdSize, int cpuCores);
+    
+    public VmBucket GetVmStatus();
+    
+    public String GetVmIp(String vmId);
 }

@@ -25,6 +25,7 @@ public interface Azure {
 
     /**
      * 
+     * @param arg2
      * @param arg1
      * @param arg0
      * @return
@@ -36,10 +37,13 @@ public interface Azure {
         @WebParam(name = "arg0", partName = "arg0")
         String arg0,
         @WebParam(name = "arg1", partName = "arg1")
-        String arg1);
+        String arg1,
+        @WebParam(name = "arg2", partName = "arg2")
+        String arg2);
 
     /**
      * 
+     * @param arg1
      * @param arg0
      * @return
      *     returns org.azuremd.backend.webservice.SystemStatus
@@ -48,10 +52,13 @@ public interface Azure {
     @WebResult(partName = "return")
     public SystemStatus startVm(
         @WebParam(name = "arg0", partName = "arg0")
-        String arg0);
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1);
 
     /**
      * 
+     * @param arg1
      * @param arg0
      * @return
      *     returns org.azuremd.backend.webservice.SystemStatus
@@ -60,10 +67,13 @@ public interface Azure {
     @WebResult(partName = "return")
     public SystemStatus restartVm(
         @WebParam(name = "arg0", partName = "arg0")
-        String arg0);
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1);
 
     /**
      * 
+     * @param arg1
      * @param arg0
      * @return
      *     returns org.azuremd.backend.webservice.SystemStatus
@@ -72,10 +82,13 @@ public interface Azure {
     @WebResult(partName = "return")
     public SystemStatus stopVm(
         @WebParam(name = "arg0", partName = "arg0")
-        String arg0);
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1);
 
     /**
      * 
+     * @param arg1
      * @param arg0
      * @return
      *     returns org.azuremd.backend.webservice.SystemStatus
@@ -84,10 +97,13 @@ public interface Azure {
     @WebResult(partName = "return")
     public SystemStatus suspendVm(
         @WebParam(name = "arg0", partName = "arg0")
-        String arg0);
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1);
 
     /**
      * 
+     * @param arg1
      * @param arg0
      * @return
      *     returns org.azuremd.backend.webservice.SystemStatus
@@ -96,10 +112,13 @@ public interface Azure {
     @WebResult(partName = "return")
     public SystemStatus resumeVm(
         @WebParam(name = "arg0", partName = "arg0")
-        String arg0);
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1);
 
     /**
      * 
+     * @param arg4
      * @param arg3
      * @param arg2
      * @param arg1
@@ -113,23 +132,29 @@ public interface Azure {
         @WebParam(name = "arg0", partName = "arg0")
         String arg0,
         @WebParam(name = "arg1", partName = "arg1")
-        int arg1,
+        String arg1,
         @WebParam(name = "arg2", partName = "arg2")
-        long arg2,
+        int arg2,
         @WebParam(name = "arg3", partName = "arg3")
-        int arg3);
+        long arg3,
+        @WebParam(name = "arg4", partName = "arg4")
+        int arg4);
 
     /**
      * 
+     * @param arg0
      * @return
-     *     returns org.azuremd.backend.webservice.Dictionary
+     *     returns java.lang.String
      */
     @WebMethod(operationName = "GetVmStatus")
     @WebResult(partName = "return")
-    public String getVmStatus();
+    public String getVmStatus(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0);
 
     /**
      * 
+     * @param arg1
      * @param arg0
      * @return
      *     returns java.lang.String
@@ -138,15 +163,20 @@ public interface Azure {
     @WebResult(partName = "return")
     public String getVmIp(
         @WebParam(name = "arg0", partName = "arg0")
-        String arg0);
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        String arg1);
 
     /**
      * 
      * @param arg1
      * @param arg0
+     * @return
+     *     returns org.azuremd.backend.webservice.SystemStatus
      */
     @WebMethod(operationName = "SetInitialParams")
-    public void setInitialParams(
+    @WebResult(partName = "return")
+    public SystemStatus setInitialParams(
         @WebParam(name = "arg0", partName = "arg0")
         String arg0,
         @WebParam(name = "arg1", partName = "arg1")
