@@ -15,7 +15,7 @@ import org.azuremd.backend.server.SystemStatus;
  */
 public interface VirtServerInterface 
 {	
-	public void disconnect();
+	public void Disconnect();
 	
     public SystemStatus RegisterVm(String vmId, String source);
 

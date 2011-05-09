@@ -16,6 +16,7 @@ import com.vmware.vix.*;
 import org.azuremd.backend.cli.ProgramArguments;
 import org.azuremd.backend.server.*;
 import org.azuremd.backend.vi.*;
+import org.azuremd.backend.vi.vmware.VMwareVirtualServer;
 import org.azuremd.backend.webservice.Azure;
 
 /**
@@ -35,6 +36,11 @@ public class Application
     private static Heartbeat heart;
     private static VirtServerInterface host;
 
+    public static boolean isLocked()
+    {
+        return (status == SystemStatus.BUSY);
+    }
+    
     public static SystemStatus getStatus()
     {
         return status;
@@ -93,7 +99,7 @@ public class Application
                 if (webservice != null)
                     webservice.stop();
                 if (host != null)
-                    host.disconnect();
+                    host.Disconnect();
             }
         });
 

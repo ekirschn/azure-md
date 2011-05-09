@@ -35,7 +35,8 @@ public class Azure
         if (!TokenHandler.isValid(token))
             return SystemStatus.NONE;
         
-        // host.vmware.register (...)
+        Application.getHost().RegisterVm(vmId, source);
+        
         return Application.getStatus();
     }
 
@@ -44,6 +45,8 @@ public class Azure
     {
         if (!TokenHandler.isValid(token))
             return SystemStatus.NONE;
+        
+        Application.getHost().StartVm(vmId);
         
         return Application.getStatus();
     }
@@ -65,6 +68,8 @@ public class Azure
         if (!TokenHandler.isValid(token))
             return SystemStatus.NONE;
         
+        Application.getHost().StopVm(vmId);
+        
         return Application.getStatus();
     }
 
@@ -73,6 +78,8 @@ public class Azure
     {
         if (!TokenHandler.isValid(token))
             return SystemStatus.NONE;
+        
+        Application.getHost().SuspendVm(vmId);
         
         return Application.getStatus();
     }
@@ -83,6 +90,8 @@ public class Azure
         if (!TokenHandler.isValid(token))
             return SystemStatus.NONE;
         
+        Application.getHost().ResumeVm(vmId);
+        
         return Application.getStatus();
     }
 
@@ -91,6 +100,8 @@ public class Azure
     {
         if (!TokenHandler.isValid(token))
             return SystemStatus.NONE;
+        
+        Application.getHost().ResizeComponents(vmId, ramSize, hdSize, cpuCores);
         
         return Application.getStatus();
     }
