@@ -11,12 +11,10 @@ import javax.net.ssl.*;
 import javax.xml.ws.*;
 import com.spinn3r.log5j.*;
 import com.beust.jcommander.JCommander;
-import com.vmware.vix.*;
 
 import org.azuremd.backend.cli.ProgramArguments;
 import org.azuremd.backend.server.*;
 import org.azuremd.backend.vi.*;
-import org.azuremd.backend.vi.vmware.VMwareVirtualServer;
 import org.azuremd.backend.webservice.Azure;
 
 /**
@@ -40,7 +38,7 @@ public class Application
     {
         return (status == SystemStatus.BUSY);
     }
-    
+
     public static SystemStatus getStatus()
     {
         return status;
@@ -132,7 +130,7 @@ public class Application
         }
 
         Configuration.load(Configuration.getConfigurationFile());
-        
+
         if (!TokenHandler.gotToken())
             log.error("No Token found; webservice locked.");
 
@@ -140,9 +138,14 @@ public class Application
         {
             try
             {
-                host = new VMwareVirtualServer(Configuration.getInstance().Hostname, Configuration.getInstance().Username, Configuration.getInstance().Password, Configuration.getInstance().Port);
+                host = VirtInterfaceSelector.get(Configuration.getInstance().Hypervisor).Create(Configuration.getInstance().Hostname, Configuration.getInstance().Username, Configuration.getInstance().Password, Configuration.getInstance().Port);
             }
-            catch (VixException e)
+            catch (ClassNotFoundException e)
+            {
+                log.error(String.format("Could not load hypervisor for %s", Configuration.getInstance().Hypervisor), e);
+                System.exit(1);
+            }
+            catch (Exception e)
             {
                 log.error(e);
                 System.exit(1);

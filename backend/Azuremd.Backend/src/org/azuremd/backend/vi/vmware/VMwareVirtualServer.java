@@ -19,19 +19,29 @@ import org.azuremd.backend.vi.VmBucket;
  * @author dako
  * 
  */
-public class VMwareVirtualServer implements VirtServerInterface
+public class VmwareVirtualServer implements VirtServerInterface
 {
     private VixHostHandle server;
     private static Logger log = Logger.getLogger();
 
-    public VMwareVirtualServer(String hostname, String username,
-            String password, int port) throws VixException
+    public VirtServerInterface Create(String hostname, String username,
+            String password, int port) throws Exception
     {
         String url = String.format("https://%s:%s/sdk", hostname, port);
         log.debug("Connecting to virtual server host using %s@%s", username, url);
 
-        server = new VixHostHandle(VixConstants.VIX_API_VERSION, VixServiceProvider.VIX_SERVICEPROVIDER_VMWARE_VI_SERVER, url, (port != 8333) ? port
-                : 0, username, password);
+        try
+        {
+            server = new VixHostHandle(VixConstants.VIX_API_VERSION, VixServiceProvider.VIX_SERVICEPROVIDER_VMWARE_VI_SERVER, url, (port != 8333) ? port
+                    : 0, username, password);
+        }
+        catch (VixException e)
+        {
+            log.error(e);
+            throw new Exception(e);
+        }
+
+        return this;
     }
 
     public void Disconnect()

@@ -27,6 +27,9 @@ public class Configuration
 
     @Element
     public String Password = "root";
+    
+    @Element 
+    public String Hypervisor = "vmware";
 
     @Element
     int Port = 8333;
