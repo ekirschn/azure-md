@@ -28,6 +28,7 @@ import com.spinn3r.log5j.Logger;
 public class Azure
 {
     private static final Logger log = Logger.getLogger();
+    private static VirtServerInterface server = Application.getHost();
     
     @WebMethod
     public SystemStatus RegisterVm(String token, String vmId, String source)
@@ -35,7 +36,7 @@ public class Azure
         if (!TokenHandler.isValid(token))
             return SystemStatus.NONE;
         
-        Application.getHost().RegisterVm(vmId, source);
+        server.RegisterVm(vmId, source);
         
         return Application.getStatus();
     }
@@ -46,7 +47,7 @@ public class Azure
         if (!TokenHandler.isValid(token))
             return SystemStatus.NONE;
         
-        Application.getHost().StartVm(vmId);
+        server.StartVm(vmId);
         
         return Application.getStatus();
     }
@@ -57,7 +58,7 @@ public class Azure
         if (!TokenHandler.isValid(token))
             return SystemStatus.NONE;
         
-        Application.getHost().RestartVm(vmId);
+        server.RestartVm(vmId);
         
         return Application.getStatus();
     }
@@ -68,7 +69,7 @@ public class Azure
         if (!TokenHandler.isValid(token))
             return SystemStatus.NONE;
         
-        Application.getHost().StopVm(vmId);
+        server.StopVm(vmId);
         
         return Application.getStatus();
     }
@@ -79,7 +80,7 @@ public class Azure
         if (!TokenHandler.isValid(token))
             return SystemStatus.NONE;
         
-        Application.getHost().SuspendVm(vmId);
+        server.SuspendVm(vmId);
         
         return Application.getStatus();
     }
@@ -90,7 +91,7 @@ public class Azure
         if (!TokenHandler.isValid(token))
             return SystemStatus.NONE;
         
-        Application.getHost().ResumeVm(vmId);
+        server.ResumeVm(vmId);
         
         return Application.getStatus();
     }
@@ -101,7 +102,7 @@ public class Azure
         if (!TokenHandler.isValid(token))
             return SystemStatus.NONE;
         
-        Application.getHost().ResizeComponents(vmId, ramSize, hdSize, cpuCores);
+        server.ResizeComponents(vmId, ramSize, hdSize, cpuCores);
         
         return Application.getStatus();
     }
@@ -120,7 +121,7 @@ public class Azure
             XMLStreamWriter writer = XMLOutputFactory.newInstance().createXMLStreamWriter(os);
             writer.writeStartElement("vms");
             
-            for(Entry<String, Hashtable<String, String>> item : Application.getHost().GetVmStatus().entrySet())
+            for(Entry<String, Hashtable<String, String>> item : server.GetVmStatus().entrySet())
             {
                 writer.writeStartElement("vm");
                 writer.writeAttribute("name", item.getKey());
@@ -156,7 +157,7 @@ public class Azure
         if (!TokenHandler.isValid(token))
             return SystemStatus.NONE.toString();
         
-        return null;
+        return server.GetVmIp(vmId);
     }
     
     @WebMethod
