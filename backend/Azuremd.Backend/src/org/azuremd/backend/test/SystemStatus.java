@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;simpleType name="systemStatus">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
  *     &lt;enumeration value="NONE"/>
+ *     &lt;enumeration value="UPGRADING"/>
  *     &lt;enumeration value="STARTING"/>
  *     &lt;enumeration value="READY"/>
  *     &lt;enumeration value="BUSY"/>
@@ -22,11 +23,12 @@ import javax.xml.bind.annotation.XmlType;
  * </pre>
  * 
  */
-@XmlType(name = "systemStatus")
+@XmlType(name = "systemStatus", namespace = "http://webservice.backend.azuremd.org/")
 @XmlEnum
 public enum SystemStatus {
 
     NONE,
+    UPGRADING,
     STARTING,
     READY,
     BUSY;
