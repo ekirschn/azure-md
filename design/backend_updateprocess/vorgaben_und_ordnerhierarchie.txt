@@ -1,0 +1,10 @@
+﻿Vorgabe fuer Konfiguration des Servers:
+--------------------------------------
+neuer User: eigener User (bsp: cloudvm)
+
+- Ordnerstruktur
+	- AppHome = ~/.azuremd
+	- ~/.azuremd/workspace	<-- aktuelle Version
+	- ~/.azuremd/upgrade	<-- hier liegt die neue Version
+	- ~/.azuremd/backup		<-- ratet!
+	- ~/.azuremd/vms 		<-- Ablage fur virtuelle Maschinen
