@@ -161,6 +161,32 @@ public class Azure
     }
     
     @WebMethod
+    public String GetBackendVersion(String token) 
+    {
+        if (!TokenHandler.isValid(token))
+            return SystemStatus.NONE.toString();
+        
+        return Application.getVersion().toString();
+    }
+    
+    @WebMethod
+    public SystemStatus UpgradeBackend(String token, String version, String source)
+    {
+        if (!TokenHandler.isValid(token))
+            return SystemStatus.NONE;
+        
+        SystemStatus result = SystemStatus.READY;
+        
+        if(Application.getVersion().isNewer(new BackendVersion(version)))
+        {
+            result = SystemStatus.UPGRADING;
+            // TODO: Async updating über OSGI
+        }
+        
+        return result;
+    }
+    
+    @WebMethod
     public SystemStatus SetInitialParams(String token, String computerId) 
     {
         if (TokenHandler.gotToken())
