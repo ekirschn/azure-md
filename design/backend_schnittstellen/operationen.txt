@@ -45,7 +45,7 @@ Blocking-Operationen (Frontend -> Backend)
 		* string	vmId
 		-> TellSystemStatus("BUSY") -> TellSystemStatus("READY") -> string ip
 
-* Upgrade: Java-Tool auf die neuste Version aktualisieren
+* UpgradeBackend: Java-Tool auf die neuste Version aktualisieren
 		* string 	authToken
 		* string 	version
 		* string 	dateiname
