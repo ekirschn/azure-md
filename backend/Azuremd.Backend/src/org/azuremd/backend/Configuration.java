@@ -48,6 +48,9 @@ public class Configuration
     
     @Element
     public String ComputerId = "NONE";
+    
+    @Element
+    public String vmwareDirectory = "/var/lib/vmware/";
 
     private static final Logger log = Logger.getLogger();
     private static Configuration instance = null;

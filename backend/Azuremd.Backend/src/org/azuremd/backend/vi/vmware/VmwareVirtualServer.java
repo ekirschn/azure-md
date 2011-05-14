@@ -6,10 +6,9 @@ import com.spinn3r.log5j.Logger;
 import com.sun.jna.Pointer;
 import com.vmware.vix.*;
 
-import org.azuremd.backend.Application;
-import org.azuremd.backend.server.SystemStatus;
-import org.azuremd.backend.vi.VirtServerInterface;
-import org.azuremd.backend.vi.VmBucket;
+import org.azuremd.backend.*;
+import org.azuremd.backend.server.*;
+import org.azuremd.backend.vi.*;
 
 /**
  * VMwareVirtualServer
@@ -62,7 +61,7 @@ public class VmwareVirtualServer implements VirtServerInterface
         // TODO: fix param source
         VixHandle handle = server.getVix().VixHost_RegisterVM(server, source, VmwareHelper.stdCallback("New vm created"), null);
         handle.release();
-        
+
         return Application.getStatus();
     }
 
@@ -85,7 +84,7 @@ public class VmwareVirtualServer implements VirtServerInterface
         {
             if (handle != null)
                 handle.release();
-            
+
             if (serverHandle != null)
                 serverHandle.release();
         }
@@ -127,7 +126,7 @@ public class VmwareVirtualServer implements VirtServerInterface
         {
             if (handle != null)
                 handle.release();
-            
+
             if (serverHandle != null)
                 serverHandle.release();
         }
@@ -156,7 +155,7 @@ public class VmwareVirtualServer implements VirtServerInterface
         {
             if (handle != null)
                 handle.release();
-            
+
             if (serverHandle != null)
                 serverHandle.release();
         }
@@ -184,7 +183,7 @@ public class VmwareVirtualServer implements VirtServerInterface
         {
             if (handle != null)
                 handle.release();
-            
+
             if (serverHandle != null)
                 serverHandle.release();
         }
@@ -195,7 +194,7 @@ public class VmwareVirtualServer implements VirtServerInterface
     @Override
     public SystemStatus ResumeVm(String vmId)
     {
-        
+
         return this.StartVm(vmId);
     }
 
@@ -218,16 +217,22 @@ public class VmwareVirtualServer implements VirtServerInterface
 
             for (final String item : server.getRegisteredVms())
             {
+                final String[] bucket = Sinir.fastRead(Configuration.getInstance().vmwareDirectory
+                        + "Virtual Machines/"
+                        + item.replace("[standard]", "").trim(), new String[] {
+                        "displayName", "guestOS" });
+
                 VixVmHandle handle = server.openVm(item);
-                table.put(handle.toString(), new Hashtable<String, String>()
+                table.put(bucket[0], new Hashtable<String, String>()
                 {
                     {
                         put("status", (runningVms.contains(item)) ? "running"
                                 : "stopped");
                         put("path", item);
+                        put("guestOS", bucket[1]);
                     }
                 });
-                
+
                 handle.release();
             }
         }
