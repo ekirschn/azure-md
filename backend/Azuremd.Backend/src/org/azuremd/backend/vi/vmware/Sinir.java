@@ -25,7 +25,7 @@ public class Sinir
         return false;
     }
     
-    public static String[] fastRead(String fileName, String[] keys) 
+    public static String[] gimme(String fileName, String[] keys) 
     {
         String[] result = new String[keys.length];
         int i = 0;

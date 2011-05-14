@@ -20,8 +20,11 @@ import org.azuremd.backend.vi.*;
  */
 public class VmwareVirtualServer implements VirtServerInterface
 {
-    private VixHostHandle server;
     private static Logger log = Logger.getLogger();
+
+    private VixHostHandle server;
+    private final String vmDir = Configuration.getInstance().vmwareDirectory
+            + "Virtual Machines/";
 
     public VirtServerInterface Create(String hostname, String username,
             String password, int port) throws Exception
@@ -194,15 +197,25 @@ public class VmwareVirtualServer implements VirtServerInterface
     @Override
     public SystemStatus ResumeVm(String vmId)
     {
-
-        return this.StartVm(vmId);
+        return StartVm(vmId);
     }
 
     @Override
     public SystemStatus ResizeComponents(String vmId, int ramSize, long hdSize,
             int cpuCores)
     {
-        // TODO Auto-generated method stub
+        StopVm(vmId);
+
+        String[] result = Sinir.gimme(vmDir + vmId.replace("[standard]", "").trim(), new String[] { "memsize" });
+        
+        if (Integer.parseInt(result[0]) != ramSize)
+        {
+            log.debug("Ram size changing! %s -> %i", result[0], ramSize);
+        }
+        
+        // TODO: Neue Ramgröße schreiben und starten
+        // Bei Festplatte mal sehen ... async?
+
         return Application.getStatus();
     }
 
@@ -217,8 +230,7 @@ public class VmwareVirtualServer implements VirtServerInterface
 
             for (final String item : server.getRegisteredVms())
             {
-                final String[] bucket = Sinir.fastRead(Configuration.getInstance().vmwareDirectory
-                        + "Virtual Machines/"
+                final String[] bucket = Sinir.gimme(vmDir
                         + item.replace("[standard]", "").trim(), new String[] {
                         "displayName", "guestOS" });
 
