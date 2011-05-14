@@ -1,0 +1,22 @@
+ToDo
+======
+- Kommunikation Container (jar) und osgi prozess (upgrade befehl kommt im jar an)
+- Fkt. des OSgi
+	- Start Prozess 
+	- Stop Prozess
+	- Install new jar
+	- Backup Jar
+	- Recovery
+	- Fehlerkontrolle
+- Ordnerstruktur
+	- Home = ~/.azuremd
+	- ~/.azuremd/workspace
+	- ~/.azuremd/upgrade
+	- ~/.azuremd/backup
+	- ~/.azuremd/vms 
+	
+realisiert
+----------
+- klasse activator mit Struktur (start, stop, ... Methoden)
+- klasse cloudprocess mit
+	- token, appname, version, upgradepath, runningpath

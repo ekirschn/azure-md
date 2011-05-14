@@ -1,0 +1,53 @@
+Execution Environment: 
+- auf unterschiedlichen Java-Plattformen lauffähig 
+- keine konkrete Java-Version referenziert (lediglich Definition einer Laufzeitumgebung)
+	- legt fest, welche Klassen, Interfaces und Methoden vorhanden sein müssen
+
+Module Layer: 
+- definiert ein Bundle (Plug-in) als kleinste Einheit
+- ein Bundle kann eigenständig im Framework installiert und genutzt werden 
+- besteht aus Java-Klassen und den benötigt Ressourcen
+- benötigt: MANIFEST.MF (enthält Metadaten, die explizit die Abhängigkeiten und angebotenen Pakete auflisten
+- Möglichkeit, Abhängigkeiten zwischen verschiedenen Bundles explizit verwalten zu können
+- Klassen eines Bundles sind zunächst nicht für andere Bundles sichtbar (erst nach Export über Manifest Datei)
+
+Life Cycle Layer: 
+- dynamischen Aspekte im Vordergrund	http://it-republik.de/zonen/magazine/onlineartikel/pspic/picture_file/40/funke_osgi49d5d250cc121.jpg
+- Bundle-Zustände werden von einem Managementagenten (über Interface zum Framework) geändert 
+
+Service Registry: 
+- Bundles im OSGi Framework registrieren
+- Service = simples Java-Objekt (wird unter seinem Interfacenamen angemeldet)
+	- kann so von anderen Bundles abgefragt und genutzt werden
+- Registratur existiert nur während der Laufzeit
+Um das Arbeiten mit diesen dynamischen Services zu erleichtern, sind in der OSGi-Spezifikation 
+- drei beschriebene Mechanismen 
+	- der Service Listener
+	- der Service Tracker 
+	- der Declarative Service
+	
+Standardservices: 
+- z.B. http-Service
+
+Security Layer: 
+- Ausführungsrechte einzelner Bundles lassen sich gezielt einschränken
+- basiert auf dem Java-Sicherheitsmodell (eingeführt mit JDK 1.2, erweitert dieses jedoch)
+
+
+Kommunikation der Bundles:
+- Im- und Export mittels Java-Class-Loading-Mechanismus
+- für gegenseitige Nutzung bzw. Sichtbarmachen der Ressourcen bzw. Bundles
+
+Arbeiten mit Services: 
+- folgende Schritte sind notwendig:
+    - Service registrieren: Bundle muss in Service Registry angemeldet warden.
+    - Service abfragen: Registrierte Bundles können über Properties gesucht werden.
+    - Service verwenden: Direkter Zugriff auf die vom Bundle bereitgestellten Funktionen.
+    - Service freigeben: Nach Nutzung muss das Bundle den Service wieder freigeben.
+    - Service deregistrieren: Bundle soll seinen Service dem System nicht mehr zur Verfügung stellen.
+
+	
+Bundles erstellen:
+- z.B. mit BND (Eclipse-Plugin) http://www.aqute.biz/Bnd/Bnd
+	- erstellt aus Java Projekten direkt Bundles
+- Bundles werden als Jar Archiv im Framework installiert
