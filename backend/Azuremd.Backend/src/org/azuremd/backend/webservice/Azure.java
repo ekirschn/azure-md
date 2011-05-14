@@ -137,6 +137,8 @@ public class Azure
                 writer.writeEndElement();
             }
             
+            writer.writeEndElement();
+            
             writer.flush();
             writer.close();
             
