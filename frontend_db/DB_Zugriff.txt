@@ -1,0 +1,3 @@
+Servername: y6qs69glbz.database.windows.net
+Login: avcorp@y6qs69glbz
+Pasword: Azuremd0

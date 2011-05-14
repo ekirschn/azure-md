@@ -1,0 +1,67 @@
+Desing - Architektur - Navivation Frontend
+
+	Home -> Login über Pagemaster -> Loginseite / Registrierungsseite
+
+	Suche nach Ressourcen von Sellern durhc Metamodell von Robert (PDL)
+		automatischer Vorschlag der verfügbaren ressourcen
+		Kategorienübersicht -> Manuelle Suche nach Manuals
+
+	Wenn eingeloggt dann zeige:
+
+		Profil 
+			Cloud Computing MarketPlace / Verkaufsplatzübersicht
+				Buyer
+					Übersicht gekauften Ressourcen
+						gekaufte Ressourcen (von wann bis wann gekauft)
+											-> installierste VM'S, vorhande Imgages auf der Ressource, genutzte Ressourcen der Ressource (gekaufte), Logbücher über Rsync
+											-> JavaUpdates (Versionnummer, Image, Link)
+											-> wenn Ressourcen der gekauften ressource nicht voll ausgeschöpft sind anbieten CPU, Festplatte oder RAM erweitern können
+											-> Ressorucen wegnehmen lassen können
+						weitere Ressourcen kaufen
+							wie bei Suche -> vllt über Kategorien navigierbar
+						Image hochladen
+				Seller
+					Übersicht der angebotenen Ressourcen
+						welche davon gekauft und Darstellung der Verfügbarkeitszeigen (Reinstelldatum, Kaufdatum, Enddatum)
+					weitere Ressourcen vermarkten
+						PDL -> siehe unten
+			Wenn Admin, dann:
+				Adminansicht (letzten Updates / Uploads von Usern ++ .... ; neue User)
+					-> Verändern der Angebote, Usersperrung bei Verstößen
+		Logout
+
+	About
+	Impressum
+
+	
+	
+PDL Struktur:
+
+Ressource =
+	Netzteil
+	CPU (Cachelevel(1-2-3), Cachegröße (MB), Takt(GHz), Coreanzahl(1-2-3-4-5-6-7-8), Typ(AMD,Intel usw.))
+	RAM (Geschwindigkeit(Taktung (333,533,1066,1333,1800,2000)), Größe (MB), Anzahl der Module(1-2-3-4), Typ(fehlererkennend usw.), Hersteller(Kingston usw.), Art (DDR1/2/3))
+	Festplatten (Anzahl(1-2-3-4-5), Cache (MB), Raidlevel(), Geschwindigkeit(U/min))
+	Main/Motherboard (Hersteller, Modell)
+	Internet (Geschwindigkeit(k))
+	Netzwerkkarte (TCP)
+	Grafikkarte (Hersteller(ATI,GForce), Modell(Varchar), Speicher(MB), Duplex(Ja/nein))
+	Standort(Land, Stadt)
+	Preis (Euro/Monat)
+	Verfügbar ab (Datum)
+	Verfügbar bis (Datum)
+	
+	
+Datenbankstruktur
+
+	Schlüssel == !
+
+	User 		{!ID_User, !Benutzername, !Name, !Vorname, !RegistrierDatum, Adresse(Straße, HausNr, PLZ, Ort, Land), E-Mail, KontoNr, BLZ, KreditInstitut, Admin_Status, Pass_wd, Login_Date, IP}
+
+	transaction 	{ID_User, Benutzername, Name, Vorname, RegistrierDatum, !ID_B, Ressource(PDL-Struktur)}
+
+	seller 		{ID_User, Benutzername, Name, Vorname, RegistrierDatum, !ID_S, Ressource(PDL-Struktur)}
+
+	Andys-Mitschrift:
+		tabelle {User_ID, Angebots_ID, PDL_Code}
+		Tabellet{ID_B, ID_S,}

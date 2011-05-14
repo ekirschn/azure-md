@@ -2,31 +2,38 @@ Blocking-Operationen (Frontend -> Backend)
 ##########################################
 
 * RegisterVm: Registrieren der VM im System
+		* string 	authToken
         * string	vmId          (Identifikation der neu einzurichtenden VM)
         * string	source        (VMX-Dateiname)
 		-> TellSystemStatus("BUSY") -> TellSystemStatus("READY")
 		
 * StartVm: Starten der VM
+		* string 	authToken
         * string	vmId          (Identifikation der zu startenden VM)
 		-> TellSystemStatus("BUSY") -> TellSystemStatus("READY")
 		
 * RestartVm: Neustarten der VM
+		* string 	authToken
         * string	vmId          (Identifikation der laufenden VM)
 		-> TellSystemStatus("BUSY") -> TellSystemStatus("READY")
 		
 * StopVm: Herunterfahren der VM
+		* string 	authToken
         * string	vmId          (Identifikation der laufenden VM)
 		-> TellSystemStatus("BUSY") -> TellSystemStatus("READY")
 		
 * SuspendVm: Ruhezustand der VM einleiten
+		* string 	authToken
         * string	vmId          (Identifikation der laufenden VM)
 		-> TellSystemStatus("BUSY") -> TellSystemStatus("READY")
 		
 * ResumeVm: VM aus dem Ruhezustand aufwecken
+		* string 	authToken
         * string	vmId          (Identifikation der im Ruhezustand befindlichen VM)
 		-> TellSystemStatus("BUSY") -> TellSystemStatus("READY")
 		
 * ResizeComponents: Festplatten-Größe, RAM-Größe und/oder Anzahl der CPU-Kerne der VM verändern
+		* string 	authToken
         * string	vmId          (Identifikation der laufenden oder gestoppten VM)
         * int		ramSize       (RAM-Größe in Megabyte)
         * long		hdSize        (Festplattengröße in Megabyte)
@@ -34,30 +41,50 @@ Blocking-Operationen (Frontend -> Backend)
 		-> "BUSY" -> "READY"
 		
 * GetVmIp: IP der VM abfragen
+		* string	authToken
 		* string	vmId
 		-> TellSystemStatus("BUSY") -> TellSystemStatus("READY") -> string ip
 
-* Upgrade: Java-Tool auf die neuste Version aktualisieren
-		-> TellSystemStatus("UPGRADING") -> TellSystemStatus("READY") -> string {UPGRADE_SUCESS, UPGRADE_FAILURE}
+* UpgradeBackend: Java-Tool auf die neuste Version aktualisieren
+		* string 	authToken
+		* string 	version
+		* string 	dateiname
+		-> TellSystemStatus("UPGRADING") -> TellSystemStatus("READY") -> Frontend: getBackendVersion
 
 
 Non-Blocking-Operationen (Frontend -> Backend)
 ##############################################
 
-* GetVmStatus: Informationen bzgl. aller VMs im System
-		-> Liste (string Id, string Status, string IsoId)
-		   mit Status = {NONE, STARTED, STOPPED, SUSPENDED}
+* GetVmStatus: Informationen bzgl. aller VMs im System abfragen
+		* string 	authToken
+		-> TellVmStatus
 
 * SetInitialParams: Authentifizierungs-Token und ComputerID festlegen
-        * string	authToken
+		* string 	authToken
 		* string	computerId
+
+* GetBackendVersion: Version des Backends abfragen
+		* string 	authToken
+		-> TellBackendVersion
 
 
 Non-Blocking-Operationen (Backend -> Frontend)
 ##############################################
 
-* TellSystemStatus: Status des Systems
-		-> string {STARTED, READY, BUSY}
+* TellSystemStatus: Status des Systems mitteilen
+		* string	computerId
+		* string	status			mit status = {STARTED, READY, BUSY}
+
+* TellVmStatus: Informationen bzgl. aller VMs im System mitteilen
+		* string	computerId
+		* Liste aus:
+			* string	id
+			* string	status		mit status = {NONE, STARTED, STOPPED, SUSPENDED}
+			* string	isoId
 
 * GetInitialParams: Authentifizierungs-Token und ComputerID anfragen
-		-> Liste (string authToken, string computerId)
+		-> setInitialParams
+
+* TellBackendVersion: Version des Backends mitteilen
+		* string	computerId
+		* string	version
