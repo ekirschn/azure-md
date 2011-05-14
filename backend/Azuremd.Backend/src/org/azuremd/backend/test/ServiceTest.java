@@ -9,8 +9,9 @@ public class ServiceTest {
 	{
 		AzureService service = new AzureService();
 		Azure inter = service.getAzurePort();
-		System.out.println(inter.getBackendVersion("lala"));
-		System.out.println(inter.getVmStatus("Key"));
-		inter.setInitialParams("Key", "01111");
+		System.out.println(inter.startVm("lala", "[standard] Virtual Machine/Virtual Machine.vmx"));
+		System.out.println(inter.getVmStatus("lala"));
+        
+		//inter.setInitialParams("lala", "01111");
 	}
 }
