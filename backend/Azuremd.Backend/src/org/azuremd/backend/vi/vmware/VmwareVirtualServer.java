@@ -6,10 +6,9 @@ import com.spinn3r.log5j.Logger;
 import com.sun.jna.Pointer;
 import com.vmware.vix.*;
 
-import org.azuremd.backend.Application;
-import org.azuremd.backend.server.SystemStatus;
-import org.azuremd.backend.vi.VirtServerInterface;
-import org.azuremd.backend.vi.VmBucket;
+import org.azuremd.backend.*;
+import org.azuremd.backend.server.*;
+import org.azuremd.backend.vi.*;
 
 /**
  * VMwareVirtualServer
@@ -21,8 +20,11 @@ import org.azuremd.backend.vi.VmBucket;
  */
 public class VmwareVirtualServer implements VirtServerInterface
 {
-    private VixHostHandle server;
     private static Logger log = Logger.getLogger();
+
+    private VixHostHandle server;
+    private final String vmDir = Configuration.getInstance().vmwareDirectory
+            + "Virtual Machines/";
 
     public VirtServerInterface Create(String hostname, String username,
             String password, int port) throws Exception
@@ -60,7 +62,8 @@ public class VmwareVirtualServer implements VirtServerInterface
 
         // async
         // TODO: fix param source
-        server.getVix().VixHost_RegisterVM(server, source, VmwareHelper.stdCallback("New vm created"), null);
+        VixHandle handle = server.getVix().VixHost_RegisterVM(server, source, VmwareHelper.stdCallback("New vm created"), null);
+        handle.release();
 
         return Application.getStatus();
     }
@@ -69,11 +72,12 @@ public class VmwareVirtualServer implements VirtServerInterface
     public SystemStatus StartVm(String vmId)
     {
         VixVmHandle handle = null;
+        VixHandle serverHandle = null;
 
         try
         {
-            handle = server.findVmByName(vmId);
-            server.getVix().VixVM_PowerOn(handle, VixVMPowerOpOptions.VIX_VMPOWEROP_NORMAL, VixVmHandle.VIX_INVALID_HANDLE, VmwareHelper.stdCallback("VM powered on"), null);
+            handle = server.openVm(vmId);
+            serverHandle = server.getVix().VixVM_PowerOn(handle, VixVMPowerOpOptions.VIX_VMPOWEROP_NORMAL, VixVmHandle.VIX_INVALID_HANDLE, VmwareHelper.stdCallback("VM powered on"), null);
         }
         catch (VixException e)
         {
@@ -83,6 +87,9 @@ public class VmwareVirtualServer implements VirtServerInterface
         {
             if (handle != null)
                 handle.release();
+
+            if (serverHandle != null)
+                serverHandle.release();
         }
 
         return Application.getStatus();
@@ -90,19 +97,21 @@ public class VmwareVirtualServer implements VirtServerInterface
 
     private void StartVm(VixVmHandle vixVmHandle)
     {
-        server.getVix().VixVM_PowerOn(vixVmHandle, VixVMPowerOpOptions.VIX_VMPOWEROP_NORMAL, VixVmHandle.VIX_INVALID_HANDLE, VmwareHelper.stdCallback("VM powered on"), null);
+        VixHandle handle = server.getVix().VixVM_PowerOn(vixVmHandle, VixVMPowerOpOptions.VIX_VMPOWEROP_NORMAL, VixVmHandle.VIX_INVALID_HANDLE, VmwareHelper.stdCallback("VM powered on"), null);
         vixVmHandle.release();
+        handle.release();
     }
 
     @Override
     public SystemStatus RestartVm(String vmId)
     {
         VixVmHandle handle = null;
+        VixHandle serverHandle = null;
 
         try
         {
-            handle = server.findVmByName(vmId);
-            server.getVix().VixVM_PowerOff(handle, VixVMPowerOpOptions.VIX_VMPOWEROP_FROM_GUEST, new VixEventProc()
+            handle = server.openVm(vmId);
+            serverHandle = server.getVix().VixVM_PowerOff(handle, VixVMPowerOpOptions.VIX_VMPOWEROP_FROM_GUEST, new VixEventProc()
             {
                 public void callbackProc(int handle, int eventType,
                         int moreEventInfo, Pointer clientData)
@@ -120,6 +129,9 @@ public class VmwareVirtualServer implements VirtServerInterface
         {
             if (handle != null)
                 handle.release();
+
+            if (serverHandle != null)
+                serverHandle.release();
         }
 
         return Application.getStatus();
@@ -129,13 +141,14 @@ public class VmwareVirtualServer implements VirtServerInterface
     public SystemStatus StopVm(String vmId)
     {
         VixVmHandle handle = null;
+        VixHandle serverHandle = null;
 
         try
         {
-            handle = server.findVmByName(vmId);
+            handle = server.openVm(vmId);
             // VIX_VMPOWEROP_FROM_GUEST = graceful shutdown
             // VIX_VMPOWEROP_NORMAL = kill
-            server.getVix().VixVM_PowerOff(handle, VixVMPowerOpOptions.VIX_VMPOWEROP_FROM_GUEST, VmwareHelper.stdCallback("VM (gracefully) turned off"), null);
+            serverHandle = server.getVix().VixVM_PowerOff(handle, VixVMPowerOpOptions.VIX_VMPOWEROP_FROM_GUEST, VmwareHelper.stdCallback("VM (gracefully) turned off"), null);
         }
         catch (VixException e)
         {
@@ -145,6 +158,9 @@ public class VmwareVirtualServer implements VirtServerInterface
         {
             if (handle != null)
                 handle.release();
+
+            if (serverHandle != null)
+                serverHandle.release();
         }
 
         return Application.getStatus();
@@ -154,12 +170,13 @@ public class VmwareVirtualServer implements VirtServerInterface
     public SystemStatus SuspendVm(String vmId)
     {
         VixVmHandle handle = null;
+        VixHandle serverHandle = null;
 
         try
         {
-            handle = server.findVmByName(vmId);
+            handle = server.openVm(vmId);
             // VIX_VMPOWEROP_NORMAL = 0 (as api defines)
-            server.getVix().VixVM_Suspend(handle, VixVMPowerOpOptions.VIX_VMPOWEROP_NORMAL, VmwareHelper.stdCallback("VM suspended"), null);
+            serverHandle = server.getVix().VixVM_Suspend(handle, VixVMPowerOpOptions.VIX_VMPOWEROP_NORMAL, VmwareHelper.stdCallback("VM suspended"), null);
         }
         catch (VixException e)
         {
@@ -169,6 +186,9 @@ public class VmwareVirtualServer implements VirtServerInterface
         {
             if (handle != null)
                 handle.release();
+
+            if (serverHandle != null)
+                serverHandle.release();
         }
 
         return Application.getStatus();
@@ -177,15 +197,25 @@ public class VmwareVirtualServer implements VirtServerInterface
     @Override
     public SystemStatus ResumeVm(String vmId)
     {
-        // TODO Auto-generated method stub
-        return Application.getStatus();
+        return StartVm(vmId);
     }
 
     @Override
     public SystemStatus ResizeComponents(String vmId, int ramSize, long hdSize,
             int cpuCores)
     {
-        // TODO Auto-generated method stub
+        StopVm(vmId);
+
+        String[] result = Sinir.gimme(vmDir + vmId.replace("[standard]", "").trim(), new String[] { "memsize" });
+        
+        if (Integer.parseInt(result[0]) != ramSize)
+        {
+            log.debug("Ram size changing! %s -> %i", result[0], ramSize);
+        }
+        
+        // TODO: Neue Ramgröße schreiben und starten
+        // Bei Festplatte mal sehen ... async?
+
         return Application.getStatus();
     }
 
@@ -200,13 +230,22 @@ public class VmwareVirtualServer implements VirtServerInterface
 
             for (final String item : server.getRegisteredVms())
             {
-                table.put(item, new Hashtable<String, String>()
+                final String[] bucket = Sinir.gimme(vmDir
+                        + item.replace("[standard]", "").trim(), new String[] {
+                        "displayName", "guestOS" });
+
+                VixVmHandle handle = server.openVm(item);
+                table.put(bucket[0], new Hashtable<String, String>()
                 {
                     {
                         put("status", (runningVms.contains(item)) ? "running"
                                 : "stopped");
+                        put("path", item);
+                        put("guestOS", bucket[1]);
                     }
                 });
+
+                handle.release();
             }
         }
         catch (VixException e)
@@ -235,7 +274,7 @@ public class VmwareVirtualServer implements VirtServerInterface
         }
         finally
         {
-            // releasse handle
+            // release handle
             if (handle != null)
                 handle.release();
         }

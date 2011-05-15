@@ -33,6 +33,11 @@ public class Application
     private static Endpoint webservice;
     private static Heartbeat heart;
     private static VirtServerInterface host;
+    
+    public static BackendVersion getVersion()
+    {
+        return new BackendVersion("0.1.0.0");
+    }
 
     public static boolean isLocked()
     {
@@ -111,7 +116,7 @@ public class Application
         }
 
         String pid = ManagementFactory.getRuntimeMXBean().getName();
-        log.debug("Backend version %s starting up ... (pid: %s)", "0.1", pid.substring(0, pid.indexOf('@')));
+        log.debug("Backend version %s starting up ... (pid: %s)", Application.getVersion(), pid.substring(0, pid.indexOf('@')));
 
         if (args.configPath != null)
             Configuration.setConfigurationPath(args.configPath);
