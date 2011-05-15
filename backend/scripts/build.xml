@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="build_jar" name="Create Runnable Jar for Project Azuremd.Backend">                                   
+    <target name="build_jar">
+        <jar destfile="azuremd.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="org.azuremd.backend.Application"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="../Azuremd.Backend/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="../Azuremd.Backend/libs/log4j-1.2.16.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="../Azuremd.Backend/libs/log5j-2.1.2.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="../Azuremd.Backend/libs/simple-xml-2.5.2.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="../Azuremd.Backend/libs/jna.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="../Azuremd.Backend/libs/vix.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="../Azuremd.Backend/libs/jython.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="../Azuremd.Backend/libs/jcommander-1.17.jar"/>
+        </jar>
+    </target>
+</project>

@@ -1,0 +1,3750 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:date="http://exslt.org/dates-and-times">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--
+              This file is generated from xml source: DO NOT EDIT
+      -->
+    <title>AzureMD-SMK - Planner</title>
+    <meta name="GENERATOR" content="Planner HTML output" />
+    <style type="text/css">
+
+/* CSS Stylesheet for Planner HTML output.
+ * 
+ * Copyright (C) 2004-2005 Imendio AB
+ * Copyright (C) 2003 CodeFactory AB
+ * Copyright (C) 2003 Daniel Lundin (daniel@edgewall.com)
+ * Copyright (C) 2004 Chris Ladd (caladd@particlestorm.net)
+ */
+
+/*
+ * Fonts 
+ */
+html,body,table { 
+ font-family: "Bitstream Vera Sans", helvetica, Arial, sans-serif;
+ font-size: 12px;
+ white-space: nowrap;
+}
+
+tr,td,th,table,font,span,div,h1,h2,h3 {
+ font-family: "Bitstream Vera Sans", helvetica, Arial, sans-serif;
+}
+
+h1 {
+ font-size: 16px;
+}
+
+h2 {
+ font-size: 12px;
+ margin-bottom: 2px;
+}
+
+div.separator {
+ margin: 1em;
+}
+
+/*
+ * Header
+ */
+table.proj-header {
+ border: 0;
+ margin: 0;
+ width: auto;
+}
+
+table.proj-header .header {
+ font-weight: bold;
+}
+
+/*
+ * Footer
+ */
+.footer {
+ float: left;
+ width: 100%;
+ margin-top: 50px;  
+ padding-top: 2px;
+ border-style: dotted;
+ border-width: 1px 0 0 0;
+ border-color: #999;
+ font-size: 9px;
+ text-align: right;
+ clear: both;
+ color: #666;
+}
+
+a:link, a:visited {
+ text-decoration: none;
+ color: #666;
+}
+
+a:hover[href] {
+ text-decoration: underline;
+}
+
+
+/*
+ * Layout
+ */
+
+.gantt, .gantt-tasklist, .gantt-chart, .tasklist, .resourcelist {
+ float: left;
+}
+
+.gantt-tasklist, .gantt-chart, .tasklist-table, .resourcelist-table {
+ border-style: solid;
+ border-width: 1px;
+ border-color: #aaa;
+}
+
+.gantt-tasklist, .gantt-chart, .tasklist, .resourcelist {
+ overflow: auto;
+}
+
+.gantt, .tasklist, .resourcelist {
+  clear: both;
+  width: 100%;
+}
+
+.gantt-tasklist {
+ border-width: 1px 0px 1px 1px;
+ width: 30%;
+}
+
+.gantt-chart {
+ border-color: #aaa #aaa #aaa #fff;
+ width: 69.5%;
+}
+
+.tasklist, .resourcelist {
+ clear: left;
+}
+
+table {
+ width: 100%;
+ border-collapse: collapse;
+ border-style: none;
+ border-color: #fff;
+ white-space: nowrap;
+ margin: 0;
+}
+
+tr, td, th {
+ white-space: nowrap;
+ vertical-align: top;
+ padding-top: 1px;
+ padding-bottom: 1px;
+}
+
+th {
+ vertical-align: top;
+}
+
+tr {
+ height: 1.5em;
+}
+
+tr.header {
+ background-color: #aaa;
+ color: #fff;
+}
+
+tr.even {
+ background-color: #eee;
+}
+
+tr.odd {
+ background-color: #fff;
+}
+
+th span, td span {
+ margin-left: 6px;
+ margin-right: 6px;
+}
+
+th.note {
+ min-width: 20em;
+}
+
+td.note {
+ white-space: normal;
+}
+
+/*
+ * Gantt
+ */
+div.gantt-empty-begin, div.gantt-empty-end, div.gantt-complete-done, div.gantt-complete-notdone, div.gantt-summary {
+ overflow: hidden;
+ clear: none;
+ float: left; 
+ height: 0.75em;
+ margin-top: 0.15em;
+ margin-bottom: 0;
+}
+
+div.gantt-complete-done {
+ background-color: #495f6b;
+ height: 0.75em;
+ margin-top: 0;
+ margin-bottom: 0;
+}
+
+div.gantt-complete-notdone {
+ background-color: #8db6cd;
+ border-style: solid;
+ border-width: 1px;
+}
+
+div.gantt-summary {
+ height: 0.3em;
+ margin-top: 0.25em;
+ border-bottom: 2px dashed #000;
+}
+
+div.gantt-empty-end {
+ margin-left: 0;
+}
+
+div.gantt-milestone {
+ float: left;
+ font-size: 0.9em;
+ color: #000000;
+ position: relative;
+ margin-left: 0;
+ margin-right: 0;
+}
+
+div.gantt-resources {
+ float: left;
+ margin-left: 0.5em;
+ white-space: nowrap;
+}
+
+th.gantt-1day-header {
+  width: 19px;
+}
+
+th.gantt-2day-header {
+  width: 39px;
+}
+
+th.gantt-3day-header {
+  width: 59px;
+}
+
+th.gantt-4day-header {
+  width: 79px;
+}
+
+th.gantt-5day-header {
+  width: 99px;
+}
+
+th.gantt-6day-header {
+  width: 119px;
+}
+
+th.gantt-week-header, .gantt-resources {
+ width: 139px;
+}
+
+th.gantt-day-header {
+ margin: 0;
+ padding-top: 1px;
+ padding-bottom: 1px;
+ width: 19px;
+}
+
+</style>
+<!--[if IE]><style type="text/css">
+
+/* IE specific overrides to compensate for the different box model used by IE
+ * (see http://en.wikipedia.org/wiki/Internet_Explorer_box_model_bug)
+ */
+
+.gantt-resources {
+  overflow: hidden;
+}
+
+
+.tasklist, .resourcelist {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 1em;
+}
+
+
+.gantt-tasklist, .gantt-chart {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+
+.gantt-chart {
+  padding-bottom: 1px;
+}
+
+
+
+.tasklist-table, .resourcelist-table {
+  width: 99.8%;
+}
+
+/*
+div.gantt-empty-begin, div.gantt-empty-end, div.gantt-complete-done, div.gantt-complete-notdone, div.gantt-summary {
+ height: 1.75em;
+}
+
+div.gantt-complete-done {
+ height: 0.75em;
+}
+
+div.gantt-summary {
+ height: 0.3em;
+}
+*/
+th.gantt-1day-header {
+  width: 20px;
+}
+
+th.gantt-2day-header {
+  width: 40px;
+}
+
+th.gantt-3day-header {
+  width: 60px;
+}
+
+th.gantt-4day-header {
+  width: 80px;
+}
+
+th.gantt-5day-header {
+  width: 100px;
+}
+
+th.gantt-6day-header {
+  width: 120px;
+}
+
+th.gantt-week-header {
+ width: 140px;
+}
+
+th.gantt-day-header {
+ width: 20px;
+}
+
+</style><![endif]-->
+<!--[if gte IE 7]><style type="text/css">
+
+.gantt-chart {
+  padding-bottom: 0px;
+}
+
+</style><![endif]-->
+  </head>
+  <body>
+    <h1 class="proj-title">
+      <a name="project" id="project">AzureMD-SMK</a>
+    </h1>
+    <table class="proj-header">
+      <tr>
+        <td class="header">Company:</td>
+        <td>Otto-von-Guericke-Universität Magdeburg</td>
+      </tr>
+      <tr>
+        <td class="header">Manager:</td>
+        <td>Friedrich Lüder</td>
+      </tr>
+      <tr>
+        <td class="header">Start:</td>
+        <td>Mai 12, 2011</td>
+      </tr>
+      <tr>
+        <td class="header">Finish:</td>
+        <td>Mai 30, 2011</td>
+      </tr>
+      <tr>
+        <td class="header">Report Date:</td>
+        <td>Mai 15, 2011</td>
+      </tr>
+    </table>
+    <div class="separator"></div>
+    <div class="gantt">
+      <h2>
+        <a name="gantt" id="gantt">Gantt Chart</a>
+      </h2>
+      <div class="gantt-tasklist">
+        <table cellspacing="0" cellpadding="0" border="1">
+          <tr class="header" align="left">
+            <th>
+              <span>WBS</span>
+            </th>
+            <th>
+              <span>Name</span>
+            </th>
+            <th>
+              <span>Arbeit</span>
+            </th>
+          </tr>
+          <tr class="header">
+            <th> </th>
+            <th> </th>
+            <th> </th>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>1</span>
+            </td>
+            <td>
+              <a name="gantt-1" style="white-space: nowrap; margin-left: 0px;" id="gantt-1">
+                <span>Vorstellung der Resultate</span>
+              </a>
+            </td>
+            <td>
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>2</span>
+            </td>
+            <td>
+              <a name="gantt-2" style="white-space: nowrap; margin-left: 0px;" id="gantt-2">
+                <span>Erste Kommunikation: Frontend-Backend</span>
+              </a>
+            </td>
+            <td>
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>3</span>
+            </td>
+            <td>
+              <a name="gantt-3" style="white-space: nowrap; margin-left: 0px;" id="gantt-3">
+                <span>Schema-Entwicklung: DB neu strukturieren</span>
+              </a>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>4</span>
+            </td>
+            <td>
+              <a name="task-4" style="white-space: nowrap; font-weight: bold; margin-left: 0px;" id="task-4">
+                <span>Datenbank aktualisieren</span>
+              </a>
+            </td>
+            <td>
+              <span style="white-space: nowrap; font-weight: bold;">1d 6h </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>4.1</span>
+            </td>
+            <td>
+              <a name="gantt-5" style="white-space: nowrap; margin-left: 18px;" id="gantt-5">
+                <span>Datenbank updaten - Neues Schema einfplegen</span>
+              </a>
+            </td>
+            <td>
+              <span>6h </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>4.2</span>
+            </td>
+            <td>
+              <a name="gantt-6" style="white-space: nowrap; margin-left: 18px;" id="gantt-6">
+                <span>DBML an neues Schema anpassen &amp; Änderungen notieren</span>
+              </a>
+            </td>
+            <td>
+              <span>6h </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>4.3</span>
+            </td>
+            <td>
+              <a name="gantt-7" style="white-space: nowrap; margin-left: 18px;" id="gantt-7">
+                <span>Testdaten in neue DB eintragen</span>
+              </a>
+            </td>
+            <td>
+              <span>2h </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>5</span>
+            </td>
+            <td>
+              <a name="gantt-8" style="white-space: nowrap; margin-left: 0px;" id="gantt-8">
+                <span>Fehler beheben durch Neueinsetzen der DB</span>
+              </a>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>6</span>
+            </td>
+            <td>
+              <a name="task-9" style="white-space: nowrap; font-weight: bold; margin-left: 0px;" id="task-9">
+                <span>Implementierung: Suchfunktion</span>
+              </a>
+            </td>
+            <td>
+              <span style="white-space: nowrap; font-weight: bold;">8d </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>6.1</span>
+            </td>
+            <td>
+              <a name="gantt-10" style="white-space: nowrap; margin-left: 18px;" id="gantt-10">
+                <span>Schema-Entwicklung: Suche</span>
+              </a>
+            </td>
+            <td>
+              <span>2d </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>6.2</span>
+            </td>
+            <td>
+              <a name="gantt-11" style="white-space: nowrap; margin-left: 18px;" id="gantt-11">
+                <span>Erster Ansatz für Suche implementieren</span>
+              </a>
+            </td>
+            <td>
+              <span>2d </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>6.3</span>
+            </td>
+            <td>
+              <a name="gantt-12" style="white-space: nowrap; margin-left: 18px;" id="gantt-12">
+                <span>Implementierung der Suche </span>
+              </a>
+            </td>
+            <td>
+              <span>4d </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>7</span>
+            </td>
+            <td>
+              <a name="task-13" style="white-space: nowrap; font-weight: bold; margin-left: 0px;" id="task-13">
+                <span>Seller - Abrechnungsfunktion</span>
+              </a>
+            </td>
+            <td>
+              <span style="white-space: nowrap; font-weight: bold;">9d </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>7.1</span>
+            </td>
+            <td>
+              <a name="gantt-14" style="white-space: nowrap; margin-left: 18px;" id="gantt-14">
+                <span>Einarbeitung in Struktur und Tabellen</span>
+              </a>
+            </td>
+            <td>
+              <span>2d </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>7.2</span>
+            </td>
+            <td>
+              <a name="gantt-15" style="white-space: nowrap; margin-left: 18px;" id="gantt-15">
+                <span>Schema-Entwicklung: Abrechnungstransaktion</span>
+              </a>
+            </td>
+            <td>
+              <span>2d </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>7.3</span>
+            </td>
+            <td>
+              <a name="gantt-16" style="white-space: nowrap; margin-left: 18px;" id="gantt-16">
+                <span>Abrechnungstransaktion implementieren</span>
+              </a>
+            </td>
+            <td>
+              <span>5d </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>8</span>
+            </td>
+            <td>
+              <a name="task-17" style="white-space: nowrap; font-weight: bold; margin-left: 0px;" id="task-17">
+                <span>Buyer - First Contact Backend</span>
+              </a>
+            </td>
+            <td>
+              <span style="white-space: nowrap; font-weight: bold;">4d 6h </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>8.1</span>
+            </td>
+            <td>
+              <a name="gantt-18" style="white-space: nowrap; margin-left: 18px;" id="gantt-18">
+                <span>Upload von Image - hard codieren - vorerst</span>
+              </a>
+            </td>
+            <td>
+              <span>2h </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>8.2</span>
+            </td>
+            <td>
+              <a name="gantt-19" style="white-space: nowrap; margin-left: 18px;" id="gantt-19">
+                <span>Stati implementieren (Started, Ready, Busy, Upgrading)</span>
+              </a>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>8.3</span>
+            </td>
+            <td>
+              <a name="gantt-20" style="white-space: nowrap; margin-left: 18px;" id="gantt-20">
+                <span>GetSystemStatus - implementieren (ComputerID, Status)</span>
+              </a>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>8.4</span>
+            </td>
+            <td>
+              <a name="gantt-21" style="white-space: nowrap; margin-left: 18px;" id="gantt-21">
+                <span>SetInitialParams - implementieren (authToken, ComputerID)</span>
+              </a>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>8.5</span>
+            </td>
+            <td>
+              <a name="gantt-22" style="white-space: nowrap; margin-left: 18px;" id="gantt-22">
+                <span>GetVmStatus - implementieren (authToken -&gt; tellvmstatus)</span>
+              </a>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>8.6</span>
+            </td>
+            <td>
+              <a name="gantt-23" style="white-space: nowrap; margin-left: 18px;" id="gantt-23">
+                <span>RegisterVm - implementieren (authToken, vmId, source -&gt; tellsystemstatus)</span>
+              </a>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>8.7</span>
+            </td>
+            <td>
+              <a name="gantt-24" style="white-space: nowrap; margin-left: 18px;" id="gantt-24">
+                <span>StartVm - implementieren (authToken, vmId -&gt; tellsystemstatus)</span>
+              </a>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>8.8</span>
+            </td>
+            <td>
+              <a name="gantt-25" style="white-space: nowrap; margin-left: 18px;" id="gantt-25">
+                <span>StopVm - implementieren (authToken, vmId -&gt; tellsystemstatus)</span>
+              </a>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>8.9</span>
+            </td>
+            <td>
+              <a name="gantt-26" style="white-space: nowrap; margin-left: 18px;" id="gantt-26">
+                <span>GetVmIp - implementieren (authToken, vmId -&gt; tellsystemstatus)</span>
+              </a>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>9</span>
+            </td>
+            <td>
+              <a name="task-27" style="white-space: nowrap; font-weight: bold; margin-left: 0px;" id="task-27">
+                <span>Buyer - Contact</span>
+              </a>
+            </td>
+            <td>
+              <span style="white-space: nowrap; font-weight: bold;">2d </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>9.1</span>
+            </td>
+            <td>
+              <a name="gantt-28" style="white-space: nowrap; margin-left: 18px;" id="gantt-28">
+                <span>RestartVm - implementieren (authToken, vmId -&gt; tellsystemstatus)</span>
+              </a>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>9.2</span>
+            </td>
+            <td>
+              <a name="gantt-29" style="white-space: nowrap; margin-left: 18px;" id="gantt-29">
+                <span>SuspendVm &amp; ResumeVm - implementieren (authToken, vmId -&gt; tellsystemstatus)</span>
+              </a>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>9.3</span>
+            </td>
+            <td>
+              <a name="gantt-30" style="white-space: nowrap; margin-left: 18px;" id="gantt-30">
+                <span>ResizeComponents - implementieren (authToken, vmId, ramsize, hdsize, cpucores)</span>
+              </a>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>9.4</span>
+            </td>
+            <td>
+              <a name="gantt-31" style="white-space: nowrap; margin-left: 18px;" id="gantt-31">
+                <span></span>
+              </a>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>10</span>
+            </td>
+            <td>
+              <a name="task-32" style="white-space: nowrap; font-weight: bold; margin-left: 0px;" id="task-32">
+                <span>Projektplanung</span>
+              </a>
+            </td>
+            <td>
+              <span style="white-space: nowrap; font-weight: bold;">4d 3h </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>10.1</span>
+            </td>
+            <td>
+              <a name="gantt-33" style="white-space: nowrap; margin-left: 18px;" id="gantt-33">
+                <span>Meilensteine festlegen und Planung bis Ende des Projekts</span>
+              </a>
+            </td>
+            <td>
+              <span>2d </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>10.2</span>
+            </td>
+            <td>
+              <a name="gantt-34" style="white-space: nowrap; margin-left: 18px;" id="gantt-34">
+                <span>Github: Wöchentlich (Aktualisierung &amp; Upload)</span>
+              </a>
+            </td>
+            <td>
+              <span>3h </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>10.3</span>
+            </td>
+            <td>
+              <a name="gantt-35" style="white-space: nowrap; margin-left: 18px;" id="gantt-35">
+                <span>Azure-SMK in die Cloud laden</span>
+              </a>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>10.4</span>
+            </td>
+            <td>
+              <a name="gantt-36" style="white-space: nowrap; margin-left: 18px;" id="gantt-36">
+                <span>DB-Upload</span>
+              </a>
+            </td>
+            <td>
+              <span>7h </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>10.5</span>
+            </td>
+            <td>
+              <a name="gantt-37" style="white-space: nowrap; margin-left: 18px;" id="gantt-37">
+                <span>Unterstützung DB-Updating</span>
+              </a>
+            </td>
+            <td>
+              <span>2h </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>10.6</span>
+            </td>
+            <td>
+              <a name="gantt-38" style="white-space: nowrap; margin-left: 18px;" id="gantt-38">
+                <span>Generierung (neu): CA &amp; Keys</span>
+              </a>
+            </td>
+            <td>
+              <span>3h </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>11</span>
+            </td>
+            <td>
+              <a name="task-39" style="white-space: nowrap; font-weight: bold; margin-left: 0px;" id="task-39">
+                <span>Upgrade - Backend</span>
+              </a>
+            </td>
+            <td>
+              <span style="white-space: nowrap; font-weight: bold;">2d </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>11.1</span>
+            </td>
+            <td>
+              <a name="gantt-40" style="white-space: nowrap; margin-left: 18px;" id="gantt-40">
+                <span>GetBackendVersion - implementieren (authToken -&gt; tellsystemstatus)</span>
+              </a>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>11.2</span>
+            </td>
+            <td>
+              <a name="gantt-41" style="white-space: nowrap; margin-left: 18px;" id="gantt-41">
+                <span>UpgradeBackend - implementieren (authToken, version, dateiname -&gt; tellsystemstatus)</span>
+              </a>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>12</span>
+            </td>
+            <td>
+              <a name="task-42" style="white-space: nowrap; font-weight: bold; margin-left: 0px;" id="task-42">
+                <span>Buyer</span>
+              </a>
+            </td>
+            <td>
+              <span style="white-space: nowrap; font-weight: bold;">7d </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>12.1</span>
+            </td>
+            <td>
+              <a name="gantt-43" style="white-space: nowrap; margin-left: 18px;" id="gantt-43">
+                <span>Übersicht der gekauften Ressourcen</span>
+              </a>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>12.2</span>
+            </td>
+            <td>
+              <a name="gantt-44" style="white-space: nowrap; margin-left: 18px;" id="gantt-44">
+                <span>Übersicht der hochgeladenen VMs</span>
+              </a>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>12.3</span>
+            </td>
+            <td>
+              <a name="task-45" style="white-space: nowrap; font-weight: bold; margin-left: 18px;" id="task-45">
+                <span>VMverwaltung</span>
+              </a>
+            </td>
+            <td>
+              <span style="white-space: nowrap; font-weight: bold;">3d </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>12.3.1</span>
+            </td>
+            <td>
+              <a name="gantt-46" style="white-space: nowrap; margin-left: 36px;" id="gantt-46">
+                <span>Neue VM erstellen</span>
+              </a>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>12.3.2</span>
+            </td>
+            <td>
+              <a name="gantt-47" style="white-space: nowrap; margin-left: 36px;" id="gantt-47">
+                <span>Bestehende VM löschen</span>
+              </a>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>12.3.3</span>
+            </td>
+            <td>
+              <a name="gantt-48" style="white-space: nowrap; margin-left: 36px;" id="gantt-48">
+                <span>VM-Eigenschaften ändern</span>
+              </a>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>12.4</span>
+            </td>
+            <td>
+              <a name="gantt-49" style="white-space: nowrap; margin-left: 18px;" id="gantt-49">
+                <span>Image hochladen (BLOB)</span>
+              </a>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>12.5</span>
+            </td>
+            <td>
+              <a name="gantt-50" style="white-space: nowrap; margin-left: 18px;" id="gantt-50">
+                <span>Suche-Ressourcenkauf nur für Buyer zulassen</span>
+              </a>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>13</span>
+            </td>
+            <td>
+              <a name="task-51" style="white-space: nowrap; font-weight: bold; margin-left: 0px;" id="task-51">
+                <span>Seller</span>
+              </a>
+            </td>
+            <td>
+              <span style="white-space: nowrap; font-weight: bold;">3d </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>13.1</span>
+            </td>
+            <td>
+              <a name="task-52" style="white-space: nowrap; font-weight: bold; margin-left: 18px;" id="task-52">
+                <span>Ressourcenverwaltung</span>
+              </a>
+            </td>
+            <td>
+              <span style="white-space: nowrap; font-weight: bold;">3d </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>13.1.1</span>
+            </td>
+            <td>
+              <a name="gantt-53" style="white-space: nowrap; margin-left: 36px;" id="gantt-53">
+                <span>Übersicht der angebotenen Ressourcen</span>
+              </a>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>13.1.2</span>
+            </td>
+            <td>
+              <a name="gantt-54" style="white-space: nowrap; margin-left: 36px;" id="gantt-54">
+                <span>vorhandene Ressourcen bearbeiten/löschen(wenn frei)</span>
+              </a>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>13.1.3</span>
+            </td>
+            <td>
+              <a name="gantt-55" style="white-space: nowrap; margin-left: 36px;" id="gantt-55">
+                <span>Anlegen neuer Ressourcen</span>
+              </a>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>14</span>
+            </td>
+            <td>
+              <a name="task-56" style="white-space: nowrap; font-weight: bold; margin-left: 0px;" id="task-56">
+                <span>Profil</span>
+              </a>
+            </td>
+            <td>
+              <span style="white-space: nowrap; font-weight: bold;">1d </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>14.1</span>
+            </td>
+            <td>
+              <a name="gantt-57" style="white-space: nowrap; margin-left: 18px;" id="gantt-57">
+                <span>Accountverwaltung (usertabelle)</span>
+              </a>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>15</span>
+            </td>
+            <td>
+              <a name="task-58" style="white-space: nowrap; font-weight: bold; margin-left: 0px;" id="task-58">
+                <span>Admin</span>
+              </a>
+            </td>
+            <td>
+              <span style="white-space: nowrap; font-weight: bold;">1d </span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>15.1</span>
+            </td>
+            <td>
+              <a name="gantt-59" style="white-space: nowrap; margin-left: 18px;" id="gantt-59">
+                <span></span>
+              </a>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="gantt-chart">
+        <table cellspacing="0" cellpadding="0" border="1" style="table-layout: fixed;">
+          <tr class="header" align="left">
+            <th class="gantt-4day-header" colspan="4"></th>
+            <th class="gantt-week-header" align="center" colspan="7">Week 20, 2011</th>
+            <th class="gantt-week-header" align="center" colspan="7">Week 21, 2011</th>
+            <th class="gantt-week-header" align="center" colspan="7">Week 22, 2011</th>
+            <th class="gantt-5day-header" colspan="5"></th>
+            <th></th>
+          </tr>
+          <tr class="header" align="left">
+            <th class="gantt-day-header" align="center">12</th>
+            <th class="gantt-day-header" align="center">13</th>
+            <th class="gantt-day-header" align="center">14</th>
+            <th class="gantt-day-header" align="center">15</th>
+            <th class="gantt-day-header" align="center">16</th>
+            <th class="gantt-day-header" align="center">17</th>
+            <th class="gantt-day-header" align="center">18</th>
+            <th class="gantt-day-header" align="center">19</th>
+            <th class="gantt-day-header" align="center">20</th>
+            <th class="gantt-day-header" align="center">21</th>
+            <th class="gantt-day-header" align="center">22</th>
+            <th class="gantt-day-header" align="center">23</th>
+            <th class="gantt-day-header" align="center">24</th>
+            <th class="gantt-day-header" align="center">25</th>
+            <th class="gantt-day-header" align="center">26</th>
+            <th class="gantt-day-header" align="center">27</th>
+            <th class="gantt-day-header" align="center">28</th>
+            <th class="gantt-day-header" align="center">29</th>
+            <th class="gantt-day-header" align="center">30</th>
+            <th class="gantt-day-header" align="center">31</th>
+            <th class="gantt-day-header" align="center">1</th>
+            <th class="gantt-day-header" align="center">2</th>
+            <th class="gantt-day-header" align="center">3</th>
+            <th class="gantt-day-header" align="center">4</th>
+            <th class="gantt-day-header" align="center">5</th>
+            <th class="gantt-day-header" align="center">6</th>
+            <th class="gantt-day-header" align="center">7</th>
+            <th class="gantt-day-header" align="center">8</th>
+            <th class="gantt-day-header" align="center">9</th>
+            <th class="gantt-day-header" align="center">10</th>
+            <th align="center"></th>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 82px;"></div>
+                <div class="gantt-milestone">◆</div>
+                <div class="gantt-resources">OE, RG, AS, CL, FL</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 102px;"></div>
+                <div class="gantt-milestone">◆</div>
+                <div class="gantt-resources">OE, RG, AS, CL, FL</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 6px;"></div>
+                <div class="gantt-complete-notdone" style="width: 3px;">
+                  <div class="gantt-complete-done" style="width: 3px;"></div>
+                </div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">OE, RG, AS, CL, FL</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;"></div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 26px;"></div>
+                <div class="gantt-complete-notdone" style="width: 4px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">CL</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 26px;"></div>
+                <div class="gantt-complete-notdone" style="width: 4px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">CL</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 86px;"></div>
+                <div class="gantt-complete-notdone" style="width: 2px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">CL</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 88px;"></div>
+                <div class="gantt-complete-notdone" style="width: 20px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources"></div>
+              </div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;"></div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 26px;"></div>
+                <div class="gantt-complete-notdone" style="width: 68px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">OE</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 6px;"></div>
+                <div class="gantt-complete-notdone" style="width: 28px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">OE</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 86px;"></div>
+                <div class="gantt-complete-notdone" style="width: 68px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">OE</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;"></div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 6px;"></div>
+                <div class="gantt-complete-notdone" style="width: 28px;">
+                  <div class="gantt-complete-done" style="width: 14px;"></div>
+                </div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">RG</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 26px;"></div>
+                <div class="gantt-complete-notdone" style="width: 68px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">RG</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 86px;"></div>
+                <div class="gantt-complete-notdone" style="width: 88px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">RG</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;"></div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 6px;"></div>
+                <div class="gantt-complete-notdone" style="width: 2px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">AS</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 26px;"></div>
+                <div class="gantt-complete-notdone" style="width: 4px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">AS</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 26px;"></div>
+                <div class="gantt-complete-notdone" style="width: 4px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">AS</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 26px;"></div>
+                <div class="gantt-complete-notdone" style="width: 4px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">AS</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 26px;"></div>
+                <div class="gantt-complete-notdone" style="width: 4px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">AS</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 86px;"></div>
+                <div class="gantt-complete-notdone" style="width: 4px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">AS</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 86px;"></div>
+                <div class="gantt-complete-notdone" style="width: 4px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">AS</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 86px;"></div>
+                <div class="gantt-complete-notdone" style="width: 4px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">AS</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 6px;"></div>
+                <div class="gantt-complete-notdone" style="width: 8px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources"></div>
+              </div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;"></div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 106px;"></div>
+                <div class="gantt-complete-notdone" style="width: 4px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">AS</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 91px;"></div>
+                <div class="gantt-complete-notdone" style="width: 16px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">AS</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 91px;"></div>
+                <div class="gantt-complete-notdone" style="width: 16px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">AS</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 91px;"></div>
+                <div class="gantt-complete-notdone" style="width: 16px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources"></div>
+              </div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;"></div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 6px;"></div>
+                <div class="gantt-complete-notdone" style="width: 28px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">FL</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 26px;"></div>
+                <div class="gantt-complete-notdone" style="width: 3px;">
+                  <div class="gantt-complete-done" style="width: 3px;"></div>
+                </div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">FL</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 86px;"></div>
+                <div class="gantt-complete-notdone" style="width: 4px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">AS, FL</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 26px;"></div>
+                <div class="gantt-complete-notdone" style="width: 7px;">
+                  <div class="gantt-complete-done" style="width: 5px;"></div>
+                </div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">AS, FL</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 86px;"></div>
+                <div class="gantt-complete-notdone" style="width: 2px;">
+                  <div class="gantt-complete-done" style="width: 2px;"></div>
+                </div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">FL</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 6px;"></div>
+                <div class="gantt-complete-notdone" style="width: 3px;">
+                  <div class="gantt-complete-done" style="width: 3px;"></div>
+                </div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">FL</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;"></div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 226px;"></div>
+                <div class="gantt-complete-notdone" style="width: 8px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources"></div>
+              </div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 226px;"></div>
+                <div class="gantt-complete-notdone" style="width: 8px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources"></div>
+              </div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;"></div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 226px;"></div>
+                <div class="gantt-complete-notdone" style="width: 8px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources"></div>
+              </div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 226px;"></div>
+                <div class="gantt-complete-notdone" style="width: 8px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources"></div>
+              </div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;"></div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 226px;"></div>
+                <div class="gantt-complete-notdone" style="width: 8px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources"></div>
+              </div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 226px;"></div>
+                <div class="gantt-complete-notdone" style="width: 8px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources"></div>
+              </div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 226px;"></div>
+                <div class="gantt-complete-notdone" style="width: 8px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources"></div>
+              </div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 226px;"></div>
+                <div class="gantt-complete-notdone" style="width: 8px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources"></div>
+              </div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 226px;"></div>
+                <div class="gantt-complete-notdone" style="width: 8px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources"></div>
+              </div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;"></div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;"></div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 226px;"></div>
+                <div class="gantt-complete-notdone" style="width: 8px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources">RG</div>
+              </div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 6px;"></div>
+                <div class="gantt-complete-notdone" style="width: 8px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources"></div>
+              </div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 226px;"></div>
+                <div class="gantt-complete-notdone" style="width: 8px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources"></div>
+              </div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;"></div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 366px;"></div>
+                <div class="gantt-complete-notdone" style="width: 8px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources"></div>
+              </div>
+            </td>
+          </tr>
+          <tr class="even">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;"></div>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td colspan="31">
+              <div style="width: 601px; white-space: nowrap;">
+                <div class="gantt-empty-begin" style="width: 366px;"></div>
+                <div class="gantt-complete-notdone" style="width: 8px;"></div>
+                <div class="gantt-empty-end"></div>
+                <div class="gantt-resources"></div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="separator"></div>
+    <div class="tasklist">
+      <h2>
+        <a name="tasks" id="tasks">Aufgaben</a>
+      </h2>
+      <div class="tasklist-table">
+        <table cellspacing="0" cellpadding="0" border="1">
+          <tr class="header" align="left">
+            <th>
+              <span>WBS</span>
+            </th>
+            <th>
+              <span>Name</span>
+            </th>
+            <th>
+              <span>Beginn</span>
+            </th>
+            <th>
+              <span>Ende</span>
+            </th>
+            <th>
+              <span>Arbeit</span>
+            </th>
+            <th>
+              <span>Priority</span>
+            </th>
+            <th>
+              <span>Complete</span>
+            </th>
+            <th>
+              <span>Kosten</span>
+            </th>
+            <th class="note">
+              <span>Notes</span>
+            </th>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>1</span>
+            </td>
+            <td>
+              <a name="task1" style="margin-left: 0px" id="task1">
+                <span>Vorstellung der Resultate</span>
+              </a>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span>Vorstellung der umgesetzten Aufgaben (%-complete)</span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>2</span>
+            </td>
+            <td>
+              <a name="task2" style="margin-left: 0px" id="task2">
+                <span>Erste Kommunikation: Frontend-Backend</span>
+              </a>
+            </td>
+            <td>
+              <span>May 17</span>
+            </td>
+            <td>
+              <span>May 17</span>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span>!!!Wichtig!!! - Bei Mangel muss Andreas mal um Unterstützung bitten.</span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>3</span>
+            </td>
+            <td>
+              <a name="task3" style="margin-left: 0px" id="task3">
+                <span>Schema-Entwicklung: DB neu strukturieren</span>
+              </a>
+            </td>
+            <td>
+              <span>May 12</span>
+            </td>
+            <td>
+              <span>May 12</span>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+            <td align="center">
+              <span>1</span>
+            </td>
+            <td align="right">
+              <span>100%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>4</span>
+            </td>
+            <td>
+              <a name="task4" style="font-weight: bold; margin-left: 0px" id="task4">
+                <span>Datenbank aktualisieren</span>
+              </a>
+            </td>
+            <td>
+              <span>May 13</span>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>1d 6h </span>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>4.1</span>
+            </td>
+            <td>
+              <a name="task5" style="margin-left: 18px" id="task5">
+                <span>Datenbank updaten - Neues Schema einfplegen</span>
+              </a>
+            </td>
+            <td>
+              <span>May 13</span>
+            </td>
+            <td>
+              <span>May 13</span>
+            </td>
+            <td>
+              <span>6h </span>
+            </td>
+            <td align="center">
+              <span>1</span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>4.2</span>
+            </td>
+            <td>
+              <a name="task6" style="margin-left: 18px" id="task6">
+                <span>DBML an neues Schema anpassen &amp; Änderungen notieren</span>
+              </a>
+            </td>
+            <td>
+              <span>May 13</span>
+            </td>
+            <td>
+              <span>May 13</span>
+            </td>
+            <td>
+              <span>6h </span>
+            </td>
+            <td align="center">
+              <span>2</span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>4.3</span>
+            </td>
+            <td>
+              <a name="task7" style="margin-left: 18px" id="task7">
+                <span>Testdaten in neue DB eintragen</span>
+              </a>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>2h </span>
+            </td>
+            <td align="center">
+              <span>3</span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>5</span>
+            </td>
+            <td>
+              <a name="task8" style="margin-left: 0px" id="task8">
+                <span>Fehler beheben durch Neueinsetzen der DB</span>
+              </a>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>May 17</span>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>6</span>
+            </td>
+            <td>
+              <a name="task9" style="font-weight: bold; margin-left: 0px" id="task9">
+                <span>Implementierung: Suchfunktion</span>
+              </a>
+            </td>
+            <td>
+              <span>May 12</span>
+            </td>
+            <td>
+              <span>May 19</span>
+            </td>
+            <td>
+              <span>8d </span>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>6.1</span>
+            </td>
+            <td>
+              <a name="task10" style="margin-left: 18px" id="task10">
+                <span>Schema-Entwicklung: Suche</span>
+              </a>
+            </td>
+            <td>
+              <span>May 13</span>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>2d </span>
+            </td>
+            <td align="center">
+              <span>1</span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>6.2</span>
+            </td>
+            <td>
+              <a name="task11" style="margin-left: 18px" id="task11">
+                <span>Erster Ansatz für Suche implementieren</span>
+              </a>
+            </td>
+            <td>
+              <span>May 12</span>
+            </td>
+            <td>
+              <span>May 13</span>
+            </td>
+            <td>
+              <span>2d </span>
+            </td>
+            <td align="center">
+              <span>2</span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>6.3</span>
+            </td>
+            <td>
+              <a name="task12" style="margin-left: 18px" id="task12">
+                <span>Implementierung der Suche </span>
+              </a>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>May 19</span>
+            </td>
+            <td>
+              <span>4d </span>
+            </td>
+            <td align="center">
+              <span>1</span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>7</span>
+            </td>
+            <td>
+              <a name="task13" style="font-weight: bold; margin-left: 0px" id="task13">
+                <span>Seller - Abrechnungsfunktion</span>
+              </a>
+            </td>
+            <td>
+              <span>May 12</span>
+            </td>
+            <td>
+              <span>May 20</span>
+            </td>
+            <td>
+              <span>9d </span>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>7.1</span>
+            </td>
+            <td>
+              <a name="task14" style="margin-left: 18px" id="task14">
+                <span>Einarbeitung in Struktur und Tabellen</span>
+              </a>
+            </td>
+            <td>
+              <span>May 12</span>
+            </td>
+            <td>
+              <span>May 13</span>
+            </td>
+            <td>
+              <span>2d </span>
+            </td>
+            <td align="center">
+              <span>1</span>
+            </td>
+            <td align="right">
+              <span>50%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>7.2</span>
+            </td>
+            <td>
+              <a name="task15" style="margin-left: 18px" id="task15">
+                <span>Schema-Entwicklung: Abrechnungstransaktion</span>
+              </a>
+            </td>
+            <td>
+              <span>May 13</span>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>2d </span>
+            </td>
+            <td align="center">
+              <span>2</span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>7.3</span>
+            </td>
+            <td>
+              <a name="task16" style="margin-left: 18px" id="task16">
+                <span>Abrechnungstransaktion implementieren</span>
+              </a>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>May 20</span>
+            </td>
+            <td>
+              <span>5d </span>
+            </td>
+            <td align="center">
+              <span>1</span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>8</span>
+            </td>
+            <td>
+              <a name="task17" style="font-weight: bold; margin-left: 0px" id="task17">
+                <span>Buyer - First Contact Backend</span>
+              </a>
+            </td>
+            <td>
+              <span>May 12</span>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>4d 6h </span>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>8.1</span>
+            </td>
+            <td>
+              <a name="task18" style="margin-left: 18px" id="task18">
+                <span>Upload von Image - hard codieren - vorerst</span>
+              </a>
+            </td>
+            <td>
+              <span>May 12</span>
+            </td>
+            <td>
+              <span>May 12</span>
+            </td>
+            <td>
+              <span>2h </span>
+            </td>
+            <td align="center">
+              <span>1</span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>8.2</span>
+            </td>
+            <td>
+              <a name="task19" style="margin-left: 18px" id="task19">
+                <span>Stati implementieren (Started, Ready, Busy, Upgrading)</span>
+              </a>
+            </td>
+            <td>
+              <span>May 13</span>
+            </td>
+            <td>
+              <span>May 13</span>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+            <td align="center">
+              <span>1</span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>8.3</span>
+            </td>
+            <td>
+              <a name="task20" style="margin-left: 18px" id="task20">
+                <span>GetSystemStatus - implementieren (ComputerID, Status)</span>
+              </a>
+            </td>
+            <td>
+              <span>May 13</span>
+            </td>
+            <td>
+              <span>May 13</span>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+            <td align="center">
+              <span>1</span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>8.4</span>
+            </td>
+            <td>
+              <a name="task21" style="margin-left: 18px" id="task21">
+                <span>SetInitialParams - implementieren (authToken, ComputerID)</span>
+              </a>
+            </td>
+            <td>
+              <span>May 13</span>
+            </td>
+            <td>
+              <span>May 13</span>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+            <td align="center">
+              <span>2</span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>8.5</span>
+            </td>
+            <td>
+              <a name="task22" style="margin-left: 18px" id="task22">
+                <span>GetVmStatus - implementieren (authToken -&gt; tellvmstatus)</span>
+              </a>
+            </td>
+            <td>
+              <span>May 13</span>
+            </td>
+            <td>
+              <span>May 13</span>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+            <td align="center">
+              <span>3</span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>8.6</span>
+            </td>
+            <td>
+              <a name="task23" style="margin-left: 18px" id="task23">
+                <span>RegisterVm - implementieren (authToken, vmId, source -&gt; tellsystemstatus)</span>
+              </a>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+            <td align="center">
+              <span>3</span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>8.7</span>
+            </td>
+            <td>
+              <a name="task24" style="margin-left: 18px" id="task24">
+                <span>StartVm - implementieren (authToken, vmId -&gt; tellsystemstatus)</span>
+              </a>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+            <td align="center">
+              <span>3</span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>8.8</span>
+            </td>
+            <td>
+              <a name="task25" style="margin-left: 18px" id="task25">
+                <span>StopVm - implementieren (authToken, vmId -&gt; tellsystemstatus)</span>
+              </a>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+            <td align="center">
+              <span>4</span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>8.9</span>
+            </td>
+            <td>
+              <a name="task26" style="margin-left: 18px" id="task26">
+                <span>GetVmIp - implementieren (authToken, vmId -&gt; tellsystemstatus)</span>
+              </a>
+            </td>
+            <td>
+              <span>May 12</span>
+            </td>
+            <td>
+              <span>May 12</span>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>9</span>
+            </td>
+            <td>
+              <a name="task27" style="font-weight: bold; margin-left: 0px" id="task27">
+                <span>Buyer - Contact</span>
+              </a>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>May 17</span>
+            </td>
+            <td>
+              <span>2d </span>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>9.1</span>
+            </td>
+            <td>
+              <a name="task28" style="margin-left: 18px" id="task28">
+                <span>RestartVm - implementieren (authToken, vmId -&gt; tellsystemstatus)</span>
+              </a>
+            </td>
+            <td>
+              <span>May 17</span>
+            </td>
+            <td>
+              <span>May 17</span>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+            <td align="center">
+              <span>1</span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>9.2</span>
+            </td>
+            <td>
+              <a name="task29" style="margin-left: 18px" id="task29">
+                <span>SuspendVm &amp; ResumeVm - implementieren (authToken, vmId -&gt; tellsystemstatus)</span>
+              </a>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>May 17</span>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+            <td align="center">
+              <span>2</span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>9.3</span>
+            </td>
+            <td>
+              <a name="task30" style="margin-left: 18px" id="task30">
+                <span>ResizeComponents - implementieren (authToken, vmId, ramsize, hdsize, cpucores)</span>
+              </a>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>May 17</span>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+            <td align="center">
+              <span>3</span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>9.4</span>
+            </td>
+            <td>
+              <a name="task31" style="margin-left: 18px" id="task31">
+                <span></span>
+              </a>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>May 17</span>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>10</span>
+            </td>
+            <td>
+              <a name="task32" style="font-weight: bold; margin-left: 0px" id="task32">
+                <span>Projektplanung</span>
+              </a>
+            </td>
+            <td>
+              <span>May 12</span>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>4d 3h </span>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>10.1</span>
+            </td>
+            <td>
+              <a name="task33" style="margin-left: 18px" id="task33">
+                <span>Meilensteine festlegen und Planung bis Ende des Projekts</span>
+              </a>
+            </td>
+            <td>
+              <span>May 12</span>
+            </td>
+            <td>
+              <span>May 13</span>
+            </td>
+            <td>
+              <span>2d </span>
+            </td>
+            <td align="center">
+              <span>1</span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>10.2</span>
+            </td>
+            <td>
+              <a name="task34" style="margin-left: 18px" id="task34">
+                <span>Github: Wöchentlich (Aktualisierung &amp; Upload)</span>
+              </a>
+            </td>
+            <td>
+              <span>May 13</span>
+            </td>
+            <td>
+              <span>May 13</span>
+            </td>
+            <td>
+              <span>3h </span>
+            </td>
+            <td align="center">
+              <span>3</span>
+            </td>
+            <td align="right">
+              <span>100%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>10.3</span>
+            </td>
+            <td>
+              <a name="task35" style="margin-left: 18px" id="task35">
+                <span>Azure-SMK in die Cloud laden</span>
+              </a>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>4h </span>
+            </td>
+            <td align="center">
+              <span>2</span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>10.4</span>
+            </td>
+            <td>
+              <a name="task36" style="margin-left: 18px" id="task36">
+                <span>DB-Upload</span>
+              </a>
+            </td>
+            <td>
+              <span>May 13</span>
+            </td>
+            <td>
+              <span>May 13</span>
+            </td>
+            <td>
+              <span>7h </span>
+            </td>
+            <td align="center">
+              <span>2</span>
+            </td>
+            <td align="right">
+              <span>80%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>10.5</span>
+            </td>
+            <td>
+              <a name="task37" style="margin-left: 18px" id="task37">
+                <span>Unterstützung DB-Updating</span>
+              </a>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>May 16</span>
+            </td>
+            <td>
+              <span>2h </span>
+            </td>
+            <td align="center">
+              <span>3</span>
+            </td>
+            <td align="right">
+              <span>100%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>10.6</span>
+            </td>
+            <td>
+              <a name="task38" style="margin-left: 18px" id="task38">
+                <span>Generierung (neu): CA &amp; Keys</span>
+              </a>
+            </td>
+            <td>
+              <span>May 12</span>
+            </td>
+            <td>
+              <span>May 12</span>
+            </td>
+            <td>
+              <span>3h </span>
+            </td>
+            <td align="center">
+              <span>1</span>
+            </td>
+            <td align="right">
+              <span>100%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>11</span>
+            </td>
+            <td>
+              <a name="task39" style="font-weight: bold; margin-left: 0px" id="task39">
+                <span>Upgrade - Backend</span>
+              </a>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>2d </span>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>11.1</span>
+            </td>
+            <td>
+              <a name="task40" style="margin-left: 18px" id="task40">
+                <span>GetBackendVersion - implementieren (authToken -&gt; tellsystemstatus)</span>
+              </a>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>11.2</span>
+            </td>
+            <td>
+              <a name="task41" style="margin-left: 18px" id="task41">
+                <span>UpgradeBackend - implementieren (authToken, version, dateiname -&gt; tellsystemstatus)</span>
+              </a>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>12</span>
+            </td>
+            <td>
+              <a name="task42" style="font-weight: bold; margin-left: 0px" id="task42">
+                <span>Buyer</span>
+              </a>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>7d </span>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>12.1</span>
+            </td>
+            <td>
+              <a name="task43" style="margin-left: 18px" id="task43">
+                <span>Übersicht der gekauften Ressourcen</span>
+              </a>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>12.2</span>
+            </td>
+            <td>
+              <a name="task44" style="margin-left: 18px" id="task44">
+                <span>Übersicht der hochgeladenen VMs</span>
+              </a>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>12.3</span>
+            </td>
+            <td>
+              <a name="task45" style="font-weight: bold; margin-left: 18px" id="task45">
+                <span>VMverwaltung</span>
+              </a>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>3d </span>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>12.3.1</span>
+            </td>
+            <td>
+              <a name="task46" style="margin-left: 36px" id="task46">
+                <span>Neue VM erstellen</span>
+              </a>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>12.3.2</span>
+            </td>
+            <td>
+              <a name="task47" style="margin-left: 36px" id="task47">
+                <span>Bestehende VM löschen</span>
+              </a>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>12.3.3</span>
+            </td>
+            <td>
+              <a name="task48" style="margin-left: 36px" id="task48">
+                <span>VM-Eigenschaften ändern</span>
+              </a>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>12.4</span>
+            </td>
+            <td>
+              <a name="task49" style="margin-left: 18px" id="task49">
+                <span>Image hochladen (BLOB)</span>
+              </a>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>12.5</span>
+            </td>
+            <td>
+              <a name="task50" style="margin-left: 18px" id="task50">
+                <span>Suche-Ressourcenkauf nur für Buyer zulassen</span>
+              </a>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>13</span>
+            </td>
+            <td>
+              <a name="task51" style="font-weight: bold; margin-left: 0px" id="task51">
+                <span>Seller</span>
+              </a>
+            </td>
+            <td>
+              <span>May 12</span>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>3d </span>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>13.1</span>
+            </td>
+            <td>
+              <a name="task52" style="font-weight: bold; margin-left: 18px" id="task52">
+                <span>Ressourcenverwaltung</span>
+              </a>
+            </td>
+            <td>
+              <span>May 12</span>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>3d </span>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>13.1.1</span>
+            </td>
+            <td>
+              <a name="task53" style="margin-left: 36px" id="task53">
+                <span>Übersicht der angebotenen Ressourcen</span>
+              </a>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+            <td align="center">
+              <span>2</span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>13.1.2</span>
+            </td>
+            <td>
+              <a name="task54" style="margin-left: 36px" id="task54">
+                <span>vorhandene Ressourcen bearbeiten/löschen(wenn frei)</span>
+              </a>
+            </td>
+            <td>
+              <span>May 12</span>
+            </td>
+            <td>
+              <span>May 12</span>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>13.1.3</span>
+            </td>
+            <td>
+              <a name="task55" style="margin-left: 36px" id="task55">
+                <span>Anlegen neuer Ressourcen</span>
+              </a>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>May 23</span>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>14</span>
+            </td>
+            <td>
+              <a name="task56" style="font-weight: bold; margin-left: 0px" id="task56">
+                <span>Profil</span>
+              </a>
+            </td>
+            <td>
+              <span>May 30</span>
+            </td>
+            <td>
+              <span>May 30</span>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>14.1</span>
+            </td>
+            <td>
+              <a name="task57" style="margin-left: 18px" id="task57">
+                <span>Accountverwaltung (usertabelle)</span>
+              </a>
+            </td>
+            <td>
+              <span>May 30</span>
+            </td>
+            <td>
+              <span>May 30</span>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <span>15</span>
+            </td>
+            <td>
+              <a name="task58" style="font-weight: bold; margin-left: 0px" id="task58">
+                <span>Admin</span>
+              </a>
+            </td>
+            <td>
+              <span>May 30</span>
+            </td>
+            <td>
+              <span>May 30</span>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <span>15.1</span>
+            </td>
+            <td>
+              <a name="task59" style="margin-left: 18px" id="task59">
+                <span></span>
+              </a>
+            </td>
+            <td>
+              <span>May 30</span>
+            </td>
+            <td>
+              <span>May 30</span>
+            </td>
+            <td>
+              <span>1d </span>
+            </td>
+            <td align="center">
+              <span></span>
+            </td>
+            <td align="right">
+              <span>0%
+                </span>
+            </td>
+            <td align="right">
+              <span></span>
+            </td>
+            <td class="note">
+              <span></span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="separator"></div>
+    <div class="resourcelist">
+      <h2>
+        <a name="resources" id="resources">Ressourcen</a>
+      </h2>
+      <div class="resourcelist-table">
+        <table cellspacing="0" cellpadding="0" border="1" width="100%">
+          <tr class="header" align="left">
+            <th>
+              <span>Name</span>
+            </th>
+            <th>
+              <span>Kurzname</span>
+            </th>
+            <th>
+              <span>Typ</span>
+            </th>
+            <th>
+              <span>Gruppe</span>
+            </th>
+            <th>
+              <span>E-Mail</span>
+            </th>
+            <th>
+              <span>Kosten</span>
+            </th>
+          </tr>
+          <tr class="odd">
+            <td>
+              <a name="res-3" id="res-3">
+                <span>Andreas Schmückert</span>
+              </a>
+            </td>
+            <td>
+              <span>AS</span>
+            </td>
+            <td>
+              <span>Arbeit</span>
+            </td>
+            <td>
+              <span>Frontend</span>
+            </td>
+            <td>
+              <a href="mailto:andreas.schmueckert@st.ovgu.de">
+                <span>andreas.schmueckert@st.ovgu.de</span>
+              </a>
+            </td>
+            <td align="right">
+              <span>0</span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <a name="res-2" id="res-2">
+                <span>Christina Lenz</span>
+              </a>
+            </td>
+            <td>
+              <span>CL</span>
+            </td>
+            <td>
+              <span>Arbeit</span>
+            </td>
+            <td>
+              <span>Frontend</span>
+            </td>
+            <td>
+              <a href="mailto:christina.lenz@st.ovgu.de">
+                <span>christina.lenz@st.ovgu.de</span>
+              </a>
+            </td>
+            <td align="right">
+              <span>0</span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <a name="res-1" id="res-1">
+                <span>Friedrich Lüder</span>
+              </a>
+            </td>
+            <td>
+              <span>FL</span>
+            </td>
+            <td>
+              <span>Arbeit</span>
+            </td>
+            <td>
+              <span>Frontend</span>
+            </td>
+            <td>
+              <a href="mailto:friedrich.lueder@st.ovgu.de">
+                <span>friedrich.lueder@st.ovgu.de</span>
+              </a>
+            </td>
+            <td align="right">
+              <span>0</span>
+            </td>
+          </tr>
+          <tr class="even">
+            <td>
+              <a name="res-5" id="res-5">
+                <span>Olga Egorow</span>
+              </a>
+            </td>
+            <td>
+              <span>OE</span>
+            </td>
+            <td>
+              <span>Arbeit</span>
+            </td>
+            <td>
+              <span>Frontend</span>
+            </td>
+            <td>
+              <a href="mailto:olga.egorow@st.ovgu.de">
+                <span>olga.egorow@st.ovgu.de</span>
+              </a>
+            </td>
+            <td align="right">
+              <span>0</span>
+            </td>
+          </tr>
+          <tr class="odd">
+            <td>
+              <a name="res-4" id="res-4">
+                <span>Ronny Garz</span>
+              </a>
+            </td>
+            <td>
+              <span>RG</span>
+            </td>
+            <td>
+              <span>Arbeit</span>
+            </td>
+            <td>
+              <span>Frontend</span>
+            </td>
+            <td>
+              <a href="mailto:ronny.garz@st.ovgu.de">
+                <span>ronny.garz@st.ovgu.de</span>
+              </a>
+            </td>
+            <td align="right">
+              <span>0</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="footer">
+      <div>This file was generated by 
+      <a href="http://live.gnome.org/Planner/" style="text-decoration: underline;">Planner</a></div>
+    </div>
+  </body>
+</html>
