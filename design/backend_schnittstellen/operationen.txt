@@ -73,7 +73,7 @@ Non-Blocking-Operationen (Backend -> Frontend)
 
 * TellSystemStatus: Status des Systems mitteilen
 		* string	computerId
-		* string	status			mit status = {STARTED, READY, BUSY}
+		* string	status			mit status = {STARTED, READY, BUSY, UPGRADING}
 
 * TellVmStatus: Informationen bzgl. aller VMs im System mitteilen
 		* string	computerId
