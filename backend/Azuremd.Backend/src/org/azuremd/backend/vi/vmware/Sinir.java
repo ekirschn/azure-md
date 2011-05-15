@@ -10,49 +10,54 @@ import com.spinn3r.log5j.Logger;
  * Einer muss ja die kaputten Inis von VMware lesen können.
  * 
  * @author dako
- *
+ * 
  */
 public class Sinir
 {
     private static Logger log = Logger.getLogger();
-    
-    private static boolean contains(String[] array, String needle) 
+
+    private static boolean contains(String[] array, String needle)
     {
-        for(String item : array)
+        for (String item : array)
             if (item.equals(needle))
                 return true;
-                
+
         return false;
     }
-    
-    public static String[] gimme(String fileName, String[] keys) 
+
+    /**
+     * Liest aus der VMX-Konfiguration von VMware die entsprechenden Werte aus.
+     * 
+     * @param fileName Pfad der VMX-Konfigurationsdatei
+     * @param keys Array mit Werte, die gelesen werden sollen
+     * @return Array mit Werten, die gelesen wurde in derselben Reihenfolge
+     */
+    public static String[] gimme(String fileName, String[] keys)
     {
         String[] result = new String[keys.length];
         int i = 0;
-        
-        try 
+
+        try
         {
-            FileInputStream fstream = new FileInputStream(new File(fileName));
-            DataInputStream in = new DataInputStream(fstream);
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
-            
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
+
             String line;
-            
-            while ((line = br.readLine()) != null)   
+
+            while ((line = br.readLine()) != null)
             {
                 String[] arr = line.split("=");
-                
+
                 if (contains(keys, arr[0].trim()))
                     result[i++] = arr[1].trim().replace("\"", "");
             }
-            
-            in.close();
+
+            br.close();
         }
-        catch(IOException e)
+        catch (IOException e)
         {
             log.error(e);
         }
-        
+
         return result;
     }
 }
