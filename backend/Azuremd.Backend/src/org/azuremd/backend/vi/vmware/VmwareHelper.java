@@ -5,7 +5,7 @@ import org.azuremd.backend.server.SystemStatus;
 
 import com.spinn3r.log5j.Logger;
 import com.sun.jna.Pointer;
-import com.vmware.vix.VixEventProc;
+import com.vmware.vix.*;
 
 /**
  * VmHelper
@@ -15,7 +15,7 @@ import com.vmware.vix.VixEventProc;
  * @author dako
  * 
  */
-public abstract class VmwareHelper
+public class VmwareHelper
 {
     private static final Logger log = Logger.getLogger();
     
@@ -28,6 +28,7 @@ public abstract class VmwareHelper
             {
                 log.debug(msg);
                 Application.setStatus(SystemStatus.READY);
+                // TODO: Frontend-Anrufen, dass wir fertig sind
             }
         };
     }

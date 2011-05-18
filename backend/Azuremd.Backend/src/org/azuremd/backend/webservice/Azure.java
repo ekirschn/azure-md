@@ -26,15 +26,18 @@ import com.spinn3r.log5j.Logger;
 @WebService(name = "Azure")
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 public class Azure
-{
+{    
     private static final Logger log = Logger.getLogger();
     private static VirtServerInterface server = Application.getHost();
     
     @WebMethod
     public SystemStatus RegisterVm(String token, String vmId, String source)
     {
-        if (!TokenHandler.isValid(token))
+        if (!Token.isValid(token))
             return SystemStatus.NONE;
+        
+        if (Application.isLocked())
+            return SystemStatus.BUSY;
         
         server.RegisterVm(vmId, source);
         
@@ -44,8 +47,11 @@ public class Azure
     @WebMethod
     public SystemStatus StartVm(String token, String vmId)
     {
-        if (!TokenHandler.isValid(token))
+        if (!Token.isValid(token))
             return SystemStatus.NONE;
+        
+        if (Application.isLocked())
+            return SystemStatus.BUSY;
         
         server.StartVm(vmId);
         
@@ -55,8 +61,11 @@ public class Azure
     @WebMethod
     public SystemStatus RestartVm(String token, String vmId)
     {
-        if (!TokenHandler.isValid(token))
+        if (!Token.isValid(token))
             return SystemStatus.NONE;
+        
+        if (Application.isLocked())
+            return SystemStatus.BUSY;
         
         server.RestartVm(vmId);
         
@@ -66,8 +75,11 @@ public class Azure
     @WebMethod
     public SystemStatus StopVm(String token, String vmId)
     {
-        if (!TokenHandler.isValid(token))
+        if (!Token.isValid(token))
             return SystemStatus.NONE;
+        
+        if (Application.isLocked())
+            return SystemStatus.BUSY;
         
         server.StopVm(vmId);
         
@@ -77,8 +89,11 @@ public class Azure
     @WebMethod
     public SystemStatus SuspendVm(String token, String vmId)
     {
-        if (!TokenHandler.isValid(token))
+        if (!Token.isValid(token))
             return SystemStatus.NONE;
+        
+        if (Application.isLocked())
+            return SystemStatus.BUSY;
         
         server.SuspendVm(vmId);
         
@@ -88,8 +103,11 @@ public class Azure
     @WebMethod
     public SystemStatus ResumeVm(String token, String vmId)
     {
-        if (!TokenHandler.isValid(token))
+        if (!Token.isValid(token))
             return SystemStatus.NONE;
+        
+        if (Application.isLocked())
+            return SystemStatus.BUSY;
         
         server.ResumeVm(vmId);
         
@@ -99,8 +117,11 @@ public class Azure
     @WebMethod
     public SystemStatus ResizeComponents(String token, String vmId, int ramSize, long hdSize, int cpuCores)
     {
-        if (!TokenHandler.isValid(token))
+        if (!Token.isValid(token))
             return SystemStatus.NONE;
+        
+        if (Application.isLocked())
+            return SystemStatus.BUSY;
         
         server.ResizeComponents(vmId, ramSize, hdSize, cpuCores);
         
@@ -110,7 +131,7 @@ public class Azure
     @WebMethod
     public String GetVmStatus(String token)
     {
-        if (!TokenHandler.isValid(token))
+        if (!Token.isValid(token))
             return SystemStatus.NONE.toString();
         
         ByteArrayOutputStream os = new ByteArrayOutputStream();
@@ -156,7 +177,7 @@ public class Azure
     @WebMethod
     public String GetVmIp(String token, String vmId)
     {
-        if (!TokenHandler.isValid(token))
+        if (!Token.isValid(token))
             return SystemStatus.NONE.toString();
         
         return server.GetVmIp(vmId);
@@ -165,7 +186,7 @@ public class Azure
     @WebMethod
     public String GetBackendVersion(String token) 
     {
-        if (!TokenHandler.isValid(token))
+        if (!Token.isValid(token))
             return SystemStatus.NONE.toString();
         
         return Application.getVersion().toString();
@@ -174,7 +195,7 @@ public class Azure
     @WebMethod
     public SystemStatus UpgradeBackend(String token, String version, String source)
     {
-        if (!TokenHandler.isValid(token))
+        if (!Token.isValid(token))
             return SystemStatus.NONE;
         
         SystemStatus result = SystemStatus.READY;
@@ -191,13 +212,13 @@ public class Azure
     @WebMethod
     public SystemStatus SetInitialParams(String token, String computerId) 
     {
-        if (TokenHandler.gotToken())
+        if (Token.gotToken())
         {
             log.debug("Invalid request: token already set");
             return SystemStatus.NONE;
         }
         
-        TokenHandler.save(token, computerId);
+        Token.save(token, computerId);
         
         return SystemStatus.READY;
     }
