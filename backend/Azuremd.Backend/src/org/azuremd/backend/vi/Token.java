@@ -5,7 +5,7 @@ import org.azuremd.backend.Configuration;
 import com.spinn3r.log5j.Logger;
 
 /**
- * TokenHandler
+ * Token
  * 
  * Beinhaltet alle Methoden, um den Token zu überprüfen
  * und zu speichern.
@@ -13,7 +13,7 @@ import com.spinn3r.log5j.Logger;
  * @author dako
  *
  */
-public class TokenHandler
+public class Token
 {
     private static Logger log = Logger.getLogger();
     
