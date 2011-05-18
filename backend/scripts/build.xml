@@ -1,19 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project default="build_jar" name="Create Runnable Jar for Project Azuremd.Backend">                                   
-    <target name="build_jar">
-        <jar destfile="azuremd.jar" filesetmanifest="mergewithoutmain">
+<project default="build_jar" name="Create and compile a runnable jar for Azuremd.Backend">
+    <property name="base.dir" value="../Azuremd.Backend/" />
+    <property name="src.dir" value="${base.dir}/src" />   
+    <property name="bin.dir" value="${base.dir}/bin" />
+    <property name="libs.dir" value="${base.dir}/libs" />
+    <property name="dest.jar" value="azuremd.jar" />
+    <property name="main.class" value="org.azuremd.backend.Application" />
+    <path id="classpath">
+        <fileset dir="${libs.dir}" includes="**/*.jar"/>
+    </path>
+    <target name="clean">
+        <delete dir="${bin.dir}"/>
+    </target>
+    <target name="compile" depends="clean">
+	<mkdir dir="${bin.dir}" />
+        <javac srcdir="${src.dir}" destdir="${bin.dir}" classpathref="classpath" includeantruntime="false" />
+	<copy todir="${bin.dir}">
+	     <fileset dir="${src.dir}" excludes="**/*.java" />
+        </copy>
+    </target>                               
+    <target name="build_jar" depends="compile">
+        <jar destfile="${dest.jar}" filesetmanifest="mergewithoutmain">
             <manifest>
-                <attribute name="Main-Class" value="org.azuremd.backend.Application"/>
+                <attribute name="Main-Class" value="${main.class}"/>
                 <attribute name="Class-Path" value="."/>
             </manifest>
-            <fileset dir="../Azuremd.Backend/bin"/>
-            <zipfileset excludes="META-INF/*.SF" src="../Azuremd.Backend/libs/log4j-1.2.16.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="../Azuremd.Backend/libs/log5j-2.1.2.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="../Azuremd.Backend/libs/simple-xml-2.5.2.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="../Azuremd.Backend/libs/jna.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="../Azuremd.Backend/libs/vix.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="../Azuremd.Backend/libs/jython.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="../Azuremd.Backend/libs/jcommander-1.17.jar"/>
+            <fileset dir="${bin.dir}"/>
+            <zipfileset excludes="META-INF/*.SF" src="${libs.dir}/log4j-1.2.16.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${libs.dir}/log5j-2.1.2.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${libs.dir}/simple-xml-2.5.2.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${libs.dir}/jna.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${libs.dir}/vix.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${libs.dir}/jython.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${libs.dir}/jcommander-1.17.jar"/>
         </jar>
     </target>
 </project>
