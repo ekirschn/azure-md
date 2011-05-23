@@ -44,3 +44,6 @@ Backend: Christoph, Ronny, Eike, Marco
 2. Kommende Aufgaben und Ziele
 
 * Hartgecodeter Test Frontend-Backend
+* Neues persistentes USB-Image [Eike]
+* Festplatte auf dem Server einbinden [Eike]
+* Einarbeitung in Update/Upgrade [Marco]
