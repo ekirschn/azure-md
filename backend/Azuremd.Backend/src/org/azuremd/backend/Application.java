@@ -41,7 +41,7 @@ public class Application
 
     public static boolean isLocked()
     {
-        return (status == SystemStatus.BUSY);
+        return (status == SystemStatus.BUSY || status == SystemStatus.BLOBBING);
     }
 
     public static SystemStatus getStatus()
