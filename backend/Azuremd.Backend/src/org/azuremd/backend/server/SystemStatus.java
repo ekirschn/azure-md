@@ -10,5 +10,13 @@ package org.azuremd.backend.server;
  */
 public enum SystemStatus
 {
-    NONE, UPGRADING, STARTING, READY, BUSY
+    NONE, 
+    /**
+     * Beziehe Image vom Azure Blob-Storage
+     */
+    BLOBBING, 
+    UPGRADING, 
+    STARTING, 
+    READY, 
+    BUSY
 }
