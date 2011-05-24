@@ -10,6 +10,7 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamWriter;
 
 import org.azuremd.backend.*;
+import org.azuremd.backend.azure.BlobLoader;
 import org.azuremd.backend.server.*;
 import org.azuremd.backend.vi.*;
 
@@ -37,7 +38,13 @@ public class Azure
             return SystemStatus.NONE;
         
         if (Application.isLocked())
-            return SystemStatus.BUSY;
+            Application.getStatus();
+        
+        Application.setStatus(SystemStatus.BLOBBING);
+        
+        // Testverzeichnis
+        BlobLoader loader = new BlobLoader(source, "temp.bin");
+        loader.run();
         
         server.RegisterVm(vmId, source);
         
@@ -51,7 +58,7 @@ public class Azure
             return SystemStatus.NONE;
         
         if (Application.isLocked())
-            return SystemStatus.BUSY;
+            Application.getStatus();
         
         server.StartVm(vmId);
         
@@ -65,7 +72,7 @@ public class Azure
             return SystemStatus.NONE;
         
         if (Application.isLocked())
-            return SystemStatus.BUSY;
+            Application.getStatus();
         
         server.RestartVm(vmId);
         
@@ -79,7 +86,7 @@ public class Azure
             return SystemStatus.NONE;
         
         if (Application.isLocked())
-            return SystemStatus.BUSY;
+            Application.getStatus();
         
         server.StopVm(vmId);
         
@@ -93,7 +100,7 @@ public class Azure
             return SystemStatus.NONE;
         
         if (Application.isLocked())
-            return SystemStatus.BUSY;
+            Application.getStatus();
         
         server.SuspendVm(vmId);
         
@@ -107,7 +114,7 @@ public class Azure
             return SystemStatus.NONE;
         
         if (Application.isLocked())
-            return SystemStatus.BUSY;
+            Application.getStatus();
         
         server.ResumeVm(vmId);
         
@@ -121,7 +128,7 @@ public class Azure
             return SystemStatus.NONE;
         
         if (Application.isLocked())
-            return SystemStatus.BUSY;
+            return Application.getStatus();
         
         server.ResizeComponents(vmId, ramSize, hdSize, cpuCores);
         
