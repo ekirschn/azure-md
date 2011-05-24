@@ -25,191 +25,191 @@ public interface Azure {
 
     /**
      * 
-     * @param arg2
-     * @param arg1
-     * @param arg0
+     * @param authToken
+     * @param vmId
+     * @param sourceUrl
      * @return
      *     returns org.azuremd.backend.webservice.SystemStatus
      */
     @WebMethod(operationName = "RegisterVm")
     @WebResult(partName = "return")
     public SystemStatus registerVm(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1,
-        @WebParam(name = "arg2", partName = "arg2")
-        String arg2);
+        @WebParam(name = "authToken", partName = "authToken")
+        String authToken,
+        @WebParam(name = "vmId", partName = "vmId")
+        String vmId,
+        @WebParam(name = "sourceUrl", partName = "sourceUrl")
+        String sourceUrl);
 
     /**
      * 
-     * @param arg1
-     * @param arg0
+     * @param authToken
+     * @param vmId
      * @return
      *     returns org.azuremd.backend.webservice.SystemStatus
      */
     @WebMethod(operationName = "StartVm")
     @WebResult(partName = "return")
     public SystemStatus startVm(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1);
+        @WebParam(name = "authToken", partName = "authToken")
+        String authToken,
+        @WebParam(name = "vmId", partName = "vmId")
+        String vmId);
 
     /**
      * 
-     * @param arg1
-     * @param arg0
+     * @param authToken
+     * @param vmId
      * @return
      *     returns org.azuremd.backend.webservice.SystemStatus
      */
     @WebMethod(operationName = "RestartVm")
     @WebResult(partName = "return")
     public SystemStatus restartVm(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1);
+        @WebParam(name = "authToken", partName = "authToken")
+        String authToken,
+        @WebParam(name = "vmId", partName = "vmId")
+        String vmId);
 
     /**
      * 
-     * @param arg1
-     * @param arg0
+     * @param authToken
+     * @param vmId
      * @return
      *     returns org.azuremd.backend.webservice.SystemStatus
      */
     @WebMethod(operationName = "StopVm")
     @WebResult(partName = "return")
     public SystemStatus stopVm(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1);
+        @WebParam(name = "authToken", partName = "authToken")
+        String authToken,
+        @WebParam(name = "vmId", partName = "vmId")
+        String vmId);
 
     /**
      * 
-     * @param arg1
-     * @param arg0
+     * @param authToken
+     * @param vmId
      * @return
      *     returns org.azuremd.backend.webservice.SystemStatus
      */
     @WebMethod(operationName = "SuspendVm")
     @WebResult(partName = "return")
     public SystemStatus suspendVm(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1);
+        @WebParam(name = "authToken", partName = "authToken")
+        String authToken,
+        @WebParam(name = "vmId", partName = "vmId")
+        String vmId);
 
     /**
      * 
-     * @param arg1
-     * @param arg0
+     * @param authToken
+     * @param vmId
      * @return
      *     returns org.azuremd.backend.webservice.SystemStatus
      */
     @WebMethod(operationName = "ResumeVm")
     @WebResult(partName = "return")
     public SystemStatus resumeVm(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1);
+        @WebParam(name = "authToken", partName = "authToken")
+        String authToken,
+        @WebParam(name = "vmId", partName = "vmId")
+        String vmId);
 
     /**
      * 
-     * @param arg4
-     * @param arg3
-     * @param arg2
-     * @param arg1
-     * @param arg0
+     * @param ramSize
+     * @param cpuCores
+     * @param hdSize
+     * @param authToken
+     * @param vmId
      * @return
      *     returns org.azuremd.backend.webservice.SystemStatus
      */
     @WebMethod(operationName = "ResizeComponents")
     @WebResult(partName = "return")
     public SystemStatus resizeComponents(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1,
-        @WebParam(name = "arg2", partName = "arg2")
-        int arg2,
-        @WebParam(name = "arg3", partName = "arg3")
-        long arg3,
-        @WebParam(name = "arg4", partName = "arg4")
-        int arg4);
+        @WebParam(name = "authToken", partName = "authToken")
+        String authToken,
+        @WebParam(name = "vmId", partName = "vmId")
+        String vmId,
+        @WebParam(name = "ramSize", partName = "ramSize")
+        int ramSize,
+        @WebParam(name = "hdSize", partName = "hdSize")
+        long hdSize,
+        @WebParam(name = "cpuCores", partName = "cpuCores")
+        int cpuCores);
 
     /**
      * 
-     * @param arg0
+     * @param authToken
      * @return
      *     returns java.lang.String
      */
     @WebMethod(operationName = "GetVmStatus")
     @WebResult(partName = "return")
     public String getVmStatus(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0);
+        @WebParam(name = "authToken", partName = "authToken")
+        String authToken);
 
     /**
      * 
-     * @param arg1
-     * @param arg0
+     * @param authToken
+     * @param vmId
      * @return
      *     returns java.lang.String
      */
     @WebMethod(operationName = "GetVmIp")
     @WebResult(partName = "return")
     public String getVmIp(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1);
+        @WebParam(name = "authToken", partName = "authToken")
+        String authToken,
+        @WebParam(name = "vmId", partName = "vmId")
+        String vmId);
 
     /**
      * 
-     * @param arg0
+     * @param authToken
      * @return
      *     returns java.lang.String
      */
     @WebMethod(operationName = "GetBackendVersion")
     @WebResult(partName = "return")
     public String getBackendVersion(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0);
+        @WebParam(name = "authToken", partName = "authToken")
+        String authToken);
 
     /**
      * 
-     * @param arg2
-     * @param arg1
-     * @param arg0
+     * @param authToken
+     * @param sourceUrl
+     * @param version
      * @return
      *     returns org.azuremd.backend.webservice.SystemStatus
      */
     @WebMethod(operationName = "UpgradeBackend")
     @WebResult(partName = "return")
     public SystemStatus upgradeBackend(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1,
-        @WebParam(name = "arg2", partName = "arg2")
-        String arg2);
+        @WebParam(name = "authToken", partName = "authToken")
+        String authToken,
+        @WebParam(name = "version", partName = "version")
+        String version,
+        @WebParam(name = "sourceUrl", partName = "sourceUrl")
+        String sourceUrl);
 
     /**
      * 
-     * @param arg1
-     * @param arg0
+     * @param computerId
+     * @param authToken
      * @return
      *     returns org.azuremd.backend.webservice.SystemStatus
      */
     @WebMethod(operationName = "SetInitialParams")
     @WebResult(partName = "return")
     public SystemStatus setInitialParams(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0,
-        @WebParam(name = "arg1", partName = "arg1")
-        String arg1);
+        @WebParam(name = "authToken", partName = "authToken")
+        String authToken,
+        @WebParam(name = "computerId", partName = "computerId")
+        String computerId);
 
 }

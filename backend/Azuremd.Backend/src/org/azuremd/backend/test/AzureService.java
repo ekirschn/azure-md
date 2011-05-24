@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.1
  * 
  */
-@WebServiceClient(name = "AzureService", targetNamespace = "http://webservice.backend.azuremd.org/", wsdlLocation = "https://localhost:8080/azure?wsdl")
+@WebServiceClient(name = "AzureService", targetNamespace = "http://webservice.backend.azuremd.org/", wsdlLocation = "http://localhost:8080/azure?wsdl")
 public class AzureService
     extends Service
 {

@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;simpleType name="systemStatus">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
  *     &lt;enumeration value="NONE"/>
+ *     &lt;enumeration value="BLOBBING"/>
  *     &lt;enumeration value="UPGRADING"/>
  *     &lt;enumeration value="STARTING"/>
  *     &lt;enumeration value="READY"/>
@@ -28,6 +29,7 @@ import javax.xml.bind.annotation.XmlType;
 public enum SystemStatus {
 
     NONE,
+    BLOBBING,
     UPGRADING,
     STARTING,
     READY,
