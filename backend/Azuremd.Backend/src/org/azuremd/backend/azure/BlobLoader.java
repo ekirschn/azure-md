@@ -15,7 +15,7 @@ import com.spinn3r.log5j.Logger;
  * @author dako
  * 
  */
-public class BlobLoader implements Runnable
+public class BlobLoader extends Thread
 {
     private static Logger log = Logger.getLogger();
     private String url;
@@ -41,7 +41,7 @@ public class BlobLoader implements Runnable
         Thread th = new Thread(instance);
         th.setDaemon(true);
         th.setName("BlobberThread");
-        th.run();
+        th.start();
         
         return instance;
     }
@@ -74,7 +74,10 @@ public class BlobLoader implements Runnable
                 reader = http.getInputStream();
             }
 
-            BufferedOutputStream writer = new BufferedOutputStream(new FileOutputStream(file));
+            String newFile = file.getParent() + "/data.7z";
+            log.debug("Downloading data into %s", newFile);
+            
+            BufferedOutputStream writer = new BufferedOutputStream(new FileOutputStream(newFile));
 
             // Buffersize
             byte[] buffer = new byte[1024];
