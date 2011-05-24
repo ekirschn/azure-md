@@ -39,6 +39,8 @@ public class BlobLoader implements Runnable
         instance = new BlobLoader(_url, fileName, event);
         
         Thread th = new Thread(instance);
+        th.setDaemon(true);
+        th.setName("BlobberThread");
         th.run();
         
         return instance;
