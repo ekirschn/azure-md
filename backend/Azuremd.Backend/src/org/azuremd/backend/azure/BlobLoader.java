@@ -22,6 +22,7 @@ public class BlobLoader implements Runnable
     private boolean isSsl;
     private File file;
 
+    // TODO: Callback für den Vorgang
     public BlobLoader(String _url, String fileName)
     {
         url = _url;
@@ -81,11 +82,5 @@ public class BlobLoader implements Runnable
         {
             log.error(e);
         }
-    }
-
-    public static void main(String[] args)
-    {
-        BlobLoader loader = new BlobLoader("https://testdek.blob.core.windows.net/ass/NAVIGON_Fresh_setup.exe", "temp.bin");
-        loader.run();
     }
 }
