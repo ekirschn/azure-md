@@ -6,11 +6,10 @@ import java.util.Map.Entry;
 
 import javax.jws.*;
 import javax.jws.soap.SOAPBinding;
-import javax.xml.stream.XMLOutputFactory;
-import javax.xml.stream.XMLStreamWriter;
+import javax.xml.stream.*;
 
 import org.azuremd.backend.*;
-import org.azuremd.backend.azure.BlobLoader;
+import org.azuremd.backend.azure.*;
 import org.azuremd.backend.server.*;
 import org.azuremd.backend.vi.*;
 
@@ -32,7 +31,7 @@ public class Azure
     private static VirtServerInterface server = Application.getHost();
     
     @WebMethod
-    public SystemStatus RegisterVm(String token, String vmId, String source)
+    public SystemStatus RegisterVm(String token, final String vmId, final String source)
     {
         if (!Token.isValid(token))
             return SystemStatus.NONE;
@@ -42,11 +41,18 @@ public class Azure
         
         Application.setStatus(SystemStatus.BLOBBING);
         
-        // Testverzeichnis
-        BlobLoader loader = new BlobLoader(source, "temp.bin");
-        loader.run();
-        
-        server.RegisterVm(vmId, source);
+        BlobLoader.load(source, Configuration.getInstance().vmwareDirectory + vmId, new IEventComplete() 
+        {
+            @Override
+            public void done()
+            {
+                // Initiate Vm register
+                Application.setStatus(SystemStatus.READY);
+                // Sets it to busy again ...
+                // TODO: vmId (noch) egal
+                Application.getHost().RegisterVm(vmId, source);
+            }
+        });
         
         return Application.getStatus();
     }

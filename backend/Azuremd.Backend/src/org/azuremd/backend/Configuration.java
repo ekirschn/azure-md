@@ -51,6 +51,11 @@ public class Configuration
     
     @Element
     public String vmwareDirectory = "/var/lib/vmware/";
+    
+    public String getVmDirectory()
+    {
+        return vmwareDirectory + "Virtual Machines/";
+    }
 
     private static final Logger log = Logger.getLogger();
     private static Configuration instance = null;

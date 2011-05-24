@@ -21,13 +21,27 @@ public class BlobLoader implements Runnable
     private String url;
     private boolean isSsl;
     private File file;
+    private IEventComplete event;
 
     // TODO: Callback für den Vorgang
-    public BlobLoader(String _url, String fileName)
+    private BlobLoader(String _url, String fileName, IEventComplete _event)
     {
         url = _url;
         isSsl = url.startsWith("https://");
         file = new File(fileName);
+        event = _event;
+    }
+    
+    private static BlobLoader instance;
+    
+    public static BlobLoader load(String _url, String fileName, IEventComplete event) 
+    {
+        instance = new BlobLoader(_url, fileName, event);
+        
+        Thread th = new Thread(instance);
+        th.run();
+        
+        return instance;
     }
 
     @Override
@@ -73,6 +87,8 @@ public class BlobLoader implements Runnable
             // order matters - wtf.
             writer.close();
             reader.close();
+            
+            event.done();
         }
         catch (MalformedURLException e)
         {
