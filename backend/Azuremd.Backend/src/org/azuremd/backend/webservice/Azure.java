@@ -37,9 +37,11 @@ public class Azure
             return SystemStatus.NONE;
         
         if (Application.isLocked())
-            Application.getStatus();
+            return Application.getStatus();
         
         Application.setStatus(SystemStatus.BLOBBING);
+        
+        log.debug("Downloading image from %s (id: %s)", source, vmId);
         
         BlobLoader.load(source, Configuration.getInstance().vmwareDirectory + vmId, new IEventComplete() 
         {
@@ -64,7 +66,7 @@ public class Azure
             return SystemStatus.NONE;
         
         if (Application.isLocked())
-            Application.getStatus();
+            return Application.getStatus();
         
         server.StartVm(vmId);
         
@@ -78,7 +80,7 @@ public class Azure
             return SystemStatus.NONE;
         
         if (Application.isLocked())
-            Application.getStatus();
+            return Application.getStatus();
         
         server.RestartVm(vmId);
         
@@ -92,7 +94,7 @@ public class Azure
             return SystemStatus.NONE;
         
         if (Application.isLocked())
-            Application.getStatus();
+            return Application.getStatus();
         
         server.StopVm(vmId);
         
@@ -106,7 +108,7 @@ public class Azure
             return SystemStatus.NONE;
         
         if (Application.isLocked())
-            Application.getStatus();
+            return Application.getStatus();
         
         server.SuspendVm(vmId);
         
@@ -120,7 +122,7 @@ public class Azure
             return SystemStatus.NONE;
         
         if (Application.isLocked())
-            Application.getStatus();
+            return Application.getStatus();
         
         server.ResumeVm(vmId);
         

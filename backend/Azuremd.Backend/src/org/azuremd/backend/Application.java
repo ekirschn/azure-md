@@ -51,6 +51,8 @@ public class Application
 
     public static void setStatus(SystemStatus _status)
     {
+        log.debug("STATUS: %s (was %s)", _status, status);
+        
         status = _status;
     }
 
