@@ -4,7 +4,7 @@
     <property name="src.dir" value="${base.dir}/src" />   
     <property name="bin.dir" value="${base.dir}/bin" />
     <property name="libs.dir" value="${base.dir}/libs" />
-    <property name="dest.jar" value="azuremd.jar" />
+    <property name="prefix.jar" value="azuremd" />
     <property name="main.class" value="org.azuremd.backend.Application" />
     <path id="classpath">
         <fileset dir="${libs.dir}" includes="**/*.jar"/>
@@ -20,7 +20,9 @@
         </copy>
     </target>                               
     <target name="build_jar" depends="compile">
-        <jar destfile="${dest.jar}" filesetmanifest="mergewithoutmain">
+		<exec executable="./version.sh" />
+		<xmlproperty file="version.xml" />
+        <jar destfile="${prefix.jar}_${root.version}.jar" filesetmanifest="mergewithoutmain">
             <manifest>
                 <attribute name="Main-Class" value="${main.class}"/>
                 <attribute name="Class-Path" value="."/>
