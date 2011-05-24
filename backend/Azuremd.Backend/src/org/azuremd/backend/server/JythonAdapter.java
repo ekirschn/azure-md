@@ -24,8 +24,23 @@ public class JythonAdapter
     {
         Logger.getLogger().debug("Starting up jython runtime (version: %s)", Version.getVersion());
         py = new PythonInterpreter();
-        // TODO: Extra Variablen/Methoden für Python zur Verfügung stellen
-        // py.set(name, value);
+        
+        // Zugriffe auf die API erlauben
+        py.set("app", Application.class);
+    }
+    
+    /**
+     * Setzt im Pythonskript Objekte, die genutzt werden können (Args).
+     * 
+     * @param name - Name
+     * @param value - Wert (z.B. ein String)
+     */
+    public static void set(String name, String value)
+    {
+        if (py == null)
+            setup();
+        
+        py.set(name, value);
     }
 
     /**
@@ -39,7 +54,7 @@ public class JythonAdapter
     {
         if (py == null)
             setup();
-
+        
         py.execfile(Application.class.getClassLoader().getResourceAsStream(String.format("scripts/%s.py", file)));
     }
 }

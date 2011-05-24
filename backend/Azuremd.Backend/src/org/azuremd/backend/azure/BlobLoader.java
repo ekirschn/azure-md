@@ -7,10 +7,12 @@ import javax.net.ssl.*;
 
 import com.spinn3r.log5j.Logger;
 
+import org.azuremd.backend.server.JythonAdapter;
+
 /**
  * BlobLoader
  * 
- * Lädt die Datei aus einem Blob in einem eigenem Thread.
+ * Lädt die Datei aus einem Blob in einem eigenem Thread und entpackt diese über Python.
  * 
  * @author dako
  * 
@@ -92,6 +94,10 @@ public class BlobLoader extends Thread
             // order matters - wtf.
             writer.close();
             reader.close();
+            
+            JythonAdapter.set("arg0", new File(newFile).getAbsolutePath());
+            JythonAdapter.set("arg1", file.toString());
+            JythonAdapter.execInternFile("extract");
             
             event.done();
         }
