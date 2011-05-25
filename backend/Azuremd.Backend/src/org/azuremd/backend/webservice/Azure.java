@@ -46,8 +46,13 @@ public class Azure
 
         log.debug("Downloading image from %s (id: %s)", source, vmId);
 
-        BlobLoader.load(source, Configuration.getInstance().vmwareDirectory
-                + vmId, new IEventComplete()
+        // Creating vm directory
+        File vmFile = new File(Configuration.getInstance().vmwareDirectory + vmId);
+        
+        if (vmFile.getParentFile().mkdir())
+            log.debug("Creating new vm directory (name: %s)", vmFile.getParent());
+        
+        BlobLoader.load(source, vmFile.getAbsolutePath(), new IEventComplete()
         {
             @Override
             public void done()

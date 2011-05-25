@@ -7,7 +7,9 @@ import javax.net.ssl.*;
 
 import com.spinn3r.log5j.Logger;
 
+import org.azuremd.backend.Application;
 import org.azuremd.backend.server.JythonAdapter;
+import org.azuremd.backend.server.SystemStatus;
 
 /**
  * BlobLoader
@@ -101,13 +103,10 @@ public class BlobLoader extends Thread
             
             event.done();
         }
-        catch (MalformedURLException e)
+        catch (Exception e)
         {
             log.error(e);
-        }
-        catch (IOException e)
-        {
-            log.error(e);
+            Application.setStatus(SystemStatus.READY);
         }
     }
 }
