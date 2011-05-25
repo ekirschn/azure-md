@@ -60,11 +60,9 @@ public class VmwareVirtualServer implements VirtServerInterface
     public SystemStatus RegisterVm(String vmId, String source)
     {
         Application.setStatus(SystemStatus.BUSY);
-
-        // async
-        // TODO: fix param source
-        vix.VixHost_RegisterVM(server, source, VmwareHelper.stdCallback("New vm created"), null);
-
+        VixHandle _job = vix.VixHost_RegisterVM(server, vmId, VmwareHelper.stdCallback("New vm created"), null);
+        deleteLater(_job, null);
+        
         return Application.getStatus();
     }
 

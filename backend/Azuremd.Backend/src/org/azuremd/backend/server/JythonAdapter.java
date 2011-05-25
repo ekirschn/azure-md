@@ -22,7 +22,7 @@ public class JythonAdapter
 
     private static void setup()
     {
-        Logger.getLogger().debug("Starting up jython runtime (version: %s)", Version.getVersion());
+        Logger.getLogger().debug("Starting up jython runtime (version: %s)", Version.getVersion().replace("\n", ""));
         py = new PythonInterpreter();
         
         // Zugriffe auf die API erlauben

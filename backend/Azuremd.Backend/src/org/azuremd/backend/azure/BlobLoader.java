@@ -98,7 +98,6 @@ public class BlobLoader extends Thread
             reader.close();
             
             JythonAdapter.set("arg0", new File(newFile).getAbsolutePath());
-            JythonAdapter.set("arg1", file.toString());
             JythonAdapter.execInternFile("extract");
             
             event.done();
