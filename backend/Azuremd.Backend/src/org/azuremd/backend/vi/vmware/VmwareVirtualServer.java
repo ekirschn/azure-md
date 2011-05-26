@@ -3,6 +3,7 @@ package org.azuremd.backend.vi.vmware;
 import java.util.*;
 
 import com.spinn3r.log5j.Logger;
+import com.sun.jna.Pointer;
 import com.vmware.vix.*;
 
 import org.azuremd.backend.*;
@@ -55,10 +56,11 @@ public class VmwareVirtualServer implements VirtServerInterface
     {
         server.disconnect();
     }
-
+    
     @Override
     public SystemStatus RegisterVm(String vmId, String source)
     {
+        // Hier ist "source" egal, da bei VMware alles über den Pfad geregelt wird.
         Application.setStatus(SystemStatus.BUSY);
         VixHandle _job = vix.VixHost_RegisterVM(server, vmId, VmwareHelper.stdCallback("New vm created"), null);
         deleteLater(_job, null);
@@ -90,7 +92,6 @@ public class VmwareVirtualServer implements VirtServerInterface
     @Override
     public SystemStatus RestartVm(String vmId)
     {
-        /** TODO: Broken
         Application.setStatus(SystemStatus.BUSY);
         
         VixVmHandle handle = null;
@@ -98,24 +99,26 @@ public class VmwareVirtualServer implements VirtServerInterface
         try
         {
             handle = server.openVm(vmId);
-            vix.VixVM_PowerOff(handle, VixVMPowerOpOptions.VIX_VMPOWEROP_FROM_GUEST, new VixEventProc()
+            VixHandle job = vix.VixVM_PowerOff(handle, VixVMPowerOpOptions.VIX_VMPOWEROP_NORMAL, new VixEventProc()
             {
+                @Override
                 public void callbackProc(int handle, int eventType,
                         int moreEventInfo, Pointer clientData)
                 {
-                    new VixHandle(handle).release();
-                    log.debug("VM (gracefully) powered off");
-                    vix.VixVM_PowerOn(vixVmHandle, VixVMPowerOpOptions.VIX_VMPOWEROP_NORMAL, VixVmHandle.VIX_INVALID_HANDLE, VmwareHelper.stdCallback("VM powered on"), null);
+                    log.debug("VM powered off");
                     
-                    StartVm(new VixVmHandle(handle));
+                    VixVmHandle _handle = new VixVmHandle(handle);
+                    VixHandle job = vix.VixVM_PowerOn(_handle, VixVMPowerOpOptions.VIX_VMPOWEROP_NORMAL, VixVmHandle.VIX_INVALID_HANDLE, VmwareHelper.stdCallback("VM restarted"), null);
+                    deleteLater(job, _handle);
                 }
             }, null);
+            deleteLater(job, null);
         }
         catch (VixException e)
         {
             log.error(e);
         }
-        */
+        
         return Application.getStatus();
     }
 
@@ -131,7 +134,7 @@ public class VmwareVirtualServer implements VirtServerInterface
             handle = server.openVm(vmId);
             // VIX_VMPOWEROP_FROM_GUEST = graceful shutdown
             // VIX_VMPOWEROP_NORMAL = kill
-            VixHandle job = vix.VixVM_PowerOff(handle, VixVMPowerOpOptions.VIX_VMPOWEROP_NORMAL, VmwareHelper.stdCallback("VM (gracefully) turned off"), null);
+            VixHandle job = vix.VixVM_PowerOff(handle, VixVMPowerOpOptions.VIX_VMPOWEROP_NORMAL, VmwareHelper.stdCallback("VM turned off"), null);
             deleteLater(job, handle);
         }
         catch (VixException e)

@@ -2,6 +2,12 @@ package org.azuremd.backend.vi.vmware;
 
 import com.vmware.vix.*;
 
+/**
+ * Implementiert den Thread, der die Handles löscht.
+ * 
+ * @author dako
+ *
+ */
 public class JobThread implements Runnable 
 {
     private VixHandle job;
@@ -18,7 +24,10 @@ public class JobThread implements Runnable
     public void run()
     {
         server.getVix().VixJob_Wait(job, VixPropertyID.VIX_PROPERTY_NONE, VixPropertyID.VIX_PROPERTY_NONE);
-        handle.release();
+        
+        if (handle != null)
+            handle.release();
+        
         job.release();
     }
 }
