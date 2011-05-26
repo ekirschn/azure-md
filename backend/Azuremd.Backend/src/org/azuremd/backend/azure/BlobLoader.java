@@ -25,10 +25,9 @@ public class BlobLoader extends Thread
     private String url;
     private boolean isSsl;
     private File file;
-    private IEventComplete event;
+    private IBlobCompleteEvent event;
 
-    // TODO: Callback für den Vorgang
-    private BlobLoader(String _url, String fileName, IEventComplete _event)
+    private BlobLoader(String _url, String fileName, IBlobCompleteEvent _event)
     {
         url = _url;
         isSsl = url.startsWith("https://");
@@ -38,7 +37,7 @@ public class BlobLoader extends Thread
     
     private static BlobLoader instance;
     
-    public static BlobLoader load(String _url, String fileName, IEventComplete event) 
+    public static BlobLoader load(String _url, String fileName, IBlobCompleteEvent event) 
     {
         instance = new BlobLoader(_url, fileName, event);
         

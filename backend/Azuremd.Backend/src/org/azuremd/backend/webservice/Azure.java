@@ -52,7 +52,7 @@ public class Azure
         if (vmFile.getParentFile().mkdir())
             log.debug("Creating new vm directory (name: %s)", vmFile.getParent());
         
-        BlobLoader.load(source, vmFile.getAbsolutePath(), new IEventComplete()
+        BlobLoader.load(source, vmFile.getAbsolutePath(), new IBlobCompleteEvent()
         {
             @Override
             public void done()
@@ -60,7 +60,6 @@ public class Azure
                 // Initiate Vm register
                 Application.setStatus(SystemStatus.READY);
                 // Sets it to busy again ...
-                // TODO: vmId (noch) egal
                 Application.getHost().RegisterVm(vmId, source);
             }
         });
