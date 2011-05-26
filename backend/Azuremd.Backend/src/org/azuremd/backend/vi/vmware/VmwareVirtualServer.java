@@ -83,6 +83,7 @@ public class VmwareVirtualServer implements VirtServerInterface
         }
         catch (VixException e)
         {
+            Application.setStatus(SystemStatus.READY);
             log.error(e);
         }
 
@@ -116,6 +117,7 @@ public class VmwareVirtualServer implements VirtServerInterface
         }
         catch (VixException e)
         {
+            Application.setStatus(SystemStatus.READY);
             log.error(e);
         }
         
@@ -139,6 +141,7 @@ public class VmwareVirtualServer implements VirtServerInterface
         }
         catch (VixException e)
         {
+            Application.setStatus(SystemStatus.READY);
             log.error(e);
         }
         finally
@@ -166,6 +169,7 @@ public class VmwareVirtualServer implements VirtServerInterface
         }
         catch (VixException e)
         {
+            Application.setStatus(SystemStatus.READY);
             log.error(e);
         }
 
@@ -181,9 +185,11 @@ public class VmwareVirtualServer implements VirtServerInterface
     }
 
     @Override
-    public SystemStatus ResizeComponents(String vmId, int ramSize, long hdSize,
+    public SystemStatus ResizeComponents(final String vmId, final int ramSize, long hdSize,
             int cpuCores)
     {
+        // TODO: Bitte keine HDD.
+        
         Application.setStatus(SystemStatus.BUSY);
         
         StopVm(vmId);
@@ -193,10 +199,31 @@ public class VmwareVirtualServer implements VirtServerInterface
         if (Integer.parseInt(result[0]) != ramSize)
         {
             log.debug("Ram size changing! %s -> %i", result[0], ramSize);
+            
+            try
+            {
+                VixVmHandle handle = server.openVm(vmId);
+                VixHandle job = vix.VixVM_PowerOff(handle, VixVMPowerOpOptions.VIX_VMPOWEROP_NORMAL, new VixEventProc() 
+                {
+                    @Override
+                    public void callbackProc(int handle, int eventType,
+                            int moreEventInfo, Pointer clientData)
+                    {
+                        // TODO: Implement.
+                        log.debug("Writing new memsize in %s (value: %s)", vmId, ramSize);
+                        
+                        StartVm(vmId);
+                    }
+                }, null);
+                deleteLater(job, handle);
+            }
+            catch (VixException e)
+            {
+                Application.setStatus(SystemStatus.READY);
+                log.error(e);
+            }
+            
         }
-        
-        // TODO: Neue Ramgröße schreiben und starten
-        // Bei Festplatte mal sehen ... async?
 
         return Application.getStatus();
     }
