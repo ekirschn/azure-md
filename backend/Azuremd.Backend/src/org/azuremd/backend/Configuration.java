@@ -50,7 +50,7 @@ public class Configuration
     public String ComputerId = "NONE";
     
     @Element
-    public String vmwareDirectory = "/var/lib/vmware/";
+    public String vmDirectory = "/var/lib/vmware/Virtual Machines/";
 
     private static final Logger log = Logger.getLogger();
     private static Configuration instance = null;
@@ -71,11 +71,6 @@ public class Configuration
         configurationPath = path;
     }
     
-    public static String getVmDirectory()
-    {
-        return getInstance().vmwareDirectory + "Virtual Machines/";
-    }
-
     public static void load(String fileName)
     {
         Serializer ser = new Persister();

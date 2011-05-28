@@ -47,7 +47,7 @@ public class Azure
         log.debug("Downloading image from %s (id: %s)", source, vmId);
 
         // Creating vm directory
-        File vmFile = new File(Configuration.getVmDirectory() + Application.getHost().FilterVmPath(vmId));
+        File vmFile = new File(Configuration.getInstance().vmDirectory + Application.getHost().FilterVmPath(vmId));
         
         if (vmFile.getParentFile().mkdir())
             log.debug("Creating new vm directory (name: %s)", vmFile.getParent());

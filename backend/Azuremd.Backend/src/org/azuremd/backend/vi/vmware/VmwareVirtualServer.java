@@ -189,7 +189,7 @@ public class VmwareVirtualServer implements VirtServerInterface
         Application.setStatus(SystemStatus.BUSY);
         final String _vmId = FilterVmPath(vmId);
 
-        String[] result = Sinir.gimme(Configuration.getVmDirectory() + _vmId, new String[] { "memsize", "numvcpus" });
+        String[] result = Sinir.gimme(Configuration.getInstance().vmDirectory + _vmId, new String[] { "memsize", "numvcpus" });
         
         if (Integer.parseInt(result[0]) != ramSize || Integer.parseInt(result[1]) != cpuCores)
         {
@@ -242,7 +242,7 @@ public class VmwareVirtualServer implements VirtServerInterface
 
             for (final String item : server.getRegisteredVms())
             {
-                final String[] bucket = Sinir.gimme(Configuration.getVmDirectory()
+                final String[] bucket = Sinir.gimme(Configuration.getInstance().vmDirectory
                         + FilterVmPath(item), new String[] {
                         "displayName", "guestOS" });
 
