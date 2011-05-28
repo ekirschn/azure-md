@@ -238,7 +238,7 @@ public class VmwareVirtualServer implements VirtServerInterface
 
         try
         {
-            //final List<String> runningVms = server.getRunningVms();
+            final List<String> runningVms = server.getRunningVms();
 
             for (final String item : server.getRegisteredVms())
             {
