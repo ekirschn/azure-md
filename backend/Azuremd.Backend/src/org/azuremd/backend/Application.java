@@ -187,8 +187,5 @@ public class Application
 
         // Entering normal working modus
         setStatus(SystemStatus.READY);
-
-        while (true)
-        {}
     }
 }

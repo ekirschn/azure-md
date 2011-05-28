@@ -47,4 +47,14 @@ public interface VirtServerInterface
     public VmBucket GetVmStatus();
 
     public String GetVmIp(String vmId);
+    
+    /**
+     * Standard-Datastore rausfiltern, falls nötig, damit mit dem Pfad gearbeitet werden
+     * kann.
+     * 
+     * @param vmId
+     *            - Pfad mit Standard-Datastore
+     * @return Gefilterter Pfad
+     */
+    public String FilterVmPath(String vmId);
 }
