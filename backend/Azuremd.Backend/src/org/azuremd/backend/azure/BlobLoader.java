@@ -14,7 +14,8 @@ import org.azuremd.backend.server.SystemStatus;
 /**
  * BlobLoader
  * 
- * Lädt die Datei aus einem Blob in einem eigenem Thread und entpackt diese über Python.
+ * Lädt die Datei aus einem Blob in einem eigenem Thread und entpackt diese über
+ * Python.
  * 
  * @author dako
  * 
@@ -34,18 +35,19 @@ public class BlobLoader extends Thread
         file = new File(fileName);
         event = _event;
     }
-    
+
     private static BlobLoader instance;
-    
-    public static BlobLoader load(String _url, String fileName, IBlobCompleteEvent event) 
+
+    public static BlobLoader load(String _url, String fileName,
+            IBlobCompleteEvent event)
     {
         instance = new BlobLoader(_url, fileName, event);
-        
+
         Thread th = new Thread(instance);
         th.setDaemon(true);
         th.setName("BlobberThread");
         th.start();
-        
+
         return instance;
     }
 
@@ -79,7 +81,7 @@ public class BlobLoader extends Thread
 
             String newFile = file.getParent() + "/data.7z";
             log.debug("Downloading data into %s", newFile);
-            
+
             BufferedOutputStream writer = new BufferedOutputStream(new FileOutputStream(newFile));
 
             // Buffersize
@@ -96,9 +98,11 @@ public class BlobLoader extends Thread
             writer.close();
             reader.close();
             
+            log.debug("Extracting %s", newFile);
+
             JythonAdapter.set("arg0", new File(newFile).getAbsolutePath());
             JythonAdapter.execInternFile("extract");
-            
+
             event.done();
         }
         catch (Exception e)
