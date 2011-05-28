@@ -10,7 +10,7 @@
   </appender> 
   
   <appender name="logfile" class="org.apache.log4j.RollingFileAppender">
-    <param name="File" value="./file.log" />
+    <param name="File" value="/tmp/azuremd.log" />
     <param name="MaxFileSize" value="10MB"/>
     <layout class="org.apache.log4j.PatternLayout"> 
       <param name="ConversionPattern" value="%d{HH:mm:ss,SSS} %-5p [%c{1}]: - %m%n"/> 
