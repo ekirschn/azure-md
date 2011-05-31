@@ -16,8 +16,8 @@
 	<mkdir dir="${bin.dir}" />
         <javac srcdir="${src.dir}" destdir="${bin.dir}" classpathref="classpath" includeantruntime="false" />
 	<copy todir="${bin.dir}">
-	     <fileset dir="${src.dir}" excludes="**/*.java" />
-        </copy>
+	     <fileset dir="${src.dir}" />
+    </copy>
     </target>                               
     <target name="build_jar" depends="compile">
 		<exec executable="./version.sh" />

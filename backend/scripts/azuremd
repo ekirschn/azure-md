@@ -1,3 +1,3 @@
 #!/bin/bash
-export LD_LIBRARY_PATH=/usr/lib/vmware-vix/VIServer-2.0.0/64bit/
-java -jar azuremd.jar $@
+export LD_LIBRARY_PATH=/usr/lib/vmware-vix/lib/VIServer-2.0.0/64bit/
+java -jar `ls | grep "azuremd.*jar$" ` $@
