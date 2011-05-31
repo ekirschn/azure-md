@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://webservice.backend.azuremd.org/" name="AzureService" targetNamespace="http://webservice.backend.azuremd.org/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="https://192.168.0.71:8080/azure?xsd=1" namespace="http://webservice.backend.azuremd.org/" />
+    </xsd:schema>
+  </types>
+  <message name="RegisterVm">
+    <part name="authToken" type="xsd:string" />
+    <part name="vmId" type="xsd:string" />
+    <part name="sourceUrl" type="xsd:string" />
+  </message>
+  <message name="RegisterVmResponse">
+    <part name="return" type="tns:systemStatus" />
+  </message>
+  <message name="StartVm">
+    <part name="authToken" type="xsd:string" />
+    <part name="vmId" type="xsd:string" />
+  </message>
+  <message name="StartVmResponse">
+    <part name="return" type="tns:systemStatus" />
+  </message>
+  <message name="RestartVm">
+    <part name="authToken" type="xsd:string" />
+    <part name="vmId" type="xsd:string" />
+  </message>
+  <message name="RestartVmResponse">
+    <part name="return" type="tns:systemStatus" />
+  </message>
+  <message name="StopVm">
+    <part name="authToken" type="xsd:string" />
+    <part name="vmId" type="xsd:string" />
+  </message>
+  <message name="StopVmResponse">
+    <part name="return" type="tns:systemStatus" />
+  </message>
+  <message name="SuspendVm">
+    <part name="authToken" type="xsd:string" />
+    <part name="vmId" type="xsd:string" />
+  </message>
+  <message name="SuspendVmResponse">
+    <part name="return" type="tns:systemStatus" />
+  </message>
+  <message name="ResumeVm">
+    <part name="authToken" type="xsd:string" />
+    <part name="vmId" type="xsd:string" />
+  </message>
+  <message name="ResumeVmResponse">
+    <part name="return" type="tns:systemStatus" />
+  </message>
+  <message name="ResizeComponents">
+    <part name="authToken" type="xsd:string" />
+    <part name="vmId" type="xsd:string" />
+    <part name="ramSize" type="xsd:int" />
+    <part name="hdSize" type="xsd:long" />
+    <part name="cpuCores" type="xsd:int" />
+  </message>
+  <message name="ResizeComponentsResponse">
+    <part name="return" type="tns:systemStatus" />
+  </message>
+  <message name="GetVmStatus">
+    <part name="authToken" type="xsd:string" />
+  </message>
+  <message name="GetVmStatusResponse">
+    <part name="return" type="xsd:string" />
+  </message>
+  <message name="GetVmIp">
+    <part name="authToken" type="xsd:string" />
+    <part name="vmId" type="xsd:string" />
+  </message>
+  <message name="GetVmIpResponse">
+    <part name="return" type="xsd:string" />
+  </message>
+  <message name="GetBackendVersion">
+    <part name="authToken" type="xsd:string" />
+  </message>
+  <message name="GetBackendVersionResponse">
+    <part name="return" type="xsd:string" />
+  </message>
+  <message name="UpgradeBackend">
+    <part name="authToken" type="xsd:string" />
+    <part name="version" type="xsd:string" />
+    <part name="sourceUrl" type="xsd:string" />
+  </message>
+  <message name="UpgradeBackendResponse">
+    <part name="return" type="tns:systemStatus" />
+  </message>
+  <message name="SetInitialParams">
+    <part name="authToken" type="xsd:string" />
+    <part name="computerId" type="xsd:string" />
+  </message>
+  <message name="SetInitialParamsResponse">
+    <part name="return" type="tns:systemStatus" />
+  </message>
+  <portType name="Azure">
+    <operation name="RegisterVm" parameterOrder="authToken vmId sourceUrl">
+      <input message="tns:RegisterVm" />
+      <output message="tns:RegisterVmResponse" />
+    </operation>
+    <operation name="StartVm" parameterOrder="authToken vmId">
+      <input message="tns:StartVm" />
+      <output message="tns:StartVmResponse" />
+    </operation>
+    <operation name="RestartVm" parameterOrder="authToken vmId">
+      <input message="tns:RestartVm" />
+      <output message="tns:RestartVmResponse" />
+    </operation>
+    <operation name="StopVm" parameterOrder="authToken vmId">
+      <input message="tns:StopVm" />
+      <output message="tns:StopVmResponse" />
+    </operation>
+    <operation name="SuspendVm" parameterOrder="authToken vmId">
+      <input message="tns:SuspendVm" />
+      <output message="tns:SuspendVmResponse" />
+    </operation>
+    <operation name="ResumeVm" parameterOrder="authToken vmId">
+      <input message="tns:ResumeVm" />
+      <output message="tns:ResumeVmResponse" />
+    </operation>
+    <operation name="ResizeComponents" parameterOrder="authToken vmId ramSize hdSize cpuCores">
+      <input message="tns:ResizeComponents" />
+      <output message="tns:ResizeComponentsResponse" />
+    </operation>
+    <operation name="GetVmStatus">
+      <input message="tns:GetVmStatus" />
+      <output message="tns:GetVmStatusResponse" />
+    </operation>
+    <operation name="GetVmIp" parameterOrder="authToken vmId">
+      <input message="tns:GetVmIp" />
+      <output message="tns:GetVmIpResponse" />
+    </operation>
+    <operation name="GetBackendVersion">
+      <input message="tns:GetBackendVersion" />
+      <output message="tns:GetBackendVersionResponse" />
+    </operation>
+    <operation name="UpgradeBackend" parameterOrder="authToken version sourceUrl">
+      <input message="tns:UpgradeBackend" />
+      <output message="tns:UpgradeBackendResponse" />
+    </operation>
+    <operation name="SetInitialParams" parameterOrder="authToken computerId">
+      <input message="tns:SetInitialParams" />
+      <output message="tns:SetInitialParamsResponse" />
+    </operation>
+  </portType>
+  <binding name="AzurePortBinding" type="tns:Azure">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <operation name="RegisterVm">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://webservice.backend.azuremd.org/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://webservice.backend.azuremd.org/" />
+      </output>
+    </operation>
+    <operation name="StartVm">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://webservice.backend.azuremd.org/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://webservice.backend.azuremd.org/" />
+      </output>
+    </operation>
+    <operation name="RestartVm">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://webservice.backend.azuremd.org/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://webservice.backend.azuremd.org/" />
+      </output>
+    </operation>
+    <operation name="StopVm">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://webservice.backend.azuremd.org/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://webservice.backend.azuremd.org/" />
+      </output>
+    </operation>
+    <operation name="SuspendVm">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://webservice.backend.azuremd.org/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://webservice.backend.azuremd.org/" />
+      </output>
+    </operation>
+    <operation name="ResumeVm">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://webservice.backend.azuremd.org/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://webservice.backend.azuremd.org/" />
+      </output>
+    </operation>
+    <operation name="ResizeComponents">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://webservice.backend.azuremd.org/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://webservice.backend.azuremd.org/" />
+      </output>
+    </operation>
+    <operation name="GetVmStatus">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://webservice.backend.azuremd.org/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://webservice.backend.azuremd.org/" />
+      </output>
+    </operation>
+    <operation name="GetVmIp">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://webservice.backend.azuremd.org/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://webservice.backend.azuremd.org/" />
+      </output>
+    </operation>
+    <operation name="GetBackendVersion">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://webservice.backend.azuremd.org/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://webservice.backend.azuremd.org/" />
+      </output>
+    </operation>
+    <operation name="UpgradeBackend">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://webservice.backend.azuremd.org/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://webservice.backend.azuremd.org/" />
+      </output>
+    </operation>
+    <operation name="SetInitialParams">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://webservice.backend.azuremd.org/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://webservice.backend.azuremd.org/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="AzureService">
+    <port name="AzurePort" binding="tns:AzurePortBinding">
+      <soap:address location="https://192.168.0.71:8080/azure" />
+    </port>
+  </service>
+</definitions>

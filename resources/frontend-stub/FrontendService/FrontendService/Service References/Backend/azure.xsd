@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://webservice.backend.azuremd.org/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="systemStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NONE" />
+      <xs:enumeration value="BLOBBING" />
+      <xs:enumeration value="UPGRADING" />
+      <xs:enumeration value="STARTING" />
+      <xs:enumeration value="READY" />
+      <xs:enumeration value="BUSY" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

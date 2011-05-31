@@ -1,0 +1,6 @@
+*.exe
+*.pdb
+*.dll
+*.suo
+*.docstates
+*.cache
