@@ -13,7 +13,6 @@ import com.spinn3r.log5j.*;
 import com.beust.jcommander.JCommander;
 
 import org.azuremd.backend.cli.ProgramArguments;
-import org.azuremd.backend.server.*;
 import org.azuremd.backend.vi.*;
 import org.azuremd.backend.webservice.Azure;
 

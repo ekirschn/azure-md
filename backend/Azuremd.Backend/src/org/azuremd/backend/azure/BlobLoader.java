@@ -8,8 +8,8 @@ import javax.net.ssl.*;
 import com.spinn3r.log5j.Logger;
 
 import org.azuremd.backend.Application;
-import org.azuremd.backend.server.JythonAdapter;
-import org.azuremd.backend.server.SystemStatus;
+import org.azuremd.backend.vi.JythonAdapter;
+import org.azuremd.backend.vi.SystemStatus;
 
 /**
  * BlobLoader

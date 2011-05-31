@@ -1,6 +1,5 @@
 package org.azuremd.backend.vi;
 
-import org.azuremd.backend.server.SystemStatus;
 
 /**
  * VirtServerInterface

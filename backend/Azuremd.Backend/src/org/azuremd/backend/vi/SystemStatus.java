@@ -1,4 +1,4 @@
-package org.azuremd.backend.server;
+package org.azuremd.backend.vi;
 
 /**
  * SystemStatus

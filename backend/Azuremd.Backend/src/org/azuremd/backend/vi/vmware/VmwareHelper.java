@@ -1,7 +1,7 @@
 package org.azuremd.backend.vi.vmware;
 
 import org.azuremd.backend.Application;
-import org.azuremd.backend.server.SystemStatus;
+import org.azuremd.backend.vi.SystemStatus;
 
 import com.spinn3r.log5j.Logger;
 import com.sun.jna.Pointer;
@@ -29,22 +29,32 @@ public class VmwareHelper
      * 
      * @param vix
      *            - Handle auf die zu nutzende VixLibrary.
-     * @param handle
+     * @param jobHandle
      *            - Job-Handle
      * @return VixError (VixError.VIX_OK für alles ok).
      */
-    public static VixError check(VixLibrary vix, int handle)
+    public static VixError getError(VixLibrary vix, int jobHandle)
     {
-        VixError err = vix.VixJob_GetError(new VixHandle(handle));
+        VixError err = vix.VixJob_GetError(new VixHandle(jobHandle));
 
-        if (err != VixError.VIX_OK)
+        if (!err.equals(VixError.VIX_OK))
             log.error("Vmware whines: %s", vix.Vix_GetErrorText(err, null));
 
         return err;
     }
 
+    /**
+     * Standard-Callback für asynchrone Jobs der VIX-Library.
+     * 
+     * @param vix
+     *            - Handle auf die zu nutzende VixLibrary.
+     * @param logMessage
+     *            - Nachricht, die ins Log geschrieben werden soll nach
+     *            erfolgreicher Abarbeitung.
+     * @return Callback-Objekt
+     */
     public static VixEventProc stdCallback(final VixLibrary vix,
-            final String msg)
+            final String logMessage)
     {
         return new VixEventProc()
         {
@@ -56,8 +66,8 @@ public class VmwareHelper
                     return;
 
                 // Das Error-Handling für die Hausfrau
-                if (check(vix, handle) == VixError.VIX_OK)
-                    log.debug(msg);
+                if (getError(vix, handle).equals(VixError.VIX_OK))
+                    log.debug(logMessage);
 
                 Application.setStatus(SystemStatus.READY);
                 // TODO: Frontend-Anrufen, dass wir fertig sind

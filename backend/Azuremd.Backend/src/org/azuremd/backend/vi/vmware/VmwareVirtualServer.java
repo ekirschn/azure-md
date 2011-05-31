@@ -7,7 +7,6 @@ import com.sun.jna.Pointer;
 import com.vmware.vix.*;
 
 import org.azuremd.backend.*;
-import org.azuremd.backend.server.*;
 import org.azuremd.backend.vi.*;
 
 /**
@@ -107,7 +106,7 @@ public class VmwareVirtualServer implements VirtServerInterface
                     if (!VmwareHelper.isComplete(eventType))
                         return;
                     
-                    if (VmwareHelper.check(vix, handle) == VixError.VIX_OK)
+                    if (VmwareHelper.getError(vix, handle) == VixError.VIX_OK)
                         log.debug("VM powered off");
                     
                     VixVmHandle _handle = new VixVmHandle(handle);
@@ -185,7 +184,6 @@ public class VmwareVirtualServer implements VirtServerInterface
     public SystemStatus ResizeComponents(final String vmId, final int ramSize, long hdSize,
             final int cpuCores)
     {
-        // TODO: Bitte keine HDD.
         Application.setStatus(SystemStatus.BUSY);
         final String _vmId = FilterVmPath(vmId);
 
@@ -208,7 +206,7 @@ public class VmwareVirtualServer implements VirtServerInterface
                         if (!VmwareHelper.isComplete(eventType))
                             return;
                         
-                        if (VmwareHelper.check(vix, handle) == VixError.VIX_OK)
+                        if (VmwareHelper.getError(vix, handle) == VixError.VIX_OK)
                             log.debug("Writing new values in %s", vmId);
                         
                         JythonAdapter.set("arg0", _vmId);
