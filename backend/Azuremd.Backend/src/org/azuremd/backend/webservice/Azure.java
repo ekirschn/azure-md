@@ -56,9 +56,6 @@ public class Azure
             @Override
             public void done()
             {
-                // Initiate Vm register
-                Application.setStatus(SystemStatus.READY);
-                // Sets it to busy again ...
                 Application.getHost().RegisterVm(vmId, source);
             }
         });
