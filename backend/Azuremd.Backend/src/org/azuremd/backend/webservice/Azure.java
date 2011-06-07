@@ -236,16 +236,17 @@ public class Azure
     {
         if (!Token.isValid(token))
             return SystemStatus.NONE;
-
-        SystemStatus result = SystemStatus.READY;
+        
+        if (Application.isLocked())
+            return Application.getStatus();
 
         if (Application.getVersion().isNewer(new BackendVersion(version)))
         {
-            result = SystemStatus.UPGRADING;
-            // TODO: Async updating über OSGI
+            Application.setStatus(SystemStatus.UPGRADING);
+            // TODO: Async updating über eigenen Worker
         }
 
-        return result;
+        return Application.getStatus();
     }
 
     @WebMethod
