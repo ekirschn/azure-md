@@ -74,9 +74,7 @@ public class Azure
         if (Application.isLocked())
             return Application.getStatus();
 
-        server.StartVm(vmId);
-
-        return Application.getStatus();
+        return server.StartVm(vmId);
     }
 
     @WebMethod
@@ -90,9 +88,7 @@ public class Azure
         if (Application.isLocked())
             return Application.getStatus();
 
-        server.RestartVm(vmId);
-
-        return Application.getStatus();
+        return server.RestartVm(vmId);
     }
 
     @WebMethod
@@ -106,9 +102,7 @@ public class Azure
         if (Application.isLocked())
             return Application.getStatus();
 
-        server.StopVm(vmId);
-
-        return Application.getStatus();
+        return server.StopVm(vmId);
     }
 
     @WebMethod
@@ -122,9 +116,7 @@ public class Azure
         if (Application.isLocked())
             return Application.getStatus();
 
-        server.SuspendVm(vmId);
-
-        return Application.getStatus();
+        return server.SuspendVm(vmId);
     }
 
     @WebMethod
@@ -138,9 +130,7 @@ public class Azure
         if (Application.isLocked())
             return Application.getStatus();
 
-        server.ResumeVm(vmId);
-
-        return Application.getStatus();
+        return server.ResumeVm(vmId);
     }
 
     @WebMethod
@@ -157,9 +147,7 @@ public class Azure
         if (Application.isLocked())
             return Application.getStatus();
 
-        server.ResizeComponents(vmId, ramSize, hdSize, cpuCores);
-
-        return Application.getStatus();
+        return server.ResizeComponents(vmId, ramSize, hdSize, cpuCores);
     }
 
     @WebMethod
