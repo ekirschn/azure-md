@@ -29,6 +29,8 @@ public interface VirtServerInterface
     public void Disconnect();
 
     public SystemStatus RegisterVm(String vmId, String source);
+    
+    public SystemStatus UnregisterVm(String vmId);
 
     public SystemStatus StartVm(String vmId);
 

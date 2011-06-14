@@ -35,7 +35,7 @@ public class Application
     
     public static BackendVersion getVersion()
     {
-        return new BackendVersion("0.2.2.2");
+        return new BackendVersion("0.2.2.3");
     }
 
     public static boolean isLocked()

@@ -64,6 +64,16 @@ public class VmwareVirtualServer implements VirtServerInterface
         
         return Application.getStatus();
     }
+    
+    @Override
+    public SystemStatus UnregisterVm(String vmId)
+    {
+        Application.setStatus(SystemStatus.BUSY);
+        VixHandle _job = vix.VixHost_UnregisterVM(server, vmId, VmwareHelper.stdCallback(vix, "Deleting vm"), null);
+        deleteLater(_job, null);
+        
+        return Application.getStatus();
+    }
 
     @Override
     public SystemStatus StartVm(String vmId)

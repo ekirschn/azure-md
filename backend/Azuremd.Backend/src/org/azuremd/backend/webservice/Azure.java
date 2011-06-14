@@ -62,6 +62,22 @@ public class Azure
 
         return Application.getStatus();
     }
+    
+    @WebMethod
+    public SystemStatus UnregisterVm(
+            @WebParam(name = "token", partName = "authToken") String token,
+            @WebParam(name = "vmId", partName = "vmId") final String vmId)
+    {
+        if (!Token.isValid(token))
+            return SystemStatus.NONE;
+
+        if (Application.isLocked())
+            return Application.getStatus();
+        
+        server.UnregisterVm(vmId);
+        
+        return Application.getStatus();
+    }
 
     @WebMethod
     public SystemStatus StartVm(
