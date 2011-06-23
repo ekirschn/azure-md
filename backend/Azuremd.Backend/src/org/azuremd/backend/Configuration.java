@@ -40,6 +40,9 @@ public class Configuration
 
     @Element
     public String HeartbeatUrl = "http://localhost.heartbeat.com";
+    
+    @Element
+    public String FrontendUrl = "https://example.com";
 
     @Element
     public String KeyStorePass = "changeit";
