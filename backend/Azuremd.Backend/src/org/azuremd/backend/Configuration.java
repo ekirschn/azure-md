@@ -2,6 +2,7 @@ package org.azuremd.backend;
 
 import java.io.*;
 
+import org.azuremd.backend.util.IoHelper;
 import org.simpleframework.xml.*;
 import org.simpleframework.xml.core.Persister;
 
@@ -119,28 +120,18 @@ public class Configuration
         File file = new File(fileName);
         File path = new File(file.getParent());
 
-        if (!path.exists())
-        {
+        if (path.mkdir())
             log.debug("Creating new path configuration path (%s)", path);
-            path.mkdir();
-        }
+        
+        // Pfade für den Updater anlegen
+        new File(path + "/backups/").mkdir();
+        new File(path + "/release/").mkdir();
 
         try
         {
-            // EOF
-            byte[] buffer = new byte[0xFFFF];
-            OutputStream out = new FileOutputStream(String.format("%s/%s", path, "server.keystore"));
-            InputStream in = Application.class.getClassLoader().getResourceAsStream("server.keystore");
-
-            for (int len; (len = in.read(buffer)) != -1;)
-                out.write(buffer, 0, len);
+            IoHelper.extractFromReource("server.keystore", String.format("%s/%s", path, "server.keystore"));
             
-            in.close();
-            out.close();
-
-            Serializer ser = new Persister();
-
-            ser.write(new Configuration(), file);
+            new Persister().write(new Configuration(), file);
         }
         catch (IOException e)
         {

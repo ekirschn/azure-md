@@ -1,6 +1,7 @@
 package org.azuremd.backend.webservice;
 
 import java.io.*;
+import java.net.*;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -10,6 +11,7 @@ import javax.xml.stream.*;
 
 import org.azuremd.backend.*;
 import org.azuremd.backend.azure.*;
+import org.azuremd.backend.util.IoHelper;
 import org.azuremd.backend.vi.*;
 
 import com.spinn3r.log5j.Logger;
@@ -236,7 +238,7 @@ public class Azure
     public SystemStatus UpgradeBackend(
             @WebParam(name = "token", partName = "authToken") String token,
             @WebParam(name = "version", partName = "version") String version,
-            @WebParam(name = "source", partName = "sourceUrl") String source)
+            @WebParam(name = "source", partName = "sourceUrl") final String source)
     {
         if (!Token.isValid(token))
             return SystemStatus.NONE;
@@ -247,7 +249,39 @@ public class Azure
         if (Application.getVersion().isNewer(new BackendVersion(version)))
         {
             Application.setStatus(SystemStatus.UPGRADING);
-            // TODO: Async updating über eigenen Worker
+            
+            new Thread(new Runnable() 
+            {
+                @Override
+                public void run()
+                {
+                    try
+                    {
+                        String updaterJar = Configuration.getConfigurationPath() + "/updater.jar";
+                        
+                        // Neue Version runterladen
+                        log.debug("Downloading new version (%s) ... ", source);
+                        IoHelper.downloadFile(source, new URL(source).getFile());
+                        
+                        IoHelper.extractFromReource("updater.jar", updaterJar);
+
+                        log.debug("Starting updarer.jar");
+                        
+                        new ProcessBuilder("java", "-jar", 
+                                updaterJar, 
+                                Application.getPid(), 
+                                // Ich weiß gar nicht, was ich zu dieser Zeile noch schrieben soll ....
+                                Application.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).start();
+                        
+                        System.exit(0);
+                    }
+                    catch (Exception e)
+                    {
+                        log.error(e);
+                        Application.setStatus(SystemStatus.READY);
+                    }
+                }
+            }).start();
         }
 
         return Application.getStatus();

@@ -37,6 +37,12 @@ public class Application
     {
         return new BackendVersion("0.2.2.3");
     }
+    
+    public static String getPid()
+    {
+        String pid = ManagementFactory.getRuntimeMXBean().getName();
+        return pid.substring(0, pid.indexOf('@'));
+    }
 
     public static boolean isLocked()
     {
@@ -115,9 +121,8 @@ public class Application
             parser.usage();
             System.exit(0);
         }
-
-        String pid = ManagementFactory.getRuntimeMXBean().getName();
-        log.debug("Backend version %s starting up ... (pid: %s)", Application.getVersion(), pid.substring(0, pid.indexOf('@')));
+        
+        log.debug("Backend version %s starting up ... (pid: %s)", Application.getVersion(), getPid());
 
         if (args.configPath != null)
             Configuration.setConfigurationPath(args.configPath);
