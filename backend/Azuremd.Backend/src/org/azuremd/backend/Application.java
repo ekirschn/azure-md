@@ -143,7 +143,7 @@ public class Application
         Configuration.load(Configuration.getConfigurationFile());
 
         if (!Token.gotToken())
-            log.error("No Token found; webservice locked.");
+            log.warn("No Token found; webservice locked.");
 
         if (!args.noConnection)
         {

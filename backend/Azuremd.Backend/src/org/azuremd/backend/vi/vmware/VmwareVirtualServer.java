@@ -40,7 +40,7 @@ public class VmwareVirtualServer implements VirtServerInterface
                     : 0, username, password);
             vix = server.getVix();
         }
-        catch (VixException e)
+        catch (Exception e)
         {
             log.error(e);
             throw new Exception(e);

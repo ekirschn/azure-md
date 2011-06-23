@@ -9,6 +9,14 @@
     </layout> 
   </appender> 
   
+  <appender name="console_error" class="org.apache.log4j.ConsoleAppender"> 
+    <param name="Target" value="System.err"/> 
+    <param name="Threshold" value="error" />
+    <layout class="org.apache.log4j.PatternLayout"> 
+      <param name="ConversionPattern" value="%d{HH:mm:ss,SSS} %-5p [%c{1}]: - %m%n"/> 
+    </layout> 
+  </appender> 
+  
   <appender name="logfile" class="org.apache.log4j.RollingFileAppender">
     <param name="File" value="/tmp/azuremd.log" />
     <param name="MaxFileSize" value="10MB"/>
@@ -17,10 +25,10 @@
     </layout>
   </appender>
   
-  <root> 
-    <priority value ="debug" /> 
-    <appender-ref ref="console" /> 
+  <logger name="org.azuremd.backend"> 
+    <level value ="debug" /> 
+    <appender-ref ref="console" />
+    <appender-ref ref="console_error" /> 
     <appender-ref ref="logfile" />
-  </root>
-  
+  </logger>
 </log4j:configuration>
