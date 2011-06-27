@@ -67,7 +67,16 @@ public class Configuration
 
     public static String getConfigurationFile()
     {
-        return String.format("%s/%s", configurationPath, "config");
+        return String.format("%s/%s/", configurationPath, "config");
+    }
+    
+    /**
+     * Gibt den Pfad zurück, in dem sich die neuen Jars liegen für ein Update.
+     * @return Pfad zu den neuen Jars
+     */
+    public static String getReleasePath()
+    {
+        return String.format("%s/%s", configurationPath, "releases");
     }
 
     public static void setConfigurationPath(String path)
@@ -128,7 +137,7 @@ public class Configuration
         
         // Pfade für den Updater anlegen
         new File(path + "/backups/").mkdir();
-        new File(path + "/release/").mkdir();
+        new File(Configuration.getReleasePath()).mkdir();
 
         try
         {

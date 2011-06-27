@@ -261,7 +261,7 @@ public class Azure
                         
                         // Neue Version runterladen
                         log.debug("Downloading new version (%s) ... ", source);
-                        IoHelper.downloadFile(source, new URL(source).getFile());
+                        IoHelper.downloadFile(source, Configuration.getReleasePath() + new URL(source).getFile());
                         IoHelper.extractFromReource("updater.jar", updaterJar);
 
                         log.debug("Starting updarer.jar");
