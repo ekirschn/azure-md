@@ -31,6 +31,19 @@ public class Azure
     private static final Logger log = Logger.getLogger();
     private static VirtServerInterface server = Application.getHost();
 
+    /**
+     * Registriert eine neue virtuelle Maschine im Hypervisor, nachdem es diese heruntergeladen hat.
+     * Dabei muss bei vmId auf den richtigen Pfad geachtet werden. Dieser setzt sich aus einem
+     * beliebigen Ordnernamen und der VMX-Datei aus dem Archiv zusammen. Beispiel: 
+     * <code>
+     *  ubuntu/ubnutu_1gb_320ram_1hdd.vmx
+     * </code>
+     * 
+     * @param token - Authentifizierungstoken
+     * @param vmId - Pfad der zu registrierenden VM aus dem Archiv inklusive VMX-Datei. 
+     * @param source - URL für das gepackte VM-Image in 7z-Format oder Zip.
+     * @return Aktueller Status nach dem Starten dieser Operation
+     */
     @WebMethod
     public SystemStatus RegisterVm(
             @WebParam(name = "token", partName = "authToken") String token,
@@ -65,6 +78,16 @@ public class Azure
         return Application.getStatus();
     }
     
+    /**
+     * Entfernt eine VM aus dem Hypervisor. Dabei werden keine Daten gelöscht.
+     * Die vmId setzt sich aus dem Datastore und den Pfad zusammen. Beispiel: 
+     * <code>
+     *  [standard] ubuntu/ubnutu_1gb_320ram_1hdd.vmx
+     * </code>
+     * @param token - Authentifizierungstoken
+     * @param vmId - Pfad der VMX-Datei. 
+     * @return Aktueller Status nach dem Starten dieser Operation
+     */
     @WebMethod
     public SystemStatus UnregisterVm(
             @WebParam(name = "token", partName = "authToken") String token,
@@ -81,6 +104,13 @@ public class Azure
         return Application.getStatus();
     }
 
+    /**
+     * Startet eine VM.
+     *
+     * @param token - Authentifizierungstoken
+     * @param vmId - Pfad der VMX-Datei. Beispiel: [standard] ubuntu/ubnutu_1gb_320ram_1hdd.vmx
+     * @return Aktueller Status nach dem Starten dieser Operation
+     */
     @WebMethod
     public SystemStatus StartVm(
             @WebParam(name = "token", partName = "authToken") String token,
@@ -95,6 +125,13 @@ public class Azure
         return server.StartVm(vmId);
     }
 
+    /**
+     * Startet eine VM neu.
+     *
+     * @param token - Authentifizierungstoken
+     * @param vmId - Pfad der VMX-Datei. Beispiel: [standard] ubuntu/ubnutu_1gb_320ram_1hdd.vmx
+     * @return Aktueller Status nach dem Starten dieser Operation
+     */
     @WebMethod
     public SystemStatus RestartVm(
             @WebParam(name = "token", partName = "authToken") String token,
@@ -109,6 +146,13 @@ public class Azure
         return server.RestartVm(vmId);
     }
 
+    /**
+     * Hält eine VM an.
+     *
+     * @param token - Authentifizierungstoken
+     * @param vmId - Pfad der VMX-Datei. Beispiel: [standard] ubuntu/ubnutu_1gb_320ram_1hdd.vmx
+     * @return Aktueller Status nach dem Starten dieser Operation
+     */
     @WebMethod
     public SystemStatus StopVm(
             @WebParam(name = "token", partName = "authToken") String token,
@@ -123,6 +167,13 @@ public class Azure
         return server.StopVm(vmId);
     }
 
+    /**
+     * Friert eine VM ein.
+     *
+     * @param token - Authentifizierungstoken
+     * @param vmId - Pfad der VMX-Datei. Beispiel: [standard] ubuntu/ubnutu_1gb_320ram_1hdd.vmx
+     * @return Aktueller Status nach dem Starten dieser Operation
+     */
     @WebMethod
     public SystemStatus SuspendVm(
             @WebParam(name = "token", partName = "authToken") String token,
@@ -137,6 +188,13 @@ public class Azure
         return server.SuspendVm(vmId);
     }
 
+    /**
+     * Startet eine eingefrorene VM.
+     *
+     * @param token - Authentifizierungstoken
+     * @param vmId - Pfad der VMX-Datei. Beispiel: [standard] ubuntu/ubnutu_1gb_320ram_1hdd.vmx
+     * @return Aktueller Status nach dem Starten dieser Operation
+     */
     @WebMethod
     public SystemStatus ResumeVm(
             @WebParam(name = "token", partName = "authToken") String token,
@@ -151,6 +209,16 @@ public class Azure
         return server.ResumeVm(vmId);
     }
 
+    /**
+     * Resize components.
+     *
+     * @param token - Authentifizierungstoken
+     * @param vmId - Pfad der VMX-Datei. Beispiel: [standard] ubuntu/ubnutu_1gb_320ram_1hdd.vmx
+     * @param ramSize the ram size
+     * @param hdSize the hd size
+     * @param cpuCores the cpu cores
+     * @return Aktueller Status nach dem Starten dieser Operation
+     */
     @WebMethod
     public SystemStatus ResizeComponents(
             @WebParam(name = "token", partName = "authToken") String token,
@@ -168,6 +236,17 @@ public class Azure
         return server.ResizeComponents(vmId, ramSize, hdSize, cpuCores);
     }
 
+    /**
+     * Gibt den Status aller registrierten VMs im Hypervisor zurück in einem XML-Dokument der Form: 
+     * <code>
+     *  <vms>
+     *      <vm name="..."> ... </vm>
+     *  </vms>
+     * </code>
+     *
+     * @param token - Authentifizierungstoken
+     * @return XML-Dokument, dass die Statusinformationen enthält.
+     */
     @WebMethod
     public String GetVmStatus(@WebParam(name = "token", partName = "authToken") String token)
     {
@@ -214,6 +293,13 @@ public class Azure
         return result;
     }
 
+    /**
+     * Gibt die IP der jeweiligen VM zurück.
+     *
+     * @param token - Authentifizierungstoken
+     * @param vmId - Pfad der VMX-Datei. Beispiel: [standard] ubuntu/ubnutu_1gb_320ram_1hdd.vmx
+     * @return IP der VM
+     */
     @WebMethod
     public String GetVmIp(
             @WebParam(name = "token", partName = "authToken") String token,
@@ -225,6 +311,12 @@ public class Azure
         return server.GetVmIp(vmId);
     }
 
+    /**
+     * Gibt die laufende Backendversion zurück.
+     *
+     * @param token - Authentifizierungstoken
+     * @return Backendversion
+     */
     @WebMethod
     public String GetBackendVersion(@WebParam(name = "token", partName = "authToken") String token)
     {
@@ -234,6 +326,14 @@ public class Azure
         return Application.getVersion().toString();
     }
 
+    /**
+     * Führt beim Backend ein Upgrade durch.
+     *
+     * @param token - Authentifizierungstoken
+     * @param version - Version des neuen Backends
+     * @param source - URL des neuen Backends, das heruntergeladen wird.
+     * @return Aktueller Status nach dem Starten dieser Operation
+     */
     @WebMethod
     public SystemStatus UpgradeBackend(
             @WebParam(name = "token", partName = "authToken") String token,
@@ -286,6 +386,15 @@ public class Azure
         return Application.getStatus();
     }
 
+    /**
+     * Setzt die initialien Parameter für das Backend wie ComputerId und Token.
+     * Diese Methode ist nur direkt nach dem ersten Einrichten aufrufbar und bis dahin sind keine anderen Methoden nutzbar. 
+     * Nachdem diese Werte gesetzt sind, ist diese Methode gesperrt.
+     *
+     * @param token - Authentifizierungstoken
+     * @param computerId - ComputerId
+     * @return Aktueller Status nach dem Starten dieser Operation
+     */
     @WebMethod
     public SystemStatus SetInitialParams(
             @WebParam(name = "token", partName = "authToken") String token,
