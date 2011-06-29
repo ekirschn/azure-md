@@ -20,9 +20,7 @@
     </copy>
     </target>                               
     <target name="build_jar" depends="compile">
-		<exec executable="./version.sh" />
-		<xmlproperty file="version.xml" />
-        <jar destfile="${prefix.jar}_${root.version}.jar" filesetmanifest="mergewithoutmain">
+        <jar destfile="${prefix.jar}.jar" filesetmanifest="mergewithoutmain">
             <manifest>
                 <attribute name="Main-Class" value="${main.class}"/>
                 <attribute name="Class-Path" value="."/>

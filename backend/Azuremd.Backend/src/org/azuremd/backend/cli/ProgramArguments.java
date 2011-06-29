@@ -24,6 +24,9 @@ public class ProgramArguments
     @Parameter(names = "-no-ssl", description="Deaktiviert die SSL-Unterstützung beim WebService.")
     public boolean noSsl;
     
-    @Parameter(names = "-h", description="Zeigt diese Hilfe an")
+    @Parameter(names = "-v", description="Gibt die aktuelle Version aus")
+    public boolean showVersion;
+    
+    @Parameter(names = "-h", description="Gibt diese Hilfe aus")
     public boolean showHelp;
 }

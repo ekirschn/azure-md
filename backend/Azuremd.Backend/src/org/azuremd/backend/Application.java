@@ -35,7 +35,7 @@ public class Application
     
     public static BackendVersion getVersion()
     {
-        return new BackendVersion("0.2.2.3");
+        return new BackendVersion("0.2.2.4");
     }
     
     public static String getPid()
@@ -115,10 +115,15 @@ public class Application
 
         ProgramArguments args = new ProgramArguments();
         JCommander parser = new JCommander(args, _args);
+        parser.setProgramName("java -jar azuremd.jar");
 
-        if (args.showHelp)
+        if (args.showHelp || args.showVersion)
         {
-            parser.usage();
+            if (args.showHelp)
+                parser.usage();
+            else if (args.showVersion)
+                System.out.println("Backend version: " + getVersion());
+                
             System.exit(0);
         }
         
